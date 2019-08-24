@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Candy?</title>
-    <link>https://thwfhk.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 24 Aug 2019 19:07:26 +0800</lastBuildDate>
     
-	<atom:link href="https://thwfhk.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>First</title>
-      <link>https://thwfhk.github.io/post/first/</link>
+      <link>http://localhost:1313/post/first/</link>
       <pubDate>Sat, 24 Aug 2019 19:07:26 +0800</pubDate>
       
-      <guid>https://thwfhk.github.io/post/first/</guid>
+      <guid>http://localhost:1313/post/first/</guid>
       <description> My first blog lalala
 $a^5$
 1  #include &amp;lt;iostream&amp;gt;  </description>
@@ -24,10 +24,10 @@ $a^5$
     
     <item>
       <title>About</title>
-      <link>https://thwfhk.github.io/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Sat, 24 Aug 2019 19:05:56 +0800</pubDate>
       
-      <guid>https://thwfhk.github.io/about/</guid>
+      <guid>http://localhost:1313/about/</guid>
       <description>About me Hello, I&amp;rsquo;m Candy?, a salt fish in PKU.
 Btw, ? is a part of my name.
 Nice to meet ya!</description>
