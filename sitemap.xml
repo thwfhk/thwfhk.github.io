@@ -1,20 +1,20 @@
-<?xml-stylesheet type="text/xsl" href="thwfhk.github.io/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="http://thwfhk.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>thwfhk.github.io/categories/</loc>
+    <loc>http://thwfhk.github.io/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>thwfhk.github.io/</loc>
+    <loc>http://thwfhk.github.io/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>thwfhk.github.io/tags/</loc>
+    <loc>http://thwfhk.github.io/tags/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

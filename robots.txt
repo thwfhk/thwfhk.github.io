@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: thwfhk.github.io/sitemap.xml
+Sitemap: http://thwfhk.github.io/sitemap.xml
