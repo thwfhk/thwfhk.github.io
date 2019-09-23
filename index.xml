@@ -6,10 +6,19 @@
     <description>Recent content on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 24 Aug 2019 20:58:40 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 23 Sep 2019 23:53:20 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>February</title>
+      <link>http://localhost:1313/post/february/</link>
+      <pubDate>Mon, 23 Sep 2019 23:53:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/february/</guid>
+      <description>为什么2月只有28天 今天下午ICS课的时候昕神跟我说：“国庆节不会要放两个lab吧，国庆放几天啊”。 我看了一下校历，“从9月28号到10月6</description>
+    </item>
     
     <item>
       <title>Demo</title>
@@ -26,7 +35,7 @@
       <pubDate>Sat, 24 Aug 2019 19:07:26 +0800</pubDate>
       
       <guid>http://localhost:1313/post/first/</guid>
-      <description>My first blog This is my new home! the second title 我爱中文！ $a^5$ 1 #include &amp;lt;iostream&amp;gt; 走向隐晦和未知，要通过更为隐晦和未知的事物。</description>
+      <description>My first blog This is my new home! the second title 我爱中文！ $a^5$ 1 2 import CandyQwQ CandyQwQ.die() 走向隐晦和未知，要通过更为隐晦和未知的事物。</description>
     </item>
     
     <item>
@@ -35,7 +44,7 @@
       <pubDate>Sat, 24 Aug 2019 19:05:56 +0800</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>About me Hello, I&amp;rsquo;m Candy?, a salt fish of PKU. Nice to meet ya!</description>
+      <description>About me 你好，我是Candy?，目前是一名学生。</description>
     </item>
     
   </channel>

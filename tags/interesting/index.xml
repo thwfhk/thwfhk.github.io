@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>interesting on Candy?</title>
+    <link>http://localhost:1313/tags/interesting/</link>
+    <description>Recent content in interesting on Candy?</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 23 Sep 2019 23:53:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/interesting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>February</title>
+      <link>http://localhost:1313/post/february/</link>
+      <pubDate>Mon, 23 Sep 2019 23:53:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/february/</guid>
+      <description>为什么2月只有28天 今天下午ICS课的时候昕神跟我说：“国庆节不会要放两个lab吧，国庆放几天啊”。 我看了一下校历，“从9月28号到10月6</description>
+    </item>
+    
+  </channel>
+</rss>
