@@ -16,7 +16,7 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/interesting/</loc>
+    <loc>http://localhost:1313/tags/fun/</loc>
     <lastmod>2019-09-23T23:53:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -44,21 +44,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/demo/</loc>
-    <lastmod>2019-08-24T20:58:40+08:00</lastmod>
+    <loc>http://localhost:1313/post/first/</loc>
+    <lastmod>2019-08-24T19:07:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/hello/</loc>
-    <lastmod>2019-08-24T20:58:40+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/first/</loc>
     <lastmod>2019-08-24T19:07:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

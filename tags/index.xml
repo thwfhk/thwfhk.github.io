@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>interesting</title>
-      <link>http://localhost:1313/tags/interesting/</link>
+      <title>fun</title>
+      <link>http://localhost:1313/tags/fun/</link>
       <pubDate>Mon, 23 Sep 2019 23:53:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/tags/interesting/</guid>
+      <guid>http://localhost:1313/tags/fun/</guid>
       <description></description>
     </item>
     
@@ -32,7 +32,7 @@
     <item>
       <title>hello</title>
       <link>http://localhost:1313/tags/hello/</link>
-      <pubDate>Sat, 24 Aug 2019 20:58:40 +0800</pubDate>
+      <pubDate>Sat, 24 Aug 2019 19:07:26 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/hello/</guid>
       <description></description>
