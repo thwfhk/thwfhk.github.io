@@ -6,10 +6,19 @@
     <description>Recent content on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 23 Sep 2019 23:53:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 11 Feb 2020 15:31:46 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何用Haskell写一棵红黑树</title>
+      <link>http://localhost:1313/post/haskell_red_black_tree/</link>
+      <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/haskell_red_black_tree/</guid>
+      <description>如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske</description>
+    </item>
     
     <item>
       <title>February</title>
@@ -35,7 +44,7 @@
       <pubDate>Sat, 24 Aug 2019 19:05:56 +0800</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>About me Hey, I&amp;rsquo;m Candy?! The question mark is a part of my name. When it is a invalid character, I always use CandyQwQ instead. I&amp;rsquo;d like to put some thoughts, reviews or just something fun in daily life here. Maybe I&amp;rsquo;ll try to write some novels XD Enjoy your reading!</description>
+      <description>关于我 名称：Candy?，当?是非法字符时也叫CandyQwQ。 简介：咸鱼一条。</description>
     </item>
     
   </channel>
