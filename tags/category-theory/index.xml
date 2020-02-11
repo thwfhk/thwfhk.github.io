@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Category Theory on Candy?</title>
+    <link>http://localhost:1313/tags/category-theory/</link>
+    <description>Recent content in Category Theory on Candy?</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 08 Feb 2020 20:06:58 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/category-theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[口胡]Haskell中Functor和Monad与范畴论的联系</title>
+      <link>http://localhost:1313/post/category_functor_monad/</link>
+      <pubDate>Sat, 08 Feb 2020 20:06:58 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/category_functor_monad/</guid>
+      <description>Candy?从接触Haskell开始就想知道它与范畴论有什么联系，听说了“*一个单子(Monad)说白了不过就是自函子范畴上的一个幺半群而已</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -17,7 +17,16 @@
       <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
       
       <guid>http://localhost:1313/post/haskell_red_black_tree/</guid>
-      <description>如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske</description>
+      <description>Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于</description>
+    </item>
+    
+    <item>
+      <title>[口胡]Haskell中Functor和Monad与范畴论的联系</title>
+      <link>http://localhost:1313/post/category_functor_monad/</link>
+      <pubDate>Sat, 08 Feb 2020 20:06:58 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/category_functor_monad/</guid>
+      <description>Candy?从接触Haskell开始就想知道它与范畴论有什么联系，听说了“*一个单子(Monad)说白了不过就是自函子范畴上的一个幺半群而已</description>
     </item>
     
   </channel>

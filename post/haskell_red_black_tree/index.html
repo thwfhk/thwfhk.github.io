@@ -30,7 +30,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Candy?" /><meta name="description" content="如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske" /><meta name="keywords" content="Candy?, Blog" />
+<meta name="author" content="Candy?" /><meta name="description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于" /><meta name="keywords" content="Candy?, Blog" />
 
 
 
@@ -53,25 +53,25 @@
 
 
 <meta property="og:title" content="如何用Haskell写一棵红黑树" />
-<meta property="og:description" content="如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske" />
+<meta property="og:description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/haskell_red_black_tree/" />
 <meta property="article:published_time" content="2020-02-11T15:31:46+08:00" />
 <meta property="article:modified_time" content="2020-02-11T15:31:46+08:00" />
 <meta itemprop="name" content="如何用Haskell写一棵红黑树">
-<meta itemprop="description" content="如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske">
+<meta itemprop="description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于">
 
 
 <meta itemprop="datePublished" content="2020-02-11T15:31:46&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-11T15:31:46&#43;08:00" />
-<meta itemprop="wordCount" content="2640">
+<meta itemprop="wordCount" content="2665">
 
 
 
 <meta itemprop="keywords" content="Haskell,Algorithm," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何用Haskell写一棵红黑树"/>
-<meta name="twitter:description" content="如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske"/>
+<meta name="twitter:description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -86,7 +86,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">Candy?&#39;s Blog</a>
+    <a href="/" class="logo">Candy?</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -102,8 +102,6 @@
         <li class="mobile-menu-item">归档</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">标签</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">分类</li>
       </a><a href="/about">
         <li class="mobile-menu-item">关于我</li>
       </a>
@@ -112,7 +110,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">Candy?&#39;s Blog</a>
+  <a href="/" class="logo">Candy?</a>
 </div>
 
 <nav class="site-navbar">
@@ -123,8 +121,6 @@
         <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">标签</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">分类</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about">关于我</a>
       </li>
@@ -143,7 +139,7 @@
       <div class="post-meta">
         <span class="post-time"> Tue, 11 Feb 2020 </span>
         
-          <span class="more-meta"> 约 2640 字 </span>
+          <span class="more-meta"> 约 2665 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
@@ -154,7 +150,7 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#如何用haskell写一颗红黑树">如何用Haskell写一颗红黑树</a>
+<li>
 <ul>
 <li><a href="#定义类型">定义类型</a></li>
 <li><a href="#辅助函数">辅助函数</a></li>
@@ -171,13 +167,13 @@
     <div class="post-content">
       
 
-<h1 id="如何用haskell写一颗红黑树">如何用Haskell写一颗红黑树</h1>
-
 <p>Candy?在上学期的数算课上学了红黑树，但是他一直没写过。</p>
 
-<p>最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于是就去学了一下如何用Haskell写红黑树，发现只要不到60行（包括空行和类型签名）！</p>
+<p>最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于是就去学了一下如何用Haskell写红黑树，发现只要不到60行！（包括空行和类型签名）</p>
 
 <p>下面是一个简单的小教程。</p>
+
+<p><del>PS: 其实下面的算法和数算学的那个一点关系都没有</del></p>
 
 <h2 id="定义类型">定义类型</h2>
 
@@ -226,7 +222,7 @@
 
 <h2 id="插入操作">插入操作</h2>
 
-<p>一般的红黑树插入不太方便用纯函数式来写，Okasaki在1999年提出了一种新的插入方法，将插入统一为：</p>
+<p>一般的红黑树插入不太方便用纯函数式来写，*Okasaki在1999年提出了一种新的插入方法*，将插入统一为：</p>
 
 <ul>
 <li>首先默认插入红色节点，然后从下向上进行balance操作；</li>
@@ -279,10 +275,10 @@
 
 <p>插入操作只要处理“双红”，删除操作还要处理“黑色节点数相等”，比较麻烦。</p>
 
-<p>这里采用了Stefan Kahrs在2001年提出的方法，主要特点是：</p>
+<p>这里采用了*Stefan Kahrs在2001年提出的方法*，主要特点是：</p>
 
 <ul>
-<li>不将带删除节点与后继交换</li>
+<li><strong>不</strong>将待删除节点与后继交换</li>
 <li>维持一个<strong>新的invariant</strong>：
 
 <ul>
@@ -528,7 +524,7 @@
 </div>
 <h2 id="其他api">其他API</h2>
 
-<p>一些其他常规操作的API：</p>
+<p>一些其他常规操作的API：序列和树之间转换、查找、求后继</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt"> 1
@@ -594,8 +590,8 @@
           </div>
       <nav class="post-nav">
         
-        <a class="next" href="/post/february/">
-            <span class="next-text nav-default">为什么2月只有28天</span>
+        <a class="next" href="/post/category_functor_monad/">
+            <span class="next-text nav-default">[口胡]Haskell中Functor和Monad与范畴论的联系</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
