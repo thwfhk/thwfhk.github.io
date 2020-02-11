@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://localhost:1313/tags/algorithm/</loc>
+    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/</loc>
+    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/haskell/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -16,6 +30,13 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/haskell_red_black_tree/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,28 +44,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/february/</loc>
-    <lastmod>2019-09-23T23:53:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/fun/</loc>
-    <lastmod>2019-09-23T23:53:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2019-09-23T23:53:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/writing/</loc>
+    <lastmod>2019-09-23T23:53:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/february/</loc>
     <lastmod>2019-09-23T23:53:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

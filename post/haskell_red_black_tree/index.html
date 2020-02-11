@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/post/haskell_red_black_tree/" />
@@ -34,7 +34,7 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.09b98e68.min.css" rel="stylesheet">
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -50,11 +50,11 @@
 
 <meta itemprop="datePublished" content="2020-02-11T15:31:46&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-11T15:31:46&#43;08:00" />
-<meta itemprop="wordCount" content="2639">
+<meta itemprop="wordCount" content="2640">
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Haskell,Algorithm," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何用Haskell写一棵红黑树"/>
 <meta name="twitter:description" content="如何用Haskell写一颗红黑树 Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haske"/>
@@ -129,7 +129,7 @@
       <div class="post-meta">
         <span class="post-time"> Tue, 11 Feb 2020 </span>
         
-          <span class="more-meta"> 约 2639 字 </span>
+          <span class="more-meta"> 约 2640 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -240,7 +240,7 @@
 </div>
 <p>balance操作要处理四种情况：</p>
 
-<p><img src="images/haskell_rbt/rbt1.jpg" alt="rbt1" /></p>
+<p><img src="/images/haskell_rbt/rbt1.jpg" alt="rbt1" /></p>
 
 <p>可以方便的用pattern matching来实现：</p>
 <div class="highlight"><div class="chroma">
@@ -319,7 +319,7 @@
 
 <p>由于delete中在balanceL/R之前会染黑，balanceL/R只要处理根为黑的情况即可，有三种情况：</p>
 
-<p><img src="images/haskell_rbt/rbt2.jpg" alt="rbt2" /></p>
+<p><img src="/images/haskell_rbt/rbt2.jpg" alt="rbt2" /></p>
 
 <p>同样用pattern matching来实现：</p>
 <div class="highlight"><div class="chroma">
@@ -348,7 +348,7 @@
 </div>
 <p>app会合并两个子树，有三种情况：</p>
 
-<p><img src="images/haskell_rbt/rbt3.jpg" alt="rbt3" /></p>
+<p><img src="/images/haskell_rbt/rbt3.jpg" alt="rbt3" /></p>
 
 <p>同样用pattern matching来实现：</p>
 <div class="highlight"><div class="chroma">
@@ -567,19 +567,21 @@
 <li><a href="https://abhiroop.github.io/Haskell-Red-Black-Tree/">一篇讲的很好的博客</a></li>
 <li><a href="https://www.cs.kent.ac.uk/people/staff/smk/redblack/Untyped.hs">一份代码实现</a></li>
 <li>Kahrs, Stefan. (2001). Red-black trees with types. Journal of Functional Programming. 11. 10.1017/S0956796801004026.</li>
+<li>另外，Matt Might提出了一种更加简洁的删除操作的实现，详情参阅<a href="http://matt.might.net/articles/red-black-delete/">他的博客</a>。</li>
 </ul>
-
-<p>另外，Matt Might提出了一种更加简洁、函数式的方法，详情参阅<a href="http://matt.might.net/articles/red-black-delete/">他的博客</a>。</p>
 
     </div>
 
     
 <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/haskell/">Haskell</a>
+          <a href="/tags/algorithm/">Algorithm</a>
+          </div>
       <nav class="post-nav">
         
         <a class="next" href="/post/february/">
-            <span class="next-text nav-default">February</span>
+            <span class="next-text nav-default">为什么2月只有28天</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -588,16 +590,16 @@
   </article>
         </div>
         
-  
+
   
 
-  <div id="utter-container"></div>
+  
     <script src="https://utteranc.es/client.js"
-        repo= 'thwfhk/blog_comments_utteranc'
-        issue-term= "pathname"
-        theme= 'github-light'
-        crossorigin= "anonymous"
-        async>
+            repo="thwfhk/thwfhk/blog_comments_utteranc"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
