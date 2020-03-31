@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/computation-theory/</loc>
+    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/set-theory/</loc>
+    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/halting_problem_and_cantor_theorem/</loc>
+    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/algorithm/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -9,28 +51,7 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/haskell/</loc>
-    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
