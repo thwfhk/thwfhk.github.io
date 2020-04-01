@@ -64,7 +64,7 @@
 
 <meta itemprop="datePublished" content="2020-03-31T22:55:23&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-31T22:55:23&#43;08:00" />
-<meta itemprop="wordCount" content="1433">
+<meta itemprop="wordCount" content="1600">
 
 
 
@@ -139,8 +139,8 @@
       <div class="post-meta">
         <span class="post-time"> Tue, 31 Mar 2020 </span>
         
-          <span class="more-meta"> 约 1433 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1600 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
     </header>
@@ -166,7 +166,9 @@
 
 <p>今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。</p>
 
-<p>Candy?发现停机问题的证明和上学期离散数学课程学到的康托定理(Cantor&rsquo;s Theorem)的证明非常像，于是思考了一下他们之间的联系，总结如下，<del>以求赶在三月末尾水一篇博客</del>。如有错误还请不吝赐教。</p>
+<p>Candy?发现停机问题的证明和上学期离散数学课程学到的康托定理(Cantor&rsquo;s Theorem)的证明非常像，于是思考了一下他们之间的联系，总结如下，<del>以求赶在三月末尾水一篇博客</del>。如有错误欢迎指出。</p>
+
+<p>PS:我发现公式中<code>\begin{cases}\end{cases}</code>无法正常显示，并且集合的<code>\{\}</code>也无法正常显示，先凑合着看叭QwQ</p>
 
 <h2 id="cantor-s-theorem">Cantor&rsquo;s Theorem</h2>
 
@@ -174,7 +176,7 @@
 
 <p>Proof: 反证，假设$\exists f:A\to P(A)$ 是一个双射。</p>
 
-<p>考虑 $B={x:x\in A \land x\notin f(A)} \in P(A)$。设 $f(x_0) = B$，考虑$x_0$是否在$B$集合内：</p>
+<p>考虑 $B={x:x\in A \land x\notin f(x)} \in P(A)$。设 $f(x_0) = B$，考虑$x_0$是否在$B$集合内：</p>
 
 <ul>
 <li>若$x_0 \in B$，则有$x_0 \notin f(x_0) = B$，产生矛盾；</li>
@@ -245,11 +247,16 @@ $$
 
 <p>这个改写的核心就是，将原来的判断$H(P,P) = l$，变成判断$P \in B$。</p>
 
-<p>（也许还是有一点不一样的地方，Cantor&rsquo;s Theorem的矛盾点是“$f$不是双射”，而这个证明的矛盾点是“$H$不存在”。其实这里是一致的，$f$是双射和$H$的存在性都是保证了能找到$B$在映射下的逆，分别是$x_0$和$K$。</p>
+<p>还有一点值得注意的地方：</p>
+
+<ul>
+<li>Cantor&rsquo;s Theorem的矛盾点是“$f$不是双射”，而这个证明的矛盾点是“$H$不存在”。其实这里是一致的，Cantor&rsquo;s Theorem的证明中$f$是双射保证了能找到$f^{-1}(B) = x_0$，而这个证明中$H$存在保证了能找到$f^{-1}(B)=K$。</li>
+<li>在某种意义上“$H$存在”是比“$f$是双射”弱的，因为$H$的存在只能找到$B$在映射下的逆，对于任意$S \in P(A)$不一定有$f^{-1}(S)$的存在。</li>
+</ul>
 
 <h2 id="后记">后记</h2>
 
-<p>本来还想：如果有验证停机问题的程序$H$，就能得到$A\to P(A)$的双射了，结果发现想的不对。程序和(数学中)函数这两个概念还是要好好区分的，函数更强大，而程序只能算是函数的一个子集，能给出某个<strong>可计算问题</strong>所对应的映射。</p>
+<p>本来还想：如果有验证停机问题的程序$H$，就能得到$A\to P(A)$的双射了，结果发现想的不对。程序和(数学中)函数这两个概念还是要好好区分的，函数更强大，而程序只能算是函数的一个子集，只能给出某个<strong>可计算问题</strong>所对应的映射。</p>
 
 <p>另外，停机问题还与lambda calculus、哥德尔定理等等有紧密的联系，发现了一篇不错的<a href="http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/">blog</a>。恰好最近在上DPPL，对lambda calculus比较感兴趣，有时间仔细研究一下。(<del>咕咕咕</del>)</p>
 
