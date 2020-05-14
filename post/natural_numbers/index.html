@@ -30,7 +30,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Candy?" /><meta name="description" content="" /><meta name="keywords" content="Candy?, Blog" />
+<meta name="author" content="Candy?" /><meta name="description" content=" 0,1,2,3,4,....我好像可以无穷无尽的数下去啊？
+" /><meta name="keywords" content="Candy?, Blog" />
 
 
 
@@ -53,25 +54,31 @@
 
 
 <meta property="og:title" content="什么是自然数" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="
+0,1,2,3,4,....我好像可以无穷无尽的数下去啊？
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://thwfhk.github.io/post/natural_numbers/" />
 <meta property="article:published_time" content="2020-05-14T12:26:00+08:00" />
 <meta property="article:modified_time" content="2020-05-14T12:26:00+08:00" />
 <meta itemprop="name" content="什么是自然数">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="
+0,1,2,3,4,....我好像可以无穷无尽的数下去啊？
+">
 
 
 <meta itemprop="datePublished" content="2020-05-14T12:26:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-14T12:26:00&#43;08:00" />
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="1870">
 
 
 
-<meta itemprop="keywords" content="Set Theory,Category Theory," />
+<meta itemprop="keywords" content="Set Theory,Category Theory,Programming Language Theory," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="什么是自然数"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="
+0,1,2,3,4,....我好像可以无穷无尽的数下去啊？
+"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -141,8 +148,8 @@
         <div class="post-category">
             <a href="/categories/what-is-what/"> What-is-what </a>
             </div>
-          <span class="more-meta"> 约 0 字 </span>
-          <span class="more-meta"> 预计阅读 0 分钟 </span>
+          <span class="more-meta"> 约 1870 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
     </header>
@@ -154,8 +161,86 @@
   </div>
 </div>
     <div class="post-content">
-      
-
+      <blockquote>
+<p>0,1,2,3,4,....我好像可以无穷无尽的数下去啊？</p>
+</blockquote>
+<p>这是&quot;<strong>什么是什么(What is What)</strong>&quot;系列的第一篇文章，首先介绍一下这个系列：</p>
+<p>我有时会发现自己在不同的地方学到的东西以某种微妙的方式联系在一起，这种体验非常有趣；另一方面，有些事物又是难以界定的，即使读再多次它的定义，仍会感到琢磨不透。因此，我希望开始这样一个系列，将我在<em>不同的地方看到的同一事物</em>总结在一起，希望能够发现它们之间的某种联系，从而对事物本身有更清晰的认识。</p>
+<p>第一个事物是“<strong>自然数(Natural Numbers)</strong>”.</p>
+<p>PS：这篇文章可能不太友好难以读懂，因为我太懒了，并且学期的最后一个月不太有时间，暑假可能会update一个友好的版本2333</p>
+<h2 id="自然语言">1. 自然语言</h2>
+<blockquote>
+<p>来自日常生活和中学数学。</p>
+</blockquote>
+<p>自然数就是<code>0,1,2,3,4,...</code>这样数下去得到的所有的数。</p>
+<p>自然数就是所有的正整数，包含0.（PS: 我至今记得高中时我分不清<span class="math inline">\(\mathbb{N}\)</span>中有没有0，然后同桌一脸鄙夷的说“N是自然数的缩写吧，应该包含0”）</p>
+<h2 id="peano公理">2. Peano公理</h2>
+<blockquote>
+<p>来自Discrete Math课程。</p>
+</blockquote>
+<p>Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少在同构意义上）。</p>
+<p>一种Peano公理的描述为：设三元组<span class="math inline">\((N,F,0)\)</span>满足：</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(0\in N\)</span></p></li>
+<li><p><span class="math inline">\(N\)</span> is closed under <span class="math inline">\(F\)</span>, i.e. <span class="math inline">\(F(N)=\{F(n)\mid n\in N\} \subset N\)</span></p></li>
+<li><p><span class="math inline">\(0\notin \text{ran}\ F\)</span></p></li>
+<li><p><span class="math inline">\(F\)</span> is injective.</p></li>
+<li><p>Suppose a subset <span class="math inline">\(A\)</span> of <span class="math inline">\(N\)</span> satisfies <span class="math inline">\(0\in A\)</span> and <span class="math inline">\(F(A)\subset A\)</span>, then <span class="math inline">\(A=N\)</span>.</p></li>
+</ol>
+<p>这样<span class="math inline">\(N\)</span>就是自然数集。</p>
+<p>事实上，<span class="math inline">\(F\)</span>指定了<span class="math inline">\(N\)</span>上的一种后继运算，并且满足自然数的后继运算的性质。</p>
+<h2 id="集合论set-theory">3. 集合论(Set Theory)</h2>
+<blockquote>
+<p>来自Discrete Math课程。</p>
+</blockquote>
+<p>自然数集是最小的<strong>归纳集(minimal inductive set)</strong>.</p>
+<p>其中一个集合<span class="math inline">\(A\)</span>是归纳集(inductive set)，当且仅当：</p>
+<ul>
+<li><span class="math inline">\(0\in A\)</span></li>
+<li><span class="math inline">\(\forall a\in A,\ a^+\in A\)</span></li>
+</ul>
+<p>其中<span class="math inline">\(a^+\)</span>是<span class="math inline">\(a\)</span>的后继运算。</p>
+<p>可以发现，这种定义和Peano公理几乎是一样的，Peano公理中的第5条实际上就是保证了<em>&quot;<span class="math inline">\(N\)</span>是满足<span class="math inline">\(0\in A\land F(A)\subset A\)</span>的最小集合&quot;。</em></p>
+<p>另外，在集合论中有一种对自然数的经典构造：</p>
+<ul>
+<li><span class="math inline">\(0=\{\}\)</span></li>
+<li><span class="math inline">\(1=\{0\} = \{\{\}\}\)</span></li>
+<li><span class="math inline">\(2=\{0,1\}=\{\{\},\{\{\}\}\}\)</span></li>
+<li>...</li>
+<li><span class="math inline">\(n+1 = n\cup \{n\}\)</span></li>
+</ul>
+<h2 id="不动点fixed-point">4. 不动点(Fixed Point)</h2>
+<blockquote>
+<p>来自<em>Types and Programming Languages</em>.</p>
+</blockquote>
+<p>自然数集是函数<span class="math inline">\(F\)</span>的<strong>最小不动点(the least fixed point)</strong>，其中集合到集合的函数<span class="math inline">\(F\)</span>定义为：</p>
+<ul>
+<li><span class="math inline">\(F(X) = \{0\}\cup \{x^+\mid x\in X\}\)</span></li>
+</ul>
+<p>这个定义在本质上和前面是一样的，只不过是从不动点的角度。</p>
+<p>最小不动点和最大不动点构造常用来定义programing languages中的recursive datatypes，这里实际上将“自然数集”看成了“自然数类型”这个数据类型。</p>
+<p>更多信息可以参考<em>Types and Programming Languages</em>的21章。</p>
+<h2 id="f-代数f-algebra">5. F-代数(F-Algebra)</h2>
+<blockquote>
+<p>来自<em>Calculating Functional Programs</em>.</p>
+</blockquote>
+<p><span class="math inline">\(Nat = \text{DATA}\ (\underline 1\hat{+} Id)\)</span>，即自然数集是函子<span class="math inline">\(\underline 1\hat{+} Id\)</span>的初始代数(<strong>the initial <span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra</strong>)</p>
+<p>这里使用<span class="math inline">\(Nat\)</span>而不是<span class="math inline">\(\mathbb{N}\)</span>，是为了看起来更像一个数据类型，而不是自然数集合。虽然在使用<span class="math inline">\(Set\)</span>范畴的时候，他们是一样的。</p>
+<p>The initial <span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra 意味着在某种意义上，<span class="math inline">\(Nat\)</span>是函子<span class="math inline">\((\underline 1\hat{+} Id)\)</span>的“最小不动点”，即满足<span class="math inline">\(Nat = 1+Nat\)</span>的最小集合。</p>
+<p>这一部分篇幅过长<del>不想写了</del>，可以参考<em>Calculating Functional Programs</em>。</p>
+<h3 id="与自然数上递归定理的联系">与自然数上递归定理的联系</h3>
+<p>顺便提一下，使用F-algebra定义的自然数自带了到其他F-algebra的唯一同态，而这与<strong>自然数上的递归定理</strong>产生了某种联系：</p>
+<p>先回顾一下自然数上的递归定理：</p>
+<ul>
+<li>设集合<span class="math inline">\(A,\ a\in A,\ F:A\to A\)</span>，则存在唯一的<span class="math inline">\(h:\mathbb{N}\to A\)</span>，满足 <span class="math inline">\(h(0)=a\)</span> 且 <span class="math inline">\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)</span>。</li>
+<li>写成point-free就是<span class="math inline">\(h\circ succ = F\circ h\)</span>，其中<span class="math inline">\(succ(n) = n^+\)</span></li>
+</ul>
+<p>而由于<span class="math inline">\((\mathbb{N},zero\triangledown succ)\)</span>是一个initial <span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra，所以从它到任何其他<span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra <span class="math inline">\((A,f)\)</span>存在唯一的同态<span class="math inline">\(h:\mathbb{N}\to A\)</span>，满足<span class="math inline">\(h\circ (zero\triangledown succ) = f\circ (1+h)\)</span></p>
+<p>啊哈，实际上“<span class="math inline">\(h\circ (zero\triangledown succ) = f\circ (1+h)\)</span>” 和 “<span class="math inline">\(h(0)=a\)</span> 且 <span class="math inline">\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)</span>” 这两个描述的性质是一模一样的！</p>
+<p>这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！</p>
+<hr />
+<h2 id="后记">后记</h2>
+<p>其实本来是读<em>Calculating Functional Programs</em>想到的这个问题，回顾了一下Discrete Math后发现原来还有这么多联系，非常有趣。</p>
     </div>
 
     
@@ -163,6 +248,7 @@
       <div class="post-tags">
           <a href="/tags/set-theory/">Set Theory</a>
           <a href="/tags/category-theory/">Category Theory</a>
+          <a href="/tags/programming-language-theory/">Programming Language Theory</a>
           </div>
       <nav class="post-nav">
         
