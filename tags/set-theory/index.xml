@@ -2,22 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Set Theory on Candy?</title>
-    <link>http://localhost:1313/tags/set-theory/</link>
+    <link>https://thwfhk.github.io/tags/set-theory/</link>
     <description>Recent content in Set Theory on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 31 Mar 2020 22:55:23 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/set-theory/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thwfhk.github.io/tags/set-theory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>什么是自然数</title>
+      <link>https://thwfhk.github.io/post/natural_numbers/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/post/natural_numbers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>停机问题与康托定理</title>
-      <link>http://localhost:1313/post/halting_problem_and_cantor_theorem/</link>
+      <link>https://thwfhk.github.io/post/halting_problem_and_cantor_theorem/</link>
       <pubDate>Tue, 31 Mar 2020 22:55:23 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/halting_problem_and_cantor_theorem/</guid>
-      <description>今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题</description>
+      <guid>https://thwfhk.github.io/post/halting_problem_and_cantor_theorem/</guid>
+      <description>&lt;p&gt;今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。&lt;/p&gt;</description>
     </item>
     
   </channel>

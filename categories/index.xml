@@ -2,13 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Candy?</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>https://thwfhk.github.io/categories/</link>
     <description>Recent content in Categories on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thwfhk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What-is-what</title>
+      <link>https://thwfhk.github.io/categories/what-is-what/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/categories/what-is-what/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

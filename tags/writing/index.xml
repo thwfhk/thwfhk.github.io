@@ -2,22 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Writing on Candy?</title>
-    <link>http://localhost:1313/tags/writing/</link>
+    <link>https://thwfhk.github.io/tags/writing/</link>
     <description>Recent content in Writing on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 23 Sep 2019 23:53:20 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thwfhk.github.io/tags/writing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>为什么2月只有28天</title>
-      <link>http://localhost:1313/post/february/</link>
+      <link>https://thwfhk.github.io/post/february/</link>
       <pubDate>Mon, 23 Sep 2019 23:53:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/february/</guid>
-      <description>故事是这样开始的： 今天下午ICS课的时候昕神跟我说：“国庆节不会要放两个lab吧，国庆放几天啊”。 我看了一下校历，“从9月28号到10月6号</description>
+      <guid>https://thwfhk.github.io/post/february/</guid>
+      <description>&lt;p&gt;故事是这样开始的：&lt;/p&gt;
+
+&lt;p&gt;今天下午ICS课的时候昕神跟我说：“国庆节不会要放两个lab吧，国庆放几天啊”。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -30,7 +30,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Candy?" /><meta name="description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题" /><meta name="keywords" content="Candy?, Blog" />
+<meta name="author" content="Candy?" /><meta name="description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。
+" /><meta name="keywords" content="Candy?, Blog" />
 
 
 
@@ -40,7 +41,7 @@
 <meta name="generator" content="Hugo 0.58.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/halting_problem_and_cantor_theorem/" />
+<link rel="canonical" href="https://thwfhk.github.io/post/halting_problem_and_cantor_theorem/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -53,25 +54,25 @@
 
 
 <meta property="og:title" content="停机问题与康托定理" />
-<meta property="og:description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题" />
+<meta property="og:description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/halting_problem_and_cantor_theorem/" />
+<meta property="og:url" content="https://thwfhk.github.io/post/halting_problem_and_cantor_theorem/" />
 <meta property="article:published_time" content="2020-03-31T22:55:23+08:00" />
 <meta property="article:modified_time" content="2020-03-31T22:55:23+08:00" />
 <meta itemprop="name" content="停机问题与康托定理">
-<meta itemprop="description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题">
+<meta itemprop="description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。">
 
 
 <meta itemprop="datePublished" content="2020-03-31T22:55:23&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-31T22:55:23&#43;08:00" />
-<meta itemprop="wordCount" content="1600">
+<meta itemprop="wordCount" content="1634">
 
 
 
 <meta itemprop="keywords" content="Computation Theory,Set Theory," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="停机问题与康托定理"/>
-<meta name="twitter:description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题"/>
+<meta name="twitter:description" content="今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -139,7 +140,7 @@
       <div class="post-meta">
         <span class="post-time"> Tue, 31 Mar 2020 </span>
         
-          <span class="more-meta"> 约 1600 字 </span>
+          <span class="more-meta"> 约 1634 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
@@ -148,118 +149,69 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#cantor-s-theorem">Cantor&rsquo;s Theorem</a></li>
-<li><a href="#halting-problem">Halting Problem</a></li>
-<li><a href="#它们之间的联系">它们之间的联系</a></li>
-<li><a href="#后记">后记</a></li>
-</ul></li>
-</ul>
-</nav>
+    
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。</p>
-
-<p>Candy?发现停机问题的证明和上学期离散数学课程学到的康托定理(Cantor&rsquo;s Theorem)的证明非常像，于是思考了一下他们之间的联系，总结如下，<del>以求赶在三月末尾水一篇博客</del>。如有错误欢迎指出。</p>
-
-<p>PS:我发现公式中<code>\begin{cases}\end{cases}</code>无法正常显示，并且集合的<code>\{\}</code>也无法正常显示，先凑合着看叭QwQ</p>
-
-<h2 id="cantor-s-theorem">Cantor&rsquo;s Theorem</h2>
-
-<p>康托定理说的是“<strong>任何集合和它的幂集不等势</strong>”，也就是说$A \not\approx P(A)$。</p>
-
-<p>Proof: 反证，假设$\exists f:A\to P(A)$ 是一个双射。</p>
-
-<p>考虑 $B={x:x\in A \land x\notin f(x)} \in P(A)$。设 $f(x_0) = B$，考虑$x_0$是否在$B$集合内：</p>
-
+      <p>今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。</p>
+<p>Candy?发现停机问题的证明和上学期离散数学课程学到的康托定理(Cantor's Theorem)的证明非常像，于是思考了一下他们之间的联系，总结如下，<del>以求赶在三月末尾水一篇博客</del>。如有错误欢迎指出。</p>
+<h2 id="cantors-theorem">Cantor's Theorem</h2>
+<p>康托定理说的是“<strong>任何集合和它的幂集不等势</strong>”，也就是说<span class="math inline">\(A \not\approx P(A)\)</span>。</p>
+<p>Proof: 反证，假设<span class="math inline">\(\exists f:A\to P(A)\)</span> 是一个双射。</p>
+<p>考虑 <span class="math inline">\(B=\{x:x\in A \land x\notin f(x)\} \in P(A)\)</span>。设 <span class="math inline">\(f(x_0) = B\)</span>，考虑<span class="math inline">\(x_0\)</span>是否在<span class="math inline">\(B\)</span>集合内：</p>
 <ul>
-<li>若$x_0 \in B$，则有$x_0 \notin f(x_0) = B$，产生矛盾；</li>
-<li>若$x_0\notin B$，则有$x_0 \in f(x_0) =B$，产生矛盾。</li>
+<li>若<span class="math inline">\(x_0 \in B\)</span>，则有<span class="math inline">\(x_0 \notin f(x_0) = B\)</span>，产生矛盾；</li>
+<li>若<span class="math inline">\(x_0\notin B\)</span>，则有<span class="math inline">\(x_0 \in f(x_0) =B\)</span>，产生矛盾。</li>
 </ul>
-
-<p>所以并不存在这样的双射$f$。</p>
-
+<p>所以并不存在这样的双射<span class="math inline">\(f\)</span>。</p>
 <h2 id="halting-problem">Halting Problem</h2>
-
-<p>停机问题是说，<strong>对于程序$P$在输入$I$下的计算过程$P(I)$，其是否会在有限步终止是不可计算的</strong>。</p>
-
+<p>停机问题是说，<strong>对于程序<span class="math inline">\(P\)</span>在输入<span class="math inline">\(I\)</span>下的计算过程<span class="math inline">\(P(I)\)</span>，其是否会在有限步终止是不可计算的</strong>。</p>
 <p>经典的证明方法是这样的：</p>
-
-<p>反证，假设$\exists\ \text{program}\ H$可以判定是否会停机，即
-$$
-H(P,I) =
+<p>反证，假设<span class="math inline">\(\exists\ \text{program}\ H\)</span>可以判定是否会停机，即 <span class="math display">\[
+H(P,I) = 
 \begin{cases}
-h &amp; \textrm{if $P(I)$ halts in finite steps},\quad <br />
-l &amp; \textrm{if $P(I)$ loops forever}\
+h &amp; \textrm{if $P(I)$ halts in finite steps},\quad \\
+l &amp; \textrm{if $P(I)$ loops forever}\\ 
 \end{cases}
-$$
-考虑program $K$，
-$$
-K(P)<br />
+\]</span> 考虑program <span class="math inline">\(K\)</span>， <span class="math display">\[
+K(P)  
 \begin{cases}
-\text{halts in finite steps} &amp; \textrm{if $H(P,P) = l$},\quad <br />
-\text{loops forever} &amp; \textrm{if $H(P,P)=h$}\
+\text{halts in finite steps} &amp; \textrm{if $H(P,P) = l$},\quad \\
+\text{loops forever} &amp; \textrm{if $H(P,P)=h$}\\ 
 \end{cases}
-$$
-考虑$H(K,K)$的结果：</p>
-
+\]</span> 考虑<span class="math inline">\(H(K,K)\)</span>的结果：</p>
 <ul>
-<li>若$H(K,K)=h$，即$K(K)$ halts，由$K(P)$定义有$H(K,K)=l$，产生矛盾；</li>
-<li>若$H(K,K)=l$，即$K(K)$ loops forever，由$K(P)$定义有$H(K,K)=h$产生矛盾。</li>
+<li>若<span class="math inline">\(H(K,K)=h\)</span>，即<span class="math inline">\(K(K)\)</span> halts，由<span class="math inline">\(K(P)\)</span>定义有<span class="math inline">\(H(K,K)=l\)</span>，产生矛盾；</li>
+<li>若<span class="math inline">\(H(K,K)=l\)</span>，即<span class="math inline">\(K(K)\)</span> loops forever，由<span class="math inline">\(K(P)\)</span>定义有<span class="math inline">\(H(K,K)=h\)</span>产生矛盾。</li>
 </ul>
-
-<p>所以不存在这样的program $H$。</p>
-
+<p>所以不存在这样的program <span class="math inline">\(H\)</span>。</p>
 <h2 id="它们之间的联系">它们之间的联系</h2>
-
 <p>直觉上这两个证明是非常像的。</p>
-
-<p>实际上，可以<strong>改写Halting Problem的证明</strong>，得到和Cantor&rsquo;s Theorem的证明相似的形式：</p>
-
-<p>同样假设$\exists\ \text{program}\ H$可以判定是否会停机。设所有program的集合是$A$（这个集合是良定义的，毕竟$A=\Sigma^*$加上一个确定的语法检查过程），对于$\forall P\in A$，可以定义集合$f(P) = {I : P(I)\ \text{halts in finite steps}}$。$f$是一个$A\to P(A)$的映射。</p>
-
-<p>考虑$B={P:P\in A \land P \notin f(P)}$。容易发现$B = {P:P\in A \land H(P,P) = l}$。</p>
-
-<p>同样定义program $K$：
-$$
-K(P)<br />
+<p>实际上，可以<strong>改写Halting Problem的证明</strong>，得到和Cantor's Theorem的证明相似的形式：</p>
+<p>同样假设<span class="math inline">\(\exists\ \text{program}\ H\)</span>可以判定是否会停机。设所有program的集合是<span class="math inline">\(A\)</span>（这个集合是良定义的，毕竟<span class="math inline">\(A=\Sigma^*\)</span>加上一个确定的语法检查过程），对于<span class="math inline">\(\forall P\in A\)</span>，可以定义集合<span class="math inline">\(f(P) = \{I : P(I)\ \text{halts in finite steps}\}\)</span>。<span class="math inline">\(f\)</span>是一个<span class="math inline">\(A\to P(A)\)</span>的映射。</p>
+<p>考虑<span class="math inline">\(B=\{P:P\in A \land P \notin f(P)\}\)</span>。容易发现<span class="math inline">\(B = \{P:P\in A \land H(P,P) = l\}\)</span>。</p>
+<p>同样定义program <span class="math inline">\(K\)</span>： <span class="math display">\[
+K(P)  
 \begin{cases}
-\text{halts in finite steps} &amp; \textrm{if $H(P,P) = l$},\quad <br />
-\text{loops forever} &amp; \textrm{if $H(P,P)=h$}\
+\text{halts in finite steps} &amp; \textrm{if $H(P,P) = l$},\quad \\
+\text{loops forever} &amp; \textrm{if $H(P,P)=h$}\\ 
 \end{cases}
-$$
-容易验证$f(K) = B$，考虑$K$是否在$B$集合内：</p>
-
+\]</span> 容易验证<span class="math inline">\(f(K) = B\)</span>，考虑<span class="math inline">\(K\)</span>是否在<span class="math inline">\(B\)</span>集合内：</p>
 <ul>
-<li>若$K \in B$，则有$K \notin f(K) = B$，产生矛盾；</li>
-<li>若$K\notin B$，则有$K \in f(K) =B$，产生矛盾。</li>
+<li>若<span class="math inline">\(K \in B\)</span>，则有<span class="math inline">\(K \notin f(K) = B\)</span>，产生矛盾；</li>
+<li>若<span class="math inline">\(K\notin B\)</span>，则有<span class="math inline">\(K \in f(K) =B\)</span>，产生矛盾。</li>
 </ul>
-
-<p>所以不存在这样的program $H$。</p>
-
-<p>现在这个证明就和Cantor&rsquo;s Theorem的证明一模一样了！</p>
-
-<p>这个改写的核心就是，将原来的判断$H(P,P) = l$，变成判断$P \in B$。</p>
-
+<p>所以不存在这样的program <span class="math inline">\(H\)</span>。</p>
+<p>现在这个证明就和Cantor's Theorem的证明一模一样了！</p>
+<p>这个改写的核心就是，将原来的判断<span class="math inline">\(H(P,P) = l\)</span>，变成判断<span class="math inline">\(P \in B\)</span>。</p>
 <p>还有一点值得注意的地方：</p>
-
 <ul>
-<li>Cantor&rsquo;s Theorem的矛盾点是“$f$不是双射”，而这个证明的矛盾点是“$H$不存在”。其实这里是一致的，Cantor&rsquo;s Theorem的证明中$f$是双射保证了能找到$f^{-1}(B) = x_0$，而这个证明中$H$存在保证了能找到$f^{-1}(B)=K$。</li>
-<li>在某种意义上“$H$存在”是比“$f$是双射”弱的，因为$H$的存在只能找到$B$在映射下的逆，对于任意$S \in P(A)$不一定有$f^{-1}(S)$的存在。</li>
+<li>Cantor's Theorem的矛盾点是“<span class="math inline">\(f\)</span>不是双射”，而这个证明的矛盾点是“<span class="math inline">\(H\)</span>不存在”。其实这里是一致的，Cantor's Theorem的证明中<span class="math inline">\(f\)</span>是双射保证了能找到<span class="math inline">\(f^{-1}(B) = x_0\)</span>，而这个证明中<span class="math inline">\(H\)</span>存在保证了能找到<span class="math inline">\(f^{-1}(B)=K\)</span>。</li>
+<li>在某种意义上“<span class="math inline">\(H\)</span>存在”是比“<span class="math inline">\(f\)</span>是双射”弱的，因为<span class="math inline">\(H\)</span>的存在只能找到<span class="math inline">\(B\)</span>在映射下的逆，对于任意<span class="math inline">\(S \in P(A)\)</span>不一定有<span class="math inline">\(f^{-1}(S)\)</span>的存在。</li>
 </ul>
-
 <h2 id="后记">后记</h2>
-
-<p>本来还想：如果有验证停机问题的程序$H$，就能得到$A\to P(A)$的双射了，结果发现想的不对。程序和(数学中)函数这两个概念还是要好好区分的，函数更强大，而程序只能算是函数的一个子集，只能给出某个<strong>可计算问题</strong>所对应的映射。</p>
-
+<p>本来还想：如果有验证停机问题的程序<span class="math inline">\(H\)</span>，就能得到<span class="math inline">\(A\to P(A)\)</span>的双射了，结果发现想的不对。程序和(数学中)函数这两个概念还是要好好区分的，函数更强大，而程序只能算是函数的一个子集，只能给出某个<strong>可计算问题</strong>所对应的映射。</p>
 <p>另外，停机问题还与lambda calculus、哥德尔定理等等有紧密的联系，发现了一篇不错的<a href="http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/">blog</a>。恰好最近在上DPPL，对lambda calculus比较感兴趣，有时间仔细研究一下。(<del>咕咕咕</del>)</p>
-
     </div>
 
     
@@ -269,7 +221,11 @@ $$
           <a href="/tags/set-theory/">Set Theory</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/natural_numbers/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">什么是自然数</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/haskell_red_black_tree/">
             <span class="next-text nav-default">如何用Haskell写一棵红黑树</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -303,7 +259,7 @@ $$
       <div class="social-links">
       <a href="mailto:thwfhk@163.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/thwfhk" class="iconfont icon-github" title="github"></a>
-  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://thwfhk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">

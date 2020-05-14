@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithm on Candy?</title>
-    <link>http://localhost:1313/tags/algorithm/</link>
+    <link>https://thwfhk.github.io/tags/algorithm/</link>
     <description>Recent content in Algorithm on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 11 Feb 2020 15:31:46 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thwfhk.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>如何用Haskell写一棵红黑树</title>
-      <link>http://localhost:1313/post/haskell_red_black_tree/</link>
+      <link>https://thwfhk.github.io/post/haskell_red_black_tree/</link>
       <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/haskell_red_black_tree/</guid>
-      <description>Candy?在上学期的数算课上学了红黑树，但是他一直没写过。 最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于</description>
+      <guid>https://thwfhk.github.io/post/haskell_red_black_tree/</guid>
+      <description>&lt;p&gt;Candy?在上学期的数算课上学了红黑树，但是他一直没写过。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -2,22 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Category Theory on Candy?</title>
-    <link>http://localhost:1313/tags/category-theory/</link>
+    <link>https://thwfhk.github.io/tags/category-theory/</link>
     <description>Recent content in Category Theory on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 08 Feb 2020 20:06:58 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/category-theory/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thwfhk.github.io/tags/category-theory/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>什么是自然数</title>
+      <link>https://thwfhk.github.io/post/natural_numbers/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/post/natural_numbers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>[口胡]Haskell中Functor和Monad与范畴论的联系</title>
-      <link>http://localhost:1313/post/category_functor_monad/</link>
+      <link>https://thwfhk.github.io/post/category_functor_monad/</link>
       <pubDate>Sat, 08 Feb 2020 20:06:58 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/category_functor_monad/</guid>
-      <description>Candy?从接触Haskell开始就想知道它与范畴论有什么联系，听说了“*一个单子(Monad)说白了不过就是自函子范畴上的一个幺半群而已</description>
+      <guid>https://thwfhk.github.io/post/category_functor_monad/</guid>
+      <description>&lt;p&gt;Candy?从接触Haskell开始就想知道它与范畴论有什么联系。&lt;/p&gt;</description>
     </item>
     
   </channel>

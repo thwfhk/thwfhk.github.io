@@ -1,120 +1,135 @@
-<?xml-stylesheet type="text/xsl" href="http://localhost:1313/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://thwfhk.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://thwfhk.github.io/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/categories/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/tags/category-theory/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/post/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/tags/set-theory/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/tags/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/categories/what-is-what/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/post/natural_numbers/</loc>
+    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/tags/computation-theory/</loc>
     <lastmod>2020-03-31T22:55:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/computation-theory/</loc>
+    <loc>https://thwfhk.github.io/post/halting_problem_and_cantor_theorem/</loc>
     <lastmod>2020-03-31T22:55:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/set-theory/</loc>
-    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/halting_problem_and_cantor_theorem/</loc>
-    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/algorithm/</loc>
+    <loc>https://thwfhk.github.io/tags/algorithm/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/haskell/</loc>
+    <loc>https://thwfhk.github.io/tags/haskell/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/haskell_red_black_tree/</loc>
+    <loc>https://thwfhk.github.io/post/haskell_red_black_tree/</loc>
     <lastmod>2020-02-11T15:31:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/category_functor_monad/</loc>
+    <loc>https://thwfhk.github.io/post/category_functor_monad/</loc>
     <lastmod>2020-02-08T20:06:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/category-theory/</loc>
-    <lastmod>2020-02-08T20:06:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/writing/</loc>
+    <loc>https://thwfhk.github.io/tags/writing/</loc>
     <lastmod>2019-09-23T23:53:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/february/</loc>
+    <loc>https://thwfhk.github.io/post/february/</loc>
     <lastmod>2019-09-23T23:53:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/first/</loc>
+    <loc>https://thwfhk.github.io/post/first/</loc>
     <lastmod>2019-08-24T19:07:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/hello/</loc>
+    <loc>https://thwfhk.github.io/tags/hello/</loc>
     <lastmod>2019-08-24T19:07:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://thwfhk.github.io/about/</loc>
     <lastmod>2019-08-24T19:05:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
