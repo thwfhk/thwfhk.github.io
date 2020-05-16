@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Writing on Candy?</title>
-    <link>https://thwfhk.github.io/tags/writing/</link>
-    <description>Recent content in Writing on Candy?</description>
+    <title>科普向 on Candy?</title>
+    <link>https://thwfhk.github.io/categories/%E7%A7%91%E6%99%AE%E5%90%91/</link>
+    <description>Recent content in 科普向 on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 16 May 2020 09:49:46 +0800</lastBuildDate>
     
-	<atom:link href="https://thwfhk.github.io/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://thwfhk.github.io/categories/%E7%A7%91%E6%99%AE%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;爱情其实就是阿妮玛/阿尼姆斯在对方身上的投射。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>为什么2月只有28天</title>
-      <link>https://thwfhk.github.io/post/february/</link>
-      <pubDate>Mon, 23 Sep 2019 23:53:20 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/post/february/</guid>
-      <description>&lt;p&gt;故事是这样开始的：&lt;/p&gt;
-
-&lt;p&gt;今天下午ICS课的时候昕神跟我说：“国庆节不会要放两个lab吧，国庆放几天啊”。&lt;/p&gt;</description>
     </item>
     
   </channel>
