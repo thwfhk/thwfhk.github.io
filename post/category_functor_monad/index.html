@@ -65,7 +65,7 @@
 
 <meta itemprop="datePublished" content="2020-02-08T20:06:58&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-08T20:06:58&#43;08:00" />
-<meta itemprop="wordCount" content="2157">
+<meta itemprop="wordCount" content="2174">
 
 
 
@@ -144,7 +144,7 @@
       <div class="post-meta">
         <span class="post-time"> Sat, 08 Feb 2020 </span>
         
-          <span class="more-meta"> 约 2157 字 </span>
+          <span class="more-meta"> 约 2174 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         
       </div>
@@ -153,136 +153,243 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#范畴-category">范畴(Category)</a>
+<ul>
+<li><a href="#haskell中的范畴">Haskell中的范畴</a></li>
+</ul></li>
+<li><a href="#函子-functor">函子(Functor)</a>
+<ul>
+<li><a href="#haskell中的函子">Haskell中的函子</a></li>
+</ul></li>
+<li><a href="#自然映射-natural-transformation">自然映射(Natural transformation)</a></li>
+<li><a href="#单子-monad">单子(Monad)</a>
+<ul>
+<li><a href="#haskell中的单子">Haskell中的单子</a></li>
+</ul></li>
+<li><a href="#如何解释-一个单子就是自函子范畴上的幺半群">如何解释“一个单子就是自函子范畴上的幺半群”</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
       <p>Candy?从接触Haskell开始就想知道它与范畴论有什么联系。</p>
-<p>听说了“<em>一个单子(Monad)说白了不过就是自函子范畴上的一个幺半群而已</em>”这句话后更加好奇，于是略微了解了一下，下面记录一点笔记。</p>
+
+<p>听说了“*一个单子(Monad)说白了不过就是自函子范畴上的一个幺半群而已*”这句话后更加好奇，于是略微了解了一下，下面记录一点笔记。</p>
+
+<p><strong>update(5.20): 现在知道了一点更多的东西，感觉当时比较naive，有时间重写一下</strong></p>
+
 <p><strong>【警告⚠️】：Candy?既不擅长Haskell也不擅长范畴论，以下内容纯属口胡，还请见谅</strong></p>
-<h2 id="范畴category">范畴(Category)</h2>
+
+<h2 id="范畴-category">范畴(Category)</h2>
+
 <p>首先要引入范畴的概念</p>
-<p>一个<strong>范畴</strong> <span class="math inline">\(C\)</span> 由以下部分组成</p>
+
+<p>一个<strong>范畴</strong> $C$ 由以下部分组成</p>
+
 <ul>
-<li><p>一类<strong>对象(objects)</strong> <span class="math inline">\(a, b, c, \dots\)</span></p></li>
-<li><p>一类对象之间的<strong>态射(morphisms)</strong> <span class="math inline">\(f:a\rightarrow b,\ g: b \rightarrow c\)</span></p></li>
-<li><p>态射之间的<strong>复合(composition)</strong>操作 <span class="math inline">\(f \circ g\)</span></p></li>
+<li><p>一类<strong>对象(objects)</strong>   $a, b, c, \dots$</p></li>
+
+<li><p>一类对象之间的<strong>态射(morphisms)</strong>   $f:a\rightarrow b,\ g: b \rightarrow c$</p></li>
+
+<li><p>态射之间的<strong>复合(composition)</strong>操作    $f \circ g$</p></li>
 </ul>
+
 <p>并且要满足如下公理：</p>
-<ol style="list-style-type: decimal">
+
+<ol>
 <li><p>态射的复合满足<strong>结合律</strong></p></li>
+
 <li><p>范畴在态射复合下是<strong>闭的</strong></p></li>
-<li><p>对于 <span class="math inline">\(\forall A \in C\)</span>，有一个<strong>单位态射(identity morphism)</strong> <span class="math inline">\(id_A : A \rightarrow A\)</span></p></li>
+
+<li><p>对于 $\forall A \in C$，有一个<strong>单位态射(identity morphism)</strong> $id_A : A \rightarrow A$</p></li>
 </ol>
+
 <p>一些栗子🌰：</p>
+
 <ul>
 <li>所有集合的范畴<strong>Set</strong>，其态射为集合间的函数，而态射复合则为一般的函数复合</li>
 <li>所有群的范畴<strong>Grp</strong>，其态射为群间的群同态</li>
 <li>所有拓扑空间的范畴<strong>Top</strong>，其态射为连续函数</li>
-<li>任一偏序集<span class="math inline">\((P, \le)\)</span> 也会形成一个范畴，对象是<span class="math inline">\(P\)</span>中元素，<span class="math inline">\(x\le y\)</span>表示<span class="math inline">\(x\)</span>到<span class="math inline">\(y\)</span>的态射</li>
+<li>任一偏序集$(P, \le)$ 也会形成一个范畴，对象是$P$中元素，$x\le y$表示$x$到$y$的态射</li>
 </ul>
+
 <p>注意，范畴中的对象本身可能就是一个集合，而态射就是一般的函数，比如数学分析里学的函数都是<strong>Set</strong>中的态射</p>
+
 <h3 id="haskell中的范畴">Haskell中的范畴</h3>
+
 <p>在Haskell中，可以给出<strong>Hask</strong>范畴：</p>
+
 <ul>
 <li>对象是Haskell types</li>
 <li>态射是Haskell functions</li>
+
 <li><p>复合就是<code>(.)</code></p></li>
+
 <li><p>Haskell中的<code>id :: a -&gt; a</code> 函数是单位态射的<strong>多态(polymorphic)</strong>版本</p></li>
 </ul>
-<h2 id="函子functor">函子(Functor)</h2>
+
+<h2 id="函子-functor">函子(Functor)</h2>
+
 <p>有了范畴，就可以谈论函子了</p>
+
 <p>一个<strong>函子</strong>是范畴间的一种映射。</p>
-<p>给出范畴<span class="math inline">\(C,D\)</span>，函子<span class="math inline">\(F:C\rightarrow D\)</span>给出了从<span class="math inline">\(C\)</span>中对象/态射到<span class="math inline">\(D\)</span>中对象/态射的映射：</p>
+
+<p>给出范畴$C,D$，函子$F:C\rightarrow D$给出了从$C$中对象/态射到$D$中对象/态射的映射：</p>
+
 <ul>
-<li><span class="math inline">\(A \in C \rightarrow F(A) \in D\)</span></li>
-<li><span class="math inline">\((f:A\rightarrow B)\ \rightarrow \ (F(f):F(A)\rightarrow F(B))\)</span></li>
+<li>$A \in C \rightarrow F(A) \in D$</li>
+<li>$(f:A\rightarrow B)\ \rightarrow \ (F(f):F(A)\rightarrow F(B))$</li>
 </ul>
+
 <p>并且要满足如下公理：</p>
+
 <ul>
-<li><span class="math inline">\(F(id_A) = id _{F(A)}\)</span></li>
-<li><span class="math inline">\(F(f \circ g) = F(f) \circ F(g)\)</span></li>
+<li>$F(id_A) = id _{F(A)}$</li>
+<li>$F(f \circ g) = F(f) \circ F(g)$</li>
 </ul>
+
 <p>一些栗子🌰：</p>
+
 <ul>
 <li>幂集合函子：<strong>Set</strong> -&gt; <strong>Set</strong> 将集合映射到它的幂集</li>
 <li>基本群函子：将“流形”和“同胚” 映射到 “群”和“同构” （离散I学的一丁点代数拓扑终于有点用了😭）</li>
 </ul>
+
 <h3 id="haskell中的函子">Haskell中的函子</h3>
+
 <p>在Haskell中，functor被实现为一个<strong>typeclass</strong>，意义上是“从<strong>Hask</strong>范畴到一个<strong>子范畴</strong>的映射”。</p>
+
 <p>这里的子范畴，指的是像<code>[]</code>或者<code>Maybe</code>这样的parameterised type。</p>
+
 <p>回顾Haskell中functor的定义：</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Functor</span> f <span class="kw">where</span>
-<span class="ot">    fmap ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f </code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Functor</span> <span class="n">f</span> <span class="kr">where</span>
+    <span class="n">fmap</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">f</span> </code></pre></td></tr></table>
+</div>
+</div>
 <p>这个函子的两部分映射分别由两种功能提供：</p>
+
 <ul>
 <li>范畴中对象间的映射：<code>data</code>中的constructor（f类型的constructor）</li>
 <li>范畴中态射间的映射：<code>fmap</code>提供了将Hask范畴中的函数应用到子范畴中对象的方法，并返回子范畴中对象，效果上就是<em>将Hask范畴中函数变成子范畴中函数</em></li>
 </ul>
-<p><strong>总结</strong>：Haskell中属于相应typeclass functor的f是一个<em>parameterised type</em>，实际上形成了一个<em>subcategory</em>，同时提供了以上两种映射；因此对应的functor就是从<strong>Hask</strong>到这个<em>subcategory</em>的映射，即是 <span class="math inline">\(a \rightarrow f\ a\)</span></p>
-<h2 id="自然映射natural-transformation">自然映射(Natural transformation)</h2>
+
+<p><strong>总结</strong>：Haskell中属于相应typeclass functor的f是一个*parameterised type*，实际上形成了一个*subcategory*，同时提供了以上两种映射；因此对应的functor就是从<strong>Hask</strong>到这个*subcategory*的映射，即是 $a \rightarrow f\ a$</p>
+
+<h2 id="自然映射-natural-transformation">自然映射(Natural transformation)</h2>
+
 <p>在提到单子之前，需要先引入自然映射</p>
+
 <p>偷懒直接放手写了：</p>
-<div class="figure">
-<img src="/images/natural_transformation.jpg" alt="nt" />
-<p class="caption">nt</p>
-</div>
-<h2 id="单子monad">单子(Monad)</h2>
-<p>一个范畴<span class="math inline">\(C\)</span>上的<strong>单子</strong>由一个<strong>自函子(endofunctor)</strong> <span class="math inline">\(T:C\rightarrow C\)</span> 和两个自然变换:</p>
+
+<p><img src="/images/natural_transformation.jpg" alt="nt" /></p>
+
+<h2 id="单子-monad">单子(Monad)</h2>
+
+<p>一个范畴$C$上的<strong>单子</strong>由一个<strong>自函子(endofunctor)</strong> $T:C\rightarrow C$ 和两个自然变换:</p>
+
 <ul>
-<li><span class="math inline">\(\eta : 1_C \rightarrow T,\ \eta_X : X \rightarrow T(X)\)</span></li>
-<li><span class="math inline">\(\mu : T^2 \rightarrow T,\ \mu_X : T(T(X)) \rightarrow T(X)\)</span></li>
+<li>$\eta : 1_C \rightarrow T,\ \eta_X : X \rightarrow T(X)$</li>
+<li>$\mu : T^2 \rightarrow T,\ \mu_X : T(T(X)) \rightarrow T(X)$</li>
 </ul>
+
 <p>组成，（其中自函子就是一个范畴到自身的函子）</p>
+
 <p>并且要满足以下公理：(又叫coherence condition)</p>
+
 <ul>
-<li><span class="math inline">\(\mu \circ T \mu = \mu \circ \mu T\)</span></li>
-<li><span class="math inline">\(\mu \circ T \eta = \mu \circ \eta T\)</span></li>
+<li>$\mu \circ T \mu  = \mu \circ \mu T$</li>
+<li>$\mu \circ T \eta = \mu \circ \eta T$</li>
 </ul>
+
 <h3 id="haskell中的单子">Haskell中的单子</h3>
+
 <p>在Haskell中，monad也被实现为一个<strong>typeclass</strong>，定义为：</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Applicative</span> m <span class="ot">=&gt;</span> <span class="dt">Monad</span> m <span class="kw">where</span>
-<span class="ot">    return ::</span> a <span class="ot">-&gt;</span> m a
-<span class="ot">    (&gt;&gt;=) ::</span> m a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m b</code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Applicative</span> <span class="n">m</span> <span class="ow">=&gt;</span> <span class="kt">Monad</span> <span class="n">m</span> <span class="kr">where</span>
+    <span class="n">return</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">a</span>
+    <span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="ow">::</span> <span class="n">m</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span></code></pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>m也属于typeclass functor，它所对应的functor就是endofunctor T（是自函子，因为本来m就是<strong>Hask</strong>的子范畴，相当于从<strong>Hask</strong>到<strong>Hask</strong>的函子）</li>
-<li><code>return</code> is the (polymorphic) analogue to <span class="math inline">\(\eta_X\)</span> for any <span class="math inline">\(X\)</span></li>
-<li><code>join :: Monad m =&gt; m (m a) -&gt; m a</code> is the (polymorphic) analogue to <span class="math inline">\(mu_X\)</span> for any <span class="math inline">\(X\)</span> ，而<code>&gt;&gt;=</code>和<code>join</code>是可以互相表示的</li>
+<li><code>return</code> is the (polymorphic) analogue to $\eta_X$ for any $X$</li>
+<li><code>join :: Monad m =&gt; m (m a) -&gt; m a</code> is the (polymorphic) analogue to $mu_X$ for any $X$ ，而<code>&gt;&gt;=</code>和<code>join</code>是可以互相表示的</li>
 </ul>
-<p>也就是说，<code>return</code>和<code>join</code>提供了<span class="math inline">\(\eta, \mu\)</span>这两个自然变换。</p>
-<h2 id="如何解释一个单子就是自函子范畴上的幺半群">如何解释“一个单子就是自函子范畴上的幺半群”</h2>
+
+<p>也就是说，<code>return</code>和<code>join</code>提供了$\eta, \mu$这两个自然变换。</p>
+
+<h2 id="如何解释-一个单子就是自函子范畴上的幺半群">如何解释“一个单子就是自函子范畴上的幺半群”</h2>
+
 <p>原文是这样的：</p>
+
 <blockquote>
-<p>All told, monad in X is just a monoid in the category of endofunctors of X, with product <span class="math inline">\(\times\)</span> repalced by composition of endofunctors and unit set by identity endofunctor.</p>
-<p>---- Saunders Mac Lane, <em>Categories for the Working Mathematician</em></p>
+<p>All told, monad in X is just a monoid in the category of endofunctors of X, with product $\times$ repalced by composition of endofunctors and unit set by identity endofunctor.</p>
+
+<p>&mdash;- Saunders Mac Lane, <em>Categories for the Working Mathematician</em></p>
 </blockquote>
+
 <p>这里的monoid指的应该是<strong>范畴论中的monoid</strong>，wiki上说：</p>
+
 <blockquote>
 <p>In <a href="https://en.wikipedia.org/wiki/Category_theory">category theory</a>, a branch of <a href="https://en.wikipedia.org/wiki/Mathematics">mathematics</a>, a <strong>monoid</strong> (or <strong>monoid object</strong>) (<em>M</em>, <em>μ</em>, <em>η</em>) in a <a href="https://en.wikipedia.org/wiki/Monoidal_category">monoidal category</a>(<strong>C</strong>, ⊗, <em>I</em>) is an object <em>M</em> together with two <a href="https://en.wikipedia.org/wiki/Morphism">morphisms</a></p>
+
 <ul>
 <li><em>μ</em>: <em>M</em> ⊗ <em>M</em> → <em>M</em> called <em>multiplication</em>,</li>
 <li><em>η</em>: <em>I</em> → <em>M</em> called <em>unit</em>,</li>
 </ul>
 </blockquote>
+
 <p>而自函子范畴是一个monoidal category，单子又是自函子范畴上的一个object加上两个自然变换(就是自函子范畴上的态射)，对号入座即可。</p>
+
 <p>其实这里的monoid和代数里的monoid很像，都有二元运算和单位元。</p>
+
 <p>可以找到一个对应关系：</p>
+
 <ul>
-<li>集合<span class="math inline">\(M\)</span> ------ 自函子<span class="math inline">\(T\)</span></li>
-<li>笛卡尔积 ------ 函数复合</li>
-<li>二元运算<span class="math inline">\(\mu:M \times M \rightarrow M\)</span> ------ 自然变换 <span class="math inline">\(\mu : T^2 \rightarrow T\)</span></li>
-<li>单位元<span class="math inline">\(\eta : 1 \rightarrow M\)</span> ------ 自然变换 <span class="math inline">\(\eta : 1_C \rightarrow T\)</span></li>
+<li>集合$M$ &mdash;&mdash; 自函子$T$</li>
+<li>笛卡尔积 &mdash;&mdash; 函数复合</li>
+<li>二元运算$\mu:M \times M \rightarrow M$ &mdash;&mdash; 自然变换 $\mu : T^2 \rightarrow T$</li>
+<li>单位元$\eta : 1 \rightarrow M$ &mdash;&mdash; 自然变换 $\eta : 1_C \rightarrow T$</li>
 </ul>
+
 <h2 id="总结">总结</h2>
+
 <p><del>终于口胡完了！</del></p>
+
 <p>有时间好想认真学一下范畴论（喂你先把Haskell学好再说呀</p>
+
 <p>还有不到10天就开学了然而我前沿轮转要求读的paper还没开始读😨</p>
+
 <p>虽然想回学校上课不过还是有点期待网课会是什么样</p>
+
 <p>（内容逐渐跑偏QwQ</p>
+
 <h2 id="参考资料">参考资料</h2>
+
 <ul>
 <li><p><a href="https://en.wikibooks.org/wiki/Haskell/Category_theory">wikibook中关于Haskell中范畴论的文章</a></p></li>
+
 <li><p>维基百科</p></li>
+
 <li><p><a href="http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">一篇图解monad的文章</a>，虽然与这篇博客无关，但很有趣很直观</p></li>
 </ul>
     </div>
