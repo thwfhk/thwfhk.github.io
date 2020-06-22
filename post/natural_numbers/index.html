@@ -69,7 +69,7 @@
 
 <meta itemprop="datePublished" content="2020-05-14T12:26:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-14T12:26:00&#43;08:00" />
-<meta itemprop="wordCount" content="1870">
+<meta itemprop="wordCount" content="2656">
 
 
 
@@ -152,8 +152,8 @@
         <div class="post-category">
             <a href="/categories/what-is-what/"> What-is-what </a>
             </div>
-          <span class="more-meta"> 约 1870 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2656 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
     </header>
@@ -171,7 +171,6 @@
 <p>这是&quot;<strong>什么是什么(What is What)</strong>&quot;系列的第一篇文章，首先介绍一下这个系列：</p>
 <p>我有时会发现自己在不同的地方学到的东西以某种微妙的方式联系在一起，这种体验非常有趣；另一方面，有些事物又是难以界定的，即使读再多次它的定义，仍会感到琢磨不透。因此，我希望开始这样一个系列，将我在<em>不同的地方看到的同一事物</em>总结在一起，希望能够发现它们之间的某种联系，从而对事物本身有更清晰的认识。</p>
 <p>第一个事物是“<strong>自然数(Natural Numbers)</strong>”.</p>
-<p>PS：这篇文章可能不太友好难以读懂，因为我太懒了，并且学期的最后一个月不太有时间，暑假可能会update一个友好的版本2333</p>
 <h2 id="自然语言">1. 自然语言</h2>
 <blockquote>
 <p>来自日常生活和中学数学。</p>
@@ -182,7 +181,7 @@
 <blockquote>
 <p>来自Discrete Math课程。</p>
 </blockquote>
-<p>Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少在同构意义上）。</p>
+<p>Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少是和自然数集同构的）。</p>
 <p>一种Peano公理的描述为：设三元组<span class="math inline">\((N,F,0)\)</span>满足：</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(0\in N\)</span></p></li>
@@ -192,19 +191,19 @@
 <li><p>Suppose a subset <span class="math inline">\(A\)</span> of <span class="math inline">\(N\)</span> satisfies <span class="math inline">\(0\in A\)</span> and <span class="math inline">\(F(A)\subset A\)</span>, then <span class="math inline">\(A=N\)</span>.</p></li>
 </ol>
 <p>这样<span class="math inline">\(N\)</span>就是自然数集。</p>
-<p>事实上，<span class="math inline">\(F\)</span>指定了<span class="math inline">\(N\)</span>上的一种后继运算，并且满足自然数的后继运算的性质。</p>
+<p>事实上，<span class="math inline">\(F\)</span>指定了<span class="math inline">\(N\)</span>上的一种“后继”运算，这种后继运算给了<span class="math inline">\(N\)</span>中每个元素一个独一无二的后继，并且每个后继都在<span class="math inline">\(N\)</span>中，这和自然数是相符的。第5条可以算是“最关键”的一条，它实际上说明了自然数集<span class="math inline">\(N\)</span>是满足这个条件的<strong>最小</strong>集合。</p>
 <h2 id="集合论set-theory">3. 集合论(Set Theory)</h2>
 <blockquote>
 <p>来自Discrete Math课程。</p>
 </blockquote>
-<p>自然数集是最小的<strong>归纳集(minimal inductive set)</strong>.</p>
+<p>自然数集是<strong>最小</strong>的<strong>归纳集(minimal inductive set)</strong>.</p>
 <p>其中一个集合<span class="math inline">\(A\)</span>是归纳集(inductive set)，当且仅当：</p>
 <ul>
 <li><span class="math inline">\(0\in A\)</span></li>
 <li><span class="math inline">\(\forall a\in A,\ a^+\in A\)</span></li>
 </ul>
 <p>其中<span class="math inline">\(a^+\)</span>是<span class="math inline">\(a\)</span>的后继运算。</p>
-<p>可以发现，这种定义和Peano公理几乎是一样的，Peano公理中的第5条实际上就是保证了<em>&quot;<span class="math inline">\(N\)</span>是满足<span class="math inline">\(0\in A\land F(A)\subset A\)</span>的最小集合&quot;。</em></p>
+<p>可以发现，这种定义和Peano公理几乎是一样的，<span class="math inline">\(a^+\)</span>就是<span class="math inline">\(F(a)\)</span>。Peano公理中的第5条实际上就是保证了<em>&quot;<span class="math inline">\(N\)</span>是满足<span class="math inline">\(0\in A\land F(A)\subset A\)</span>的最小集合&quot;。</em></p>
 <p>另外，在集合论中有一种对自然数的经典构造：</p>
 <ul>
 <li><span class="math inline">\(0=\{\}\)</span></li>
@@ -213,6 +212,7 @@
 <li>...</li>
 <li><span class="math inline">\(n+1 = n\cup \{n\}\)</span></li>
 </ul>
+<p>这种构造的一个好处在于<span class="math inline">\(a\le b\)</span>可以表达成<span class="math inline">\(a\subseteq b\)</span>。</p>
 <h2 id="不动点fixed-point">4. 不动点(Fixed Point)</h2>
 <blockquote>
 <p>来自<em>Types and Programming Languages</em>.</p>
@@ -221,27 +221,31 @@
 <ul>
 <li><span class="math inline">\(F(X) = \{0\}\cup \{x^+\mid x\in X\}\)</span></li>
 </ul>
+<p><span class="math inline">\(F\)</span>的不动点是指满足<span class="math inline">\(X=F(X)\)</span>的集合<span class="math inline">\(X\)</span>。</p>
 <p>这个定义在本质上和前面是一样的，只不过是从不动点的角度。</p>
-<p>最小不动点和最大不动点构造常用来定义programing languages中的recursive datatypes，这里实际上将“自然数集”看成了“自然数类型”这个数据类型。</p>
+<p>最小不动点和最大不动点构造常用来定义程序语言中的<strong>recursive datatypes</strong>，这里实际上将“自然数集”看成了“自然数类型”这个递归数据类型。</p>
 <p>更多信息可以参考<em>Types and Programming Languages</em>的21章。</p>
 <h2 id="f-代数f-algebra">5. F-代数(F-Algebra)</h2>
 <blockquote>
-<p>来自<em>Calculating Functional Programs</em>.</p>
+<p>来自Program Calculation.</p>
 </blockquote>
-<p><span class="math inline">\(Nat = \text{DATA}\ (\underline 1\hat{+} Id)\)</span>，即自然数集是函子<span class="math inline">\(\underline 1\hat{+} Id\)</span>的初始代数(<strong>the initial <span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra</strong>)</p>
+<p>记<span class="math inline">\(F=\underline 1\hat{+} Id\)</span>，<span class="math inline">\(Nat = \mu F\)</span>，即自然数集是函子<span class="math inline">\(F\)</span>的初始代数的Carrier。<span class="math inline">\((Nat,in_F::F\ \mu F\to\mu F)\)</span>是F-初始代数(<strong>the initial <span class="math inline">\(F\)</span>-algebra</strong>)。</p>
+<p>这种使用intial F-algebra来定义的数据类型又叫做<strong>Algebraic Datatypes</strong>.</p>
 <p>这里使用<span class="math inline">\(Nat\)</span>而不是<span class="math inline">\(\mathbb{N}\)</span>，是为了看起来更像一个数据类型，而不是自然数集合。虽然在使用<span class="math inline">\(Set\)</span>范畴的时候，他们是一样的。</p>
 <p>The initial <span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra 意味着在某种意义上，<span class="math inline">\(Nat\)</span>是函子<span class="math inline">\((\underline 1\hat{+} Id)\)</span>的“最小不动点”，即满足<span class="math inline">\(Nat = 1+Nat\)</span>的最小集合。</p>
-<p>这一部分篇幅过长<del>不想写了</del>，可以参考<em>Calculating Functional Programs</em>。</p>
-<h3 id="与自然数上递归定理的联系">与自然数上递归定理的联系</h3>
+<p>在Program Calculation中借用了范畴论的一些概念，这里不严格的稍作解释：我们取<span class="math inline">\(Set\)</span>范畴，可以认为<span class="math inline">\(Set\)</span>中每个object都是一个类型，每个arrow都是函数（<span class="math inline">\(f:A\to B\)</span>将类型<span class="math inline">\(A\)</span>的元素映射到类型<span class="math inline">\(B\)</span>的元素）。自函子(endo-functor)就是范畴到自身的映射，将objects和arrows映射到objects和arrows。我们考虑一个自函子<span class="math inline">\(F\)</span>，它的F-algebra定义为一个pair <span class="math inline">\((A,f),\ f::F\ A \to A\)</span> ，<span class="math inline">\(A\)</span>是<span class="math inline">\(Set\)</span>中的一个object。Initial F-algebra 就是<span class="math inline">\((\mu F, in_F)\)</span>，满足从<span class="math inline">\((\mu F, in_F)\)</span>到任何其他F-algebra <span class="math inline">\((A,f)\)</span>都有一个homomorphism。利用initial F-algebra以及和它对偶的final F-algebra这两种构造，可以形式化的描述fold(catamorphism)和unfold(anamorphism)。</p>
+<p>更严格的描述可以参考<em>Calculating Functional Programs</em>或者其他有关Program Calculation的材料。</p>
+<h2 id="与自然数上递归定理的联系">与自然数上递归定理的联系</h2>
 <p>顺便提一下，使用F-algebra定义的自然数自带了到其他F-algebra的唯一同态，而这与<strong>自然数上的递归定理</strong>产生了某种联系：</p>
 <p>先回顾一下自然数上的递归定理：</p>
 <ul>
 <li>设集合<span class="math inline">\(A,\ a\in A,\ F:A\to A\)</span>，则存在唯一的<span class="math inline">\(h:\mathbb{N}\to A\)</span>，满足 <span class="math inline">\(h(0)=a\)</span> 且 <span class="math inline">\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)</span>。</li>
-<li>写成point-free就是<span class="math inline">\(h\circ succ = F\circ h\)</span>，其中<span class="math inline">\(succ(n) = n^+\)</span></li>
 </ul>
+<p>写成point-free就是<span class="math inline">\(h\circ succ = F\circ h\)</span>，其中<span class="math inline">\(succ(n) = n^+\)</span></p>
 <p>而由于<span class="math inline">\((\mathbb{N},zero\triangledown succ)\)</span>是一个initial <span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra，所以从它到任何其他<span class="math inline">\((\underline 1\hat{+} Id)\)</span>-algebra <span class="math inline">\((A,f)\)</span>存在唯一的同态<span class="math inline">\(h:\mathbb{N}\to A\)</span>，满足<span class="math inline">\(h\circ (zero\triangledown succ) = f\circ (1+h)\)</span></p>
 <p>啊哈，实际上“<span class="math inline">\(h\circ (zero\triangledown succ) = f\circ (1+h)\)</span>” 和 “<span class="math inline">\(h(0)=a\)</span> 且 <span class="math inline">\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)</span>” 这两个描述的性质是一模一样的！</p>
-<p>这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！</p>
+<p>这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！这个同态其实就是fold(catamorphism)！想要计算<span class="math inline">\(h(n)\)</span>，实际上就是将n中的0换成<span class="math inline">\(a\)</span>，<span class="math inline">\(^+\)</span>换成<span class="math inline">\(F\)</span>。</p>
+<p>从这里推广，对于任意一个algebraic datatype，我们都可以得到一个类似的“递归定理”，实际上就是catamorphism。</p>
 <hr />
 <h2 id="后记">后记</h2>
 <p>其实本来是读<em>Calculating Functional Programs</em>想到的这个问题，回顾了一下Discrete Math后发现原来还有这么多联系，非常有趣。</p>
