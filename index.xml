@@ -6,10 +6,21 @@
     <description>Recent content on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 May 2020 09:49:46 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2020 22:25:27 +0800</lastBuildDate>
     
 	<atom:link href="https://thwfhk.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Monad是自函子范畴上的幺半群</title>
+      <link>https://thwfhk.github.io/post/monad_is_a_monoid/</link>
+      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/post/monad_is_a_monoid/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;All told, monad is just a monoid in the category of endofunctors.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>如何安全地知道对方是否喜欢你</title>
@@ -49,15 +60,6 @@
       
       <guid>https://thwfhk.github.io/post/haskell_red_black_tree/</guid>
       <description>&lt;p&gt;Candy?在上学期的数算课上学了红黑树，但是他一直没写过。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>[口胡]Haskell中Functor和Monad与范畴论的联系</title>
-      <link>https://thwfhk.github.io/post/category_functor_monad/</link>
-      <pubDate>Sat, 08 Feb 2020 20:06:58 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/post/category_functor_monad/</guid>
-      <description>&lt;p&gt;Candy?从接触Haskell开始就想知道它与范畴论有什么联系。&lt;/p&gt;</description>
     </item>
     
     <item>

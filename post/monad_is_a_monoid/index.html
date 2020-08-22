@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Monad是自函子范畴上的幺半群 - Candy?</title>
+  
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Candy?" /><meta name="description" content=" All told, monad is just a monoid in the category of endofunctors.
+" /><meta name="keywords" content="Candy?, Blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://thwfhk.github.io/post/monad_is_a_monoid/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.ea46e737.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Monad是自函子范畴上的幺半群" />
+<meta property="og:description" content="
+All told, monad is just a monoid in the category of endofunctors.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://thwfhk.github.io/post/monad_is_a_monoid/" />
+<meta property="article:published_time" content="2020-08-22T22:25:27+08:00" />
+<meta property="article:modified_time" content="2020-08-22T22:25:27+08:00" />
+<meta itemprop="name" content="Monad是自函子范畴上的幺半群">
+<meta itemprop="description" content="
+All told, monad is just a monoid in the category of endofunctors.
+">
+
+
+<meta itemprop="datePublished" content="2020-08-22T22:25:27&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-22T22:25:27&#43;08:00" />
+<meta itemprop="wordCount" content="3388">
+
+
+
+<meta itemprop="keywords" content="Haskell,Category Theory," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Monad是自函子范畴上的幺半群"/>
+<meta name="twitter:description" content="
+All told, monad is just a monoid in the category of endofunctors.
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Candy?</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Candy?</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Monad是自函子范畴上的幺半群</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> Sat, 22 Aug 2020 </span>
+        
+          <span class="more-meta"> 约 3388 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#monads-in-haskell">Monads in Haskell</a>
+<ul>
+<li><a href="#fish">fish🐟</a></li>
+<li><a href="#bind">bind</a></li>
+<li><a href="#join">join</a></li>
+<li><a href="#do-notation">do notation</a></li>
+</ul></li>
+<li><a href="#monads-in-category-theory">Monads in Category Theory</a></li>
+<li><a href="#monoid-and-monoidal-category">Monoid and Monoidal Category</a>
+<ul>
+<li><a href="#monoid">Monoid</a></li>
+<li><a href="#monoidal-category">Monoidal Category</a></li>
+<li><a href="#monoid-in-a-monoidal-category">Monoid in a Monoidal Category</a></li>
+</ul></li>
+<li><a href="#monad-as-a-monoid">Monad as a Monoid</a></li>
+<li><a href="#后记">后记</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>All told, monad is just a monoid in the category of endofunctors.</p>
+</blockquote>
+
+<p>连鸽两个月后终于在八月份的末尾再次更新（填坑）。</p>
+
+<p>寒假的时候写过一个关于“Haskell中monad与范畴论有什么联系”的文章，当时写得很<del>naive</del>，现在了解的更多了一点，于是决定重写一下。主要参考资料是*Category Theory for Programmers*和<em>Category Theory in Context</em>.</p>
+
+<h2 id="monads-in-haskell">Monads in Haskell</h2>
+
+<p>首先回顾一下Haskell中的monad。</p>
+
+<p>Haskell中的Monad <code>m</code>是一个typeclass，他本身是一个函子（因此<code>m :: * -&gt; *</code>），带有一些满足特殊性质的运算。</p>
+
+<p>在Haskell中对monad有三种等价的定义，分别使用fish, bind, join配合return.</p>
+
+<h3 id="fish">fish🐟</h3>
+
+<p>对于category $C$和endofunctor $m$，我们可以将a到b的morphisms换成$a\to m\ b$的函数（这样的函数称为<strong>Kleisli arrows</strong>）， 若可以定义满足条件的composition和identity morphism，得到的新范畴就是$C$对应的<strong>Kleisli category</strong> $K$ ，此时称$m$是一个<strong>monad</strong>。</p>
+
+<p>在haskell中是这样定义的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Monad</span> <span class="n">m</span> <span class="kr">where</span>
+	<span class="p">(</span><span class="o">&gt;=&gt;</span><span class="p">)</span> <span class="ow">::</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">c</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">c</span><span class="p">)</span> 
+	<span class="n">return</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">a</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>注意到<code>&gt;=&gt;</code>(fish operator)就是composition，<code>return</code>是identity morphism（的polymorphic版本）。</p>
+
+<p>此时monad laws反应的就是Kleisli category对composition的要求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">return</span> <span class="o">&gt;=&gt;</span> <span class="n">f</span> <span class="ow">=</span> <span class="n">f</span> <span class="c1">-- left unit</span>
+<span class="nf">f</span> <span class="o">&gt;=&gt;</span> <span class="n">return</span> <span class="ow">=</span> <span class="n">f</span> <span class="c1">-- right unit</span>
+<span class="p">(</span><span class="n">f</span> <span class="o">&gt;=&gt;</span> <span class="n">g</span><span class="p">)</span> <span class="o">&gt;=&gt;</span> <span class="n">h</span> <span class="ow">=</span> <span class="n">f</span> <span class="o">&gt;=&gt;</span> <span class="p">(</span><span class="n">g</span> <span class="o">&gt;=&gt;</span> <span class="n">h</span><span class="p">)</span> <span class="c1">-- associativity </span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="bind">bind</h3>
+
+<p>观察到<code>&gt;=&gt;</code>第一步必定是将<code>a -&gt; m b</code>作用于a，因此可以将第一个<code>a -&gt; m b</code>换成<code>m b</code>，简化得到<code>&gt;&gt;=</code>（bind），这是haskell中标准的monad的定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Monad</span> <span class="n">m</span> <span class="kr">where</span>
+	<span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="ow">::</span> <span class="n">m</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span> 
+	<span class="n">return</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">a</span>
+<span class="p">(</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="ow">::</span> <span class="n">m</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">b</span>
+<span class="nf">m</span> <span class="o">&gt;&gt;</span> <span class="n">k</span> <span class="ow">=</span> <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="p">(</span><span class="nf">\</span><span class="kr">_</span> <span class="ow">-&gt;</span> <span class="n">k</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>直观上，bind将一个有context的value给了一个<code>a -&gt; m b</code>类型的函数，他提供了一种“从context里拿出值”的方法。</p>
+
+<p>与fish互相表示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">f</span> <span class="o">&gt;=&gt;</span> <span class="n">g</span> <span class="ow">=</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">g</span>
+<span class="nf">x</span> <span class="o">&gt;&gt;=</span> <span class="n">f</span> <span class="ow">=</span> <span class="p">((</span><span class="nf">\</span><span class="kr">_</span> <span class="ow">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;=&gt;</span> <span class="n">f</span><span class="p">)</span> <span class="nb">()</span> <span class="c1">-- one possible version</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以将fish表示的monad laws转换为等价的bind表示的monad laws：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">return</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">f</span> <span class="ow">=</span> <span class="n">f</span> <span class="n">x</span>
+<span class="nf">mx</span> <span class="o">&gt;&gt;=</span> <span class="n">return</span> <span class="ow">=</span> <span class="n">mx</span>
+<span class="p">(</span><span class="n">mx</span> <span class="o">&gt;&gt;=</span> <span class="n">f</span><span class="p">)</span> <span class="o">&gt;&gt;=</span> <span class="n">g</span> <span class="ow">=</span> <span class="n">mx</span> <span class="o">&gt;&gt;=</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">g</span><span class="p">)</span>
+<span class="c1">-- 或者写成(m &gt;&gt;= \x -&gt; f x) &gt;&gt;= g = m &gt;&gt;= (\x -&gt; f x &gt;&gt;= g)更清楚一点</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="join">join</h3>
+
+<p>观察到我们可以借助<code>fmap</code>来应用函数f，因此只要一个<code>join :: m(m a) -&gt; m a</code>就可以实现bind的功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">class</span> <span class="kt">Functor</span> <span class="n">m</span> <span class="ow">=&gt;</span> <span class="kt">Monad</span> <span class="n">m</span> <span class="kr">where</span>
+    <span class="n">join</span> <span class="ow">::</span> <span class="n">m</span> <span class="p">(</span><span class="n">m</span> <span class="n">a</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">a</span>
+    <span class="n">return</span> <span class="ow">::</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="n">a</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>与bind互相表示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">x</span> <span class="o">&gt;&gt;=</span> <span class="n">f</span> <span class="ow">=</span> <span class="n">join</span> <span class="p">(</span><span class="n">fmap</span> <span class="n">f</span> <span class="n">x</span><span class="p">)</span>
+<span class="nf">join</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">id</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>join表示的monad laws在下文中会从Category Theory中对$\eta,\mu$的要求中推出，可以验证这两条和之前的monad laws等价。</p>
+
+<h3 id="do-notation">do notation</h3>
+
+<p>do实际上是一个syntactic sugar:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">do</span> <span class="p">{</span><span class="n">x1</span> <span class="ow">&lt;-</span> <span class="n">m1</span><span class="p">;</span> <span class="n">x2</span> <span class="ow">&lt;-</span> <span class="n">m2</span><span class="p">;</span> <span class="n">f</span> <span class="n">x1</span> <span class="n">x2</span><span class="p">}</span> <span class="ow">=</span>
+<span class="nf">m1</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x1</span> <span class="ow">-&gt;</span> <span class="n">m2</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x2</span> <span class="ow">-&gt;</span> <span class="n">f</span> <span class="n">x1</span> <span class="n">x2</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以类似命令式来写函数式。</p>
+
+<p>上述monad laws用do notation表示的话就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="kr">do</span> <span class="p">{</span><span class="n">x&#39;</span> <span class="ow">&lt;-</span> <span class="n">return</span> <span class="n">x</span><span class="p">;</span> <span class="n">return</span> <span class="n">x&#39;</span><span class="p">}</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">{</span><span class="n">f</span> <span class="n">x</span><span class="p">}</span>
+<span class="kr">do</span> <span class="p">{</span><span class="n">x</span> <span class="ow">&lt;-</span> <span class="n">mx</span><span class="p">;</span> <span class="n">return</span> <span class="n">x</span><span class="p">}</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">{</span><span class="n">mx</span><span class="p">}</span>
+<span class="kr">do</span> <span class="p">{</span><span class="n">y</span> <span class="ow">&lt;-</span> <span class="kr">do</span> <span class="p">{</span><span class="n">x</span> <span class="ow">&lt;-</span> <span class="n">mx</span><span class="p">;</span> <span class="n">f</span> <span class="n">x</span><span class="p">};</span> <span class="n">g</span> <span class="n">y</span><span class="p">}</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">{</span><span class="n">x</span> <span class="ow">&lt;-</span> <span class="n">mx</span><span class="p">;</span> <span class="n">y</span> <span class="ow">&lt;-</span> <span class="n">f</span> <span class="n">x</span><span class="p">;</span> <span class="n">g</span> <span class="n">y</span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="monads-in-category-theory">Monads in Category Theory</h2>
+
+<p>在Category Theory中，monad的形式化定义如下：</p>
+
+<p>[Def] A <strong>monad</strong> on a category $C$ consists of:</p>
+
+<ul>
+<li>an endofunctor $T:C\to C$</li>
+<li>a <strong>multiplication</strong> natural transformation $\mu : T^2 \Rightarrow T$</li>
+<li>a <strong>unit</strong> natural transformation $\eta : 1_C\Rightarrow T$</li>
+</ul>
+
+<p>Coherence conditions: the following diagrams commute</p>
+
+<p><img src="/images/monad/monad diagram.png" alt="截屏2020-08-18 下午8.40.09" style="zoom:50%;" /></p>
+
+<p>我们假设Haskell有一个Hask范畴（objects是type，morphims是functions）的话，Haskell中的monad就是Hask范畴上的monad，其中<code>return</code>就是$\eta$，<code>join</code>就是$\mu$（准确的说是components $\eta_a,\mu_a$的polymorphic版本），他们需要满足的monad laws就是$\eta,\mu$的两个图交换：</p>
+
+<ul>
+<li>$\mu \circ T \mu  = \mu \circ \mu T$ :  <code>join . fmap (join) = join . join</code></li>
+<li>$\mu \circ T \eta = \mu \circ \eta T = 1_T$  : <code>join . fmap (unit) = join . unit = id</code></li>
+</ul>
+
+<p>当然$\eta,\mu$还要满足作为自然变换的coherence conditions，不过这两个条件由于<strong><em>Theorems for Free</em></strong>而自动满足：</p>
+
+<ul>
+<li><code>return . f = fmap f . return</code></li>
+<li><code>join . fmap (fmap f) = fmap f . join</code></li>
+</ul>
+
+<p>所以Haskell中的monad与Category Theory中的monad是一致的，接下来只要解释Category Theory中monad为什么是a monoid in the endofunctor category. 我们需要先补充一些Category Theory中的概念。</p>
+
+<h2 id="monoid-and-monoidal-category">Monoid and Monoidal Category</h2>
+
+<h3 id="monoid">Monoid</h3>
+
+<p>经典的monoid（幺半群）是在集合上定义的，人如其名，有乘法运算和单位元。</p>
+
+<p>[Def] A <strong>monoid</strong> is an object $M\in Set$ together with two morphisms $\mu : M\times M\to M$ and $\eta :1\to M$.</p>
+
+<p>Coherence conditions: the following diagrams commute</p>
+
+<p><img src="/images/monad/monoid diagram.png" alt="截屏2020-08-18 上午10.27.32" style="zoom: 50%;" /></p>
+
+<p>这个定义和抽象代数中是等价的，$\mu$给出了一个二元运算并满足结合律（图1），$\eta$给出了一个单位元（图2）。</p>
+
+<p>我们可以把monoid从Set上<strong><em>推广到其他category上</em></strong>，能在上面定义monoid的category需要满足一定条件，称为monoidal category。</p>
+
+<h3 id="monoidal-category">Monoidal Category</h3>
+
+<p>直观上，要想在一个category上定义monoid，这个category需要有一个objects之间的<strong><em>product</em></strong>，还要能从每个objects中拿出一个unit element。我们不能从category的objects里拿东西，但可以利用terminal object到其他objects的映射来取单位元，所以这个category要有一个类似<strong><em>terminal object</em></strong>的东西。。</p>
+
+<p>monoidal category的形式化定义如下：</p>
+
+<p>[Def] A <strong>symetric monoidal category</strong>$(V,\otimes,*)$ is a category $V$ together with:</p>
+
+<ul>
+<li>a <strong><em>bifunctor</em></strong> $-\otimes-:V\times V\to V$ called <strong>monoidal product</strong> (or tensor product)</li>
+<li>a <strong>unit object</strong> $*$.</li>
+</ul>
+
+<p>Coherence conditions: three coherence natural isomorphisms</p>
+
+<p><img src="/images/monad/monoidal cat.png" alt="截屏2020-08-18 上午10.31.38" style="zoom:50%;" /></p>
+
+<p>Remarks:</p>
+
+<ul>
+<li><p>注意$\alpha$这些natural isomorphisms是multifunctors之间的，他的components是$\alpha_{u,v,w}$</p></li>
+
+<li><p>三个coherence conditions分别是symetric, associativity, unit conditions on the monoidal product. 只满足后两个的话称为<strong>monoidal category</strong></p></li>
+
+<li><p>如果这些natural isomorphisms可以取identity natural isomorphisms的话，称为<strong>strict monoidal category</strong>.</p></li>
+</ul>
+
+<p>Examples:</p>
+
+<ul>
+<li>All categories with ﬁnite products such as $(Set,\times, * ), (Top,\times,*),(Cat,\times,1)$, where the monoidal unit in each case is the terminal object. 对偶地，finite coproduct和initial object也构成symmetric monoidal category，如$(Set,+,{})$.</li>
+<li>Hask范畴可以近似看成Set，因此product（coproduct）在同构意义下满足条件，terminal object是<code>()</code>（<code>Empty</code>），因此Hask是monoidal category。</li>
+<li>A commutative monoid看作discrete category(即只有identity morphisms)的话也定义了一个symetric monoidal category，此时natural isomorphisms就是identities。另一方面，经典的monoid就是Set上的monoid。</li>
+</ul>
+
+<h3 id="monoid-in-a-monoidal-category">Monoid in a Monoidal Category</h3>
+
+<p>在monoidal category$(V,\otimes,*)$上定义monoid，我们需要取一个object $M\in V$以及两个morphisms $\mu : M\otimes M\to M$, $\eta : * \to M$. Coherence conditions和经典monoid相同。</p>
+
+<h2 id="monad-as-a-monoid">Monad as a Monoid</h2>
+
+<p>终于来到了正题。实际上经过前面的铺垫，剩下的内容就很简单了：</p>
+
+<p>我们考虑<strong>functor category $C^C$</strong>，它的objects是functors，morphisms是natural transformations。它是一个<strong><em>strict monoidal category</em></strong>，monoidal product是*composition between functors*，unit object是identity endofunctor。注意此时composition(一般省略运算符) $-\circ -:C^C \times C^C \to C^C$是一个bifunctor，它是可以作用于natural transformation的，作用效果就是natural transformation的<strong><em>horizontal composition</em></strong>。</p>
+
+<p>那么$C^C$上的monoid是什么样的呢？取object $T\in C^C$，morphisms $\mu,\eta\in C^C$满足条件。 $T$就是一个monad！所以<em>A monad on $C$ is a monoid in the monoidal category $C^C$ of endofunctors on $C$</em>. Bingo!</p>
+
+<h2 id="后记">后记</h2>
+
+<p>其实这篇文章一点也不友好，<del>只能作为给自己看的复习笔记</del>。</p>
+
+<p>monad相关还有好多有趣的内容，比如comonad、adjunctions等等，<del>有时间一定写</del>。</p>
+
+<p>希望以后多更新一点有趣的东西（喂至少做到月更啊</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/haskell/">Haskell</a>
+          <a href="/tags/category-theory/">Category Theory</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/do_u_like_me/">
+            <span class="next-text nav-default">如何安全地知道对方是否喜欢你</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+
+  <div id="utter-container"></div>
+    <script src="https://utteranc.es/client.js"
+        repo= 'thwfhk/blog_comments_utteranc'
+        issue-term= "pathname"
+        theme= 'github-light'
+        crossorigin= "anonymous"
+        async>
+    </script>
+
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:thwfhk@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/thwfhk" class="iconfont icon-github" title="github"></a>
+  <a href="https://thwfhk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Candy?</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

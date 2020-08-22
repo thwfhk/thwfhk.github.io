@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 May 2020 09:49:46 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2020 22:25:27 +0800</lastBuildDate>
     
 	<atom:link href="https://thwfhk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Category Theory</title>
+      <link>https://thwfhk.github.io/tags/category-theory/</link>
+      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/tags/category-theory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Haskell</title>
+      <link>https://thwfhk.github.io/tags/haskell/</link>
+      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/tags/haskell/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>secret sharing</title>
@@ -21,20 +39,11 @@
     </item>
     
     <item>
-      <title>Writing</title>
+      <title>writing</title>
       <link>https://thwfhk.github.io/tags/writing/</link>
       <pubDate>Sat, 16 May 2020 09:49:46 +0800</pubDate>
       
       <guid>https://thwfhk.github.io/tags/writing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Category Theory</title>
-      <link>https://thwfhk.github.io/tags/category-theory/</link>
-      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/category-theory/</guid>
       <description></description>
     </item>
     
@@ -71,15 +80,6 @@
       <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
       
       <guid>https://thwfhk.github.io/tags/algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Haskell</title>
-      <link>https://thwfhk.github.io/tags/haskell/</link>
-      <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/haskell/</guid>
       <description></description>
     </item>
     
