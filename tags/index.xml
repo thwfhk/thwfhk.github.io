@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 22 Aug 2020 22:25:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2020 17:43:42 +0800</lastBuildDate>
     
 	<atom:link href="https://thwfhk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Haskell</title>
+      <link>https://thwfhk.github.io/tags/haskell/</link>
+      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/tags/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming Language Theory</title>
+      <link>https://thwfhk.github.io/tags/programming-language-theory/</link>
+      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/tags/programming-language-theory/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Category Theory</title>
@@ -17,15 +35,6 @@
       <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
       
       <guid>https://thwfhk.github.io/tags/category-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Haskell</title>
-      <link>https://thwfhk.github.io/tags/haskell/</link>
-      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/haskell/</guid>
       <description></description>
     </item>
     
@@ -39,20 +48,11 @@
     </item>
     
     <item>
-      <title>writing</title>
+      <title>Writing</title>
       <link>https://thwfhk.github.io/tags/writing/</link>
       <pubDate>Sat, 16 May 2020 09:49:46 +0800</pubDate>
       
       <guid>https://thwfhk.github.io/tags/writing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming Language Theory</title>
-      <link>https://thwfhk.github.io/tags/programming-language-theory/</link>
-      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/programming-language-theory/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>区分一些Higher-order开头的词 - Candy?</title>
+  
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Candy?" /><meta name="description" content=" 某种意义上，高阶意味着一等公民（
+" /><meta name="keywords" content="Candy?, Blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://thwfhk.github.io/post/higher_order_xxx/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.ea46e737.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="区分一些Higher-order开头的词" />
+<meta property="og:description" content="
+某种意义上，高阶意味着一等公民（
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://thwfhk.github.io/post/higher_order_xxx/" />
+<meta property="article:published_time" content="2020-08-25T17:43:42+08:00" />
+<meta property="article:modified_time" content="2020-08-25T17:43:42+08:00" />
+<meta itemprop="name" content="区分一些Higher-order开头的词">
+<meta itemprop="description" content="
+某种意义上，高阶意味着一等公民（
+">
+
+
+<meta itemprop="datePublished" content="2020-08-25T17:43:42&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-25T17:43:42&#43;08:00" />
+<meta itemprop="wordCount" content="2419">
+
+
+
+<meta itemprop="keywords" content="Haskell,Programming Language Theory," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="区分一些Higher-order开头的词"/>
+<meta name="twitter:description" content="
+某种意义上，高阶意味着一等公民（
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Candy?</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Candy?</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">区分一些Higher-order开头的词</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> Tue, 25 Aug 2020 </span>
+        
+          <span class="more-meta"> 约 2419 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#higher-order-functions">Higher-order Functions</a></li>
+<li><a href="#higher-order-type-operators">Higher-order Type (Operators)</a></li>
+<li><a href="#higher-rank-polymorphism">Higher-rank Polymorphism</a></li>
+<li><a href="#higher-order-polymorphism">Higher-order Polymorphism</a></li>
+<li><a href="#后记">后记</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>某种意义上，高阶意味着一等公民（</p>
+</blockquote>
+
+<p>在阅读PL相关的论文以及函数式语言的相关资料的时候，经常会看到&rdquo;<strong>higher-order xxx</strong>&ldquo;或者&rdquo;<strong>higher-xxx yyy</strong>&ldquo;这种格式的词语，仿佛是一切东西前面都能加个higher-order。我时常分不清他们的含义，于是我想从语言的角度总结一下各种higher/higher-order开头的词语。可以发现他们之间还是很相似的。</p>
+
+<h2 id="higher-order-functions">Higher-order Functions</h2>
+
+<p><strong>higher-order function</strong> 指接受函数作为参数的函数（有时候返回函数的函数也算），比如<code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]</code>。</p>
+
+<p>如果我们把type写成一棵语法树，可以对于higher-order function的type，它从根走到某个$(a\to b)$的路径上至少有一次是<strong>走了某个$\to$节点的左边</strong>。</p>
+
+<p>在支持higher-order function的语言中，函数是<strong>一等公民（first-class citizen）</strong>，也就是说函数可以作为参数传递。严格来说一等公民还应该支持赋值、存储等操作，但我觉得已经支持作为参数传递和返回了，其他的应该也都支持（纯粹的函数式语言不在意这些🐶）。</p>
+
+<p>如果出现<strong>higher-order language</strong>这个词，一般指支持higher-order function的语言。</p>
+
+<p>对应的lambda calculus的例子：simply typed lambda calculus $\lambda_\to$.</p>
+
+<h2 id="higher-order-type-operators">Higher-order Type (Operators)</h2>
+
+<p>首先简单介绍一下关于type operator和kind的前置知识：</p>
+
+<p>我们想要讨论<strong>type-level functions</strong> (or <strong>type operators</strong>, type constructors), 比如<code>Ref T</code> , <code>Pair S T</code>等等。因此在type层面引入了abstraction $\lambda X::K.T$ 和application $T\ T$。这样就有了type operators。</p>
+
+<p>为了从arity上区分type (operators)，我们引入<strong>kinds</strong> (the types of types):</p>
+
+<ul>
+<li>a single atomic kind $*$ (pronounced &ldquo;type&rdquo;)</li>
+<li>a single constructor $\Rightarrow$</li>
+</ul>
+
+<p>一些例子：</p>
+
+<ul>
+<li>$*$ : the kind of <strong>proper types</strong> (or ground types, the sorts of type expressions that are actually used to classify terms), like $Bool,\ Nat\to Nat,\ \forall X.X\to X$</li>
+<li>$*\Rightarrow *$ : the kind of <strong>type operators</strong> (functions from proper types to proper types), like $\lambda X.T$ (abbreviation for $\lambda X::*.T$)</li>
+<li>$* \Rightarrow * \Rightarrow *$ : the kind of functions from proper types to type operators</li>
+<li>$(* \Rightarrow *) \Rightarrow *$ : the kind of functions from type operators to proper types.</li>
+</ul>
+
+<p>有$*\Rightarrow \cdots \Rightarrow *$ 这种kind的type称为type operator或者<strong>first-order type operator</strong>；</p>
+
+<p>而如果有$(*\Rightarrow *)$出现在某个$\Rightarrow$的左子树，这种type operator称为<strong>higher-order type operators</strong> or <strong>higher-kinded type operators</strong>。这个定义和higher-order function是完全一致的，别忘了type operator是type之间的function。</p>
+
+<p>higher-order type operator很少出现。</p>
+
+<p>对应的lambda calculus的例子：$\lambda_\omega$</p>
+
+<h2 id="higher-rank-polymorphism">Higher-rank Polymorphism</h2>
+
+<p>Polymorphism有很多种，higher-rank polymorphism是对于parametric polymorphism来说的。</p>
+
+<p><strong>Parametric polymorphism</strong>允许在type中出现type variable和quantifier （如$\lambda X.t :: \forall X.T$），并在evaluation时用不同的type实例化type variable。他与<strong>ad-hoc polymorphism</strong>的很大一个不同在于：The polymorphic functions act on different types <strong><em>uniformly</em></strong>. 这也是<strong>parametricity</strong>(see theorem for free)的来源。</p>
+
+<p>一些例子：System $F$，FP中大部分语言，面向对象中的generics，C++中的template。</p>
+
+<p>几种分类：</p>
+
+<ul>
+<li><strong>let-polymorphsim(prenex polymorphism)</strong>: 只允许polymorphism出现在top-level let-bindings，也就是说quantifier只能出现在最外层，因此type variables只能instantiate成quntifier-free type。又称为<strong>rank-1 polymorphism</strong>.</li>
+<li><strong>rank-2 polymorphism</strong>: 把type写成语法树树，从根到任一个$\forall$ quantifier的路径不走<strong>两次或以上</strong>$\to$节点的左边。比如$(\forall X.X\to X)\to Nat$就是走了一次。</li>
+<li><strong>rank-k polymorphism</strong> (如上类推)</li>
+<li><strong>rank-n polymorphism</strong>又称为<strong>higher-rank polymorphism</strong> or impredicative (first-class) polymorphism，允许任意多次。注意到，此时我们可以将polymorphic function任意的当作参数进行传递，因此polymorphic function变成了一等公民。</li>
+</ul>
+
+<p>Haskell支持rank-n polymorphism，<code>{-# LANGUAGE Rank2Types #-} {-# LANGUAGE Rank2Types #-}</code>实际上就是用来开启rank-n polymorphism. 这样就可以写出<code>f :: (forall n. n-&gt;n) -&gt; (Int, Double)</code>这种函数。注意它与<code>f :: forall n . (n-&gt;n) -&gt; (Int, Double)</code>的区别：前者接受一个能作用于任意类型n并返回类型n的函数，后者接受的函数中n是任意一个具体的类型了。</p>
+
+<p>对应的lambda calculus的例子：polymorphic lambda calculus $F$.</p>
+
+<h2 id="higher-order-polymorphism">Higher-order Polymorphism</h2>
+
+<p><strong>higher-order polymorphism</strong> or <strong>higher-kinded polymorphism</strong>也是对于parametric polymorphism来说的，就是将前两节提到的higher-kinded type与higher-rank polymorphism结合到一起，允许parametric polymorphism的type variable遍历type operator。</p>
+
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">type Ground = Int
+type FirstOrder a = Maybe a  -- a is ground
+type SecondOrder c = c Int   -- c is a first-order constructor
+type ThirdOrder c = c Maybe  -- c is second-order</pre></td></tr></table>
+</div>
+</div>
+<p>Haskell中<code>fmap :: forall f. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b</code>，<code>f :: *-&gt;*</code>是一个type operator，所以这是个higher-order polymorphism。这个例子中只用到了rank-1 polymorphism，我们也可以写出同时用到rank-2 polymorphism和higher-order polymorphism的例子：<code>ret :: Monad m' =&gt; (forall m. Monad m =&gt; a -&gt; m a) -&gt; a -&gt; m' a</code>。</p>
+
+<p>对应的lambda calculus的例子：Higher-order polymorphic lambda-calculus $F_\omega$</p>
+
+<h2 id="后记">后记</h2>
+
+<p>本来想写parametricity结果发现坑越来越大，于是<del>水点简单的东西</del>。</p>
+
+<p>希望有时间去认真学一下他们与logic的联系。</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/haskell/">Haskell</a>
+          <a href="/tags/programming-language-theory/">Programming Language Theory</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/monad_is_a_monoid/">
+            <span class="next-text nav-default">Monad是自函子范畴上的幺半群</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+
+  <div id="utter-container"></div>
+    <script src="https://utteranc.es/client.js"
+        repo= 'thwfhk/blog_comments_utteranc'
+        issue-term= "pathname"
+        theme= 'github-light'
+        crossorigin= "anonymous"
+        async>
+    </script>
+
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:thwfhk@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/thwfhk" class="iconfont icon-github" title="github"></a>
+  <a href="https://thwfhk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Candy?</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

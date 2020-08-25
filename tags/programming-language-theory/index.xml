@@ -6,10 +6,21 @@
     <description>Recent content in Programming Language Theory on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2020 17:43:42 +0800</lastBuildDate>
     
 	<atom:link href="https://thwfhk.github.io/tags/programming-language-theory/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>区分一些Higher-order开头的词</title>
+      <link>https://thwfhk.github.io/post/higher_order_xxx/</link>
+      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/post/higher_order_xxx/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;某种意义上，高阶意味着一等公民（&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>什么是自然数</title>
