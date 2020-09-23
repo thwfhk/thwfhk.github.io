@@ -69,7 +69,7 @@
 
 <meta itemprop="datePublished" content="2020-08-25T17:43:42&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-25T17:43:42&#43;08:00" />
-<meta itemprop="wordCount" content="2419">
+<meta itemprop="wordCount" content="2583">
 
 
 
@@ -150,8 +150,8 @@
       <div class="post-meta">
         <span class="post-time"> Tue, 25 Aug 2020 </span>
         
-          <span class="more-meta"> 约 2419 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 2583 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
         
       </div>
     </header>
@@ -241,7 +241,13 @@
 
 <p>Haskell支持rank-n polymorphism，<code>{-# LANGUAGE Rank2Types #-} {-# LANGUAGE Rank2Types #-}</code>实际上就是用来开启rank-n polymorphism. 这样就可以写出<code>f :: (forall n. n-&gt;n) -&gt; (Int, Double)</code>这种函数。注意它与<code>f :: forall n . (n-&gt;n) -&gt; (Int, Double)</code>的区别：前者接受一个能作用于任意类型n并返回类型n的函数，后者接受的函数中n是任意一个具体的类型了。</p>
 
-<p>对应的lambda calculus的例子：polymorphic lambda calculus $F$.</p>
+<p>对应的lambda calculus的例子：polymorphic lambda calculus $F$ (System F)</p>
+
+<blockquote>
+<p>值得注意的是，Haskell的function并不支持explicit type-level abstraction（而System F中支持），因为这会使type inference变成undecidable。Haskell的编译器会自动推断type variable应该实例化成哪个类型。</p>
+
+<p>在加入pragma<code>{-# language TypeApplications #-}</code>后可以写出<code>idInt = id @Int</code></p>
+</blockquote>
 
 <h2 id="higher-order-polymorphism">Higher-order Polymorphism</h2>
 
