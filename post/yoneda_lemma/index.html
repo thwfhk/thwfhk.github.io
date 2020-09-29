@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>万有性质和米田引理 - Candy?</title>
+  
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Candy?" /><meta name="description" content=" 人的本质是一切社会关系的总和
+" /><meta name="keywords" content="Candy?, Blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://thwfhk.github.io/post/yoneda_lemma/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.ea46e737.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="万有性质和米田引理" />
+<meta property="og:description" content="
+人的本质是一切社会关系的总和
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://thwfhk.github.io/post/yoneda_lemma/" />
+<meta property="article:published_time" content="2020-09-29T17:51:30+08:00" />
+<meta property="article:modified_time" content="2020-09-29T17:51:30+08:00" />
+<meta itemprop="name" content="万有性质和米田引理">
+<meta itemprop="description" content="
+人的本质是一切社会关系的总和
+">
+
+
+<meta itemprop="datePublished" content="2020-09-29T17:51:30&#43;08:00" />
+<meta itemprop="dateModified" content="2020-09-29T17:51:30&#43;08:00" />
+<meta itemprop="wordCount" content="3071">
+
+
+
+<meta itemprop="keywords" content="Category Theory," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="万有性质和米田引理"/>
+<meta name="twitter:description" content="
+人的本质是一切社会关系的总和
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Candy?</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Candy?</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">万有性质和米田引理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> Tue, 29 Sep 2020 </span>
+        
+          <span class="more-meta"> 约 3071 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>人的本质是一切社会关系的总和</p>
+</blockquote>
+<p>这是一篇关于<em>Category Theory in Context</em>的第二章<em>Universal Properties, Representability, and the Yoneda Lemma</em>的学习笔记，记录了核心内容与一些个人理解。</p>
+<p>Motivation: 最基本的描述universal property的方式是：某个object是某个category的initial/terminal object。这种方式的问题在于需要构造复杂的category。我们希望有一种更方便的描述universal property的方式：通过representable functor来描述从c映射出/映射到c的所有映射的样子。</p>
+<h2 id="representable-functors">Representable Functors</h2>
+<p>以下均假设<span class="math inline">\(C\)</span> is locally small.</p>
+<p>[Def] <span class="math inline">\(C\)</span> is <em>locally small</em>, <span class="math inline">\(c\in C\)</span>,</p>
+<ul>
+<li><span class="math inline">\(C(c,-):C\to Set\)</span>是 <strong>covariant functor represented by <span class="math inline">\(c\)</span></strong></li>
+<li><span class="math inline">\(C(-,c):C^{op}\to Set\)</span>是 <strong>contravariant functor represented by <span class="math inline">\(c\)</span></strong></li>
+</ul>
+<div class="figure">
+<img src="/images/yoneda_lemma.assets/截屏2020-08-08%20上午12.08.56.png" />
+
+</div>
+<ul>
+<li><p>对于<span class="math inline">\(f:x\to y\)</span>, <span class="math inline">\(C(c,f) = f_* : C(c,x)\to C(c,y)\)</span>是<strong>post-composition</strong>，<span class="math inline">\(C(c,f) g = f g\)</span> 将f在g之后（左）作用上</p></li>
+<li><p>对于<span class="math inline">\(f:x\to y\)</span> ,<span class="math inline">\(C(f,c):C(y,c)\to C(x,c)\)</span>是<strong>pre-composition</strong>，<span class="math inline">\(C(-,c) f\ g = gf\)</span>将f在g之前（右）作用上</p></li>
+</ul>
+<p>[Def] <strong>two-sided represented functor</strong> <span class="math inline">\(\mathrm{C}(-,-): \mathrm{C}^{\mathrm{op}} \times \mathrm{C} \rightarrow \text { Set }\)</span></p>
+<ul>
+<li>对于<span class="math inline">\(f:w\to x, h:y\to z\)</span>，<span class="math inline">\(C(f,h):C(x,y)\to C(w,z)\)</span>分别将f复合在g前，h复合在g后。<span class="math inline">\(g:x\to y\)</span>，<span class="math inline">\(C(f,h)g = hgf\)</span></li>
+</ul>
+<p>[Def] <strong>Representable functor</strong>: <span class="math inline">\(C\)</span> is <em>locally small</em>, <span class="math inline">\(c\in C\)</span>,</p>
+<ul>
+<li>A covariant functor <span class="math inline">\(F:C\to Set\)</span> is <strong>representable</strong> if <span class="math inline">\(C(c,-)\cong F\)</span></li>
+<li>A contravariant functor <span class="math inline">\(F:C^{op}\to Set\)</span> is <strong>representable</strong> if <span class="math inline">\(C(-,c)\cong F\)</span></li>
+<li>称<span class="math inline">\(F\)</span> is represented by <span class="math inline">\(c\)</span>, <span class="math inline">\(c\)</span>称为the representing object</li>
+</ul>
+<h2 id="yoneda-lemma">Yoneda Lemma</h2>
+<p>为了用representable functor描述universal property，我们需要知道构造一个<span class="math inline">\(C(c,-)\cong F\)</span>需要什么？我们先看更一般的情况，构造<span class="math inline">\(\alpha : C(c,-)\Rightarrow F\)</span>需要什么。Yoneda lemma告诉我们，只要给出一个<span class="math inline">\(x\in F\ c\)</span>就可以构造出一个<span class="math inline">\(\alpha\)</span>.</p>
+<p>[Thm] <strong>Yoneda lemma</strong>: <span class="math inline">\(C\)</span> is <em>locally small</em>, 对于<span class="math inline">\(c\in C\)</span>,</p>
+<ul>
+<li><span class="math inline">\(F:C\to Set\)</span>, 有双射<span class="math inline">\(\mathrm{Hom}(C(c,-),F)\cong F\ c\)</span>, 且natural in <span class="math inline">\(c\)</span> and <span class="math inline">\(F\)</span>.</li>
+<li><span class="math inline">\(F:C^{op}\to Set\)</span>, 有双射<span class="math inline">\(\mathrm{Hom}(C(-,c),F)\cong F\ c\)</span>, 且natural in <span class="math inline">\(c\)</span> and <span class="math inline">\(F\)</span>.</li>
+</ul>
+<p>Remark:</p>
+<ul>
+<li>理解：这个双射说明natural transformation <span class="math inline">\(\alpha:C(c,-)\Rightarrow F\)</span> 与 <span class="math inline">\(x\in F\ c\)</span> 之间的一一对应</li>
+<li>从左到右，<span class="math inline">\(\alpha_c(1_c)\)</span>就是<span class="math inline">\(F\ c\)</span>中的一个元素</li>
+<li>从右到左，给出<span class="math inline">\(x\in F\ c\)</span>，再利用<span class="math inline">\(\alpha\)</span>的naturality就可以确定一个natural transformation <span class="math inline">\(\alpha\)</span>. 实际上，给出的就是<span class="math inline">\(\alpha_c(1_c)\)</span>.</li>
+<li>双射具体构造：</li>
+<li>从左到右 <span class="math inline">\(\Phi: \operatorname{Hom}(\mathrm{C}(c,-), F) \rightarrow F c\)</span>, <span class="math inline">\(\Phi(\alpha):=\alpha_{c}\left(1_{c}\right)\)</span></li>
+<li>从右到左 <span class="math inline">\(\Psi: F c \rightarrow \operatorname{Hom}(\mathrm{C}(c,-), F)\)</span>, <span class="math inline">\(\Psi(x)\)</span>就是某个natural transformatiton <span class="math inline">\(\alpha\)</span>. <span class="math inline">\(\Psi(x)\)</span>定义为对于<span class="math inline">\(f:c\to d\)</span>, <span class="math inline">\(\Psi(x)_d(f) = F f(x)\)</span>.</li>
+<li>构造的核心想法是在如下交换图中<span class="math inline">\(1_c\)</span>的沿着两条路径计算结果相等，证明只要验证<span class="math inline">\(\Psi(x)\)</span>的naturality、$<span class="math inline">\(是\)</span>$的逆以及整个双射natural in c and F.</li>
+</ul>
+<div class="figure">
+<img src="/images/yoneda_lemma.assets/image-20200929132020885.png" />
+
+</div>
+<ul>
+<li>一个关于size的问题：由于<span class="math inline">\(C\)</span> is locally small, 由functor category部分的结论不能保证<span class="math inline">\(Set^C\)</span> is locally small, 但是从Yoneda lemma可以得知<span class="math inline">\(\mathrm{Hom}(C(c,-),F)\)</span>（这是<span class="math inline">\(Set^C\)</span>中两个objects之间的mophisms集合）确实是一个set.</li>
+</ul>
+<p>Yoneda lemma的等价表述：<span class="math inline">\(\Phi : \mathrm{Hom}(y(-),-)\Rightarrow ev\)</span> is a natural isomorphism.</p>
+<ul>
+<li>其中functor <span class="math inline">\(y\)</span> 定义如下图所示</li>
+</ul>
+<div class="figure">
+<img src="/images/yoneda_lemma.assets/image-20200929132411475.png" />
+
+</div>
+<ul>
+<li>具体解释略</li>
+</ul>
+<h2 id="yoneda-embedding">Yoneda Embedding</h2>
+<p>Yoneda lemma的一个重要应用是Yoneda embedding，这可以告诉我们用universal property刻画的objects之间同构。</p>
+<p>[Thm] <strong>Yoneda embedding</strong>: <span class="math inline">\(y\)</span> is a <strong><em>full and faithful embedding</em></strong>.</p>
+<p>Remark:</p>
+<ul>
+<li>理解：以<strong>covariant Yoneda embedding</strong>为例，这说明<span class="math inline">\(\forall c,d\in C\)</span>, <span class="math inline">\(C(c,d)\)</span>与<span class="math inline">\(\mathrm{Hom}(C(-,c),C(-,d))\)</span>之间有双射，并且该双射保持composition和identity（这是<span class="math inline">\(y\)</span>的functoriality要求，无需证明）. 这个双射将<span class="math inline">\(f\)</span>映射到<span class="math inline">\(f_*\)</span>.</li>
+<li>full and faithful embedding说明<span class="math inline">\(C\)</span> is isomorphic to a full subcategory of <span class="math inline">\(Set^{C^{op}}\)</span></li>
+<li>证明中，证明是满射用到了yoneda lemma</li>
+</ul>
+<p>[Prop] Yoneda embedding的推论</p>
+<ul>
+<li>若<span class="math inline">\(x\cong y\)</span>, 则<span class="math inline">\(C(x,-)\cong C(y,-)\)</span>且<span class="math inline">\(C(-,x)\cong C(-,y)\)</span></li>
+<li>若<span class="math inline">\(C(x,-)\cong C(y,-)\)</span>或<span class="math inline">\(C(-,x)\cong C(-,y)\)</span>，则<span class="math inline">\(x\cong y\)</span></li>
+</ul>
+<h2 id="universal-property">Universal Property</h2>
+<p>有了之前的准备，就可以给出universal property的描述了！</p>
+<p>[Def] <strong>Universal property</strong> of <span class="math inline">\(c\in C\)</span>定义为：</p>
+<ul>
+<li>a reprensentable functor <span class="math inline">\(F\)</span></li>
+<li>a <strong>universal element</strong> <span class="math inline">\(x\in F c\)</span></li>
+</ul>
+<p>s.t. 它们通过Yoneda lemma给出了一个natural isomorphism <span class="math inline">\(C(c,-)\cong F\)</span> (F covariant)或者 <span class="math inline">\(C(-,c)\cong F\)</span> (F contravariant).</p>
+<p>Remark:</p>
+<ul>
+<li>由Yoneda lemma，<span class="math inline">\(x\in F c\)</span>对应了一个natural transformation <span class="math inline">\(\alpha\)</span>, 并且我们希望它是natural isomorphism. 这个<span class="math inline">\(\alpha : C(c,-)\Rightarrow F\)</span>的定义如下：</li>
+<li><span class="math inline">\(\alpha_c(1_c) = x\)</span></li>
+<li><span class="math inline">\(f:c\to d,\ \alpha_d(f) = F f(x)\)</span></li>
+<li>由Yoneda embedding的推论，<strong><em><span class="math inline">\(c\)</span>在同构意义下唯一</em></strong></li>
+<li>直观上，一个universal property of c刻画了c出/入映射的性质</li>
+</ul>
+<p>这种universal property的描述与之前的描述有什么联系呢？下面我们想说明：一个universal element是某个category中的initial/terminal object.</p>
+<p>[Def] <strong>Category of elements</strong></p>
+<ul>
+<li>对于<span class="math inline">\(F:C\to Set\)</span>, Category of elements <span class="math inline">\(\int F\)</span></li>
+<li>objects：<span class="math inline">\((c,x)\)</span> where <span class="math inline">\(c\in C,\ x\in F\ c\)</span></li>
+<li>morphisms: a morphism <span class="math inline">\((c,x)\to (c&#39;,x&#39;)\)</span> is a <span class="math inline">\(f:c\to c&#39;\)</span> s.t. <span class="math inline">\(F f(x)=x&#39;\)</span></li>
+<li>对于<span class="math inline">\(F:C^{op }\to Set\)</span>, Category of elements <span class="math inline">\(\int F\)</span></li>
+<li>objects：<span class="math inline">\((c,x)\)</span> where <span class="math inline">\(c\in C,\ x\in F\ c\)</span></li>
+<li>morphisms: a morphism <span class="math inline">\((c,x)\to (c&#39;,x&#39;)\)</span> is a <span class="math inline">\(f:c\to c&#39;\)</span> s.t. <span class="math inline">\(F f(x&#39;)=x\)</span></li>
+</ul>
+<p>Remarks:</p>
+<ul>
+<li>直观理解，<span class="math inline">\(\int F\)</span>把所有集合<span class="math inline">\(F\ c\)</span>中的元素拿出来作为objects</li>
+</ul>
+<p>[Prop]</p>
+<ul>
+<li><span class="math inline">\(F:C\to Set\)</span> is reprensentable iff <span class="math inline">\(\int F\)</span> has an initial element</li>
+<li><span class="math inline">\(F^{op}:C\to Set\)</span> is reprensentable iff <span class="math inline">\(\int F\)</span> has an terminal element</li>
+</ul>
+<p>Remark:</p>
+<ul>
+<li><p>这个推论说明，initial element <span class="math inline">\((c,x)\in \int F\)</span> 中的<span class="math inline">\(x\)</span> 就是 universal property of <span class="math inline">\(c\)</span>中的universal element <span class="math inline">\(x\)</span>，也就是说它通过Yoneda lemma给出了一个natural isomorphism.</p></li>
+<li><p>a representation of <span class="math inline">\(F\)</span> 是<span class="math inline">\(c\)</span>和自然同构<span class="math inline">\(C(c,-)\cong F\)</span>. 注意到这和initial object <span class="math inline">\((c,x)\in \int F\)</span>等价，因此有时候也说a representation of <span class="math inline">\(F\)</span> is the initial object in <span class="math inline">\(\int F\)</span>.</p></li>
+</ul>
+<h2 id="例子">例子</h2>
+<h3 id="initial-object">1. initial object</h3>
+<p>考虑initial object <span class="math inline">\(c\in C\)</span>的universal property，是constant functor <span class="math inline">\(*:C\to Set\)</span> (将任意<span class="math inline">\(d\in C\)</span>映射到singleton set <span class="math inline">\(*\)</span>)和universal element <span class="math inline">\(x\in *\)</span> (只有唯一一个元素)使得<span class="math inline">\(C(c,-)\cong *\)</span>.</p>
+<p><span class="math inline">\((c,x)\in \int *\)</span> 是initial object实际上就是说<span class="math inline">\(c\in C\)</span>是initial object（因为x位置上只有x这一个元素）。</p>
+<h3 id="图染色">2. 图染色</h3>
+<p>这个例子来自<em>Category in Context</em>, 我觉得这个例子很形象很CS。</p>
+<p>考虑functor <span class="math inline">\(nColor：Graph^{op}\to Set\)</span> 将图g映射到g的所有n染色方案的集合。<span class="math inline">\(nColor\)</span>是contravariant的因为有了图同态<span class="math inline">\(f:G\to G&#39;\)</span> ，利用图同构保持顶点相邻关系，可以从<span class="math inline">\(G&#39;\)</span>的染色方案得到<span class="math inline">\(G\)</span>的染色方案。</p>
+<p>我们宣称完全图<span class="math inline">\(K_n\)</span> represents <span class="math inline">\(nColor\)</span>, 也就是说<span class="math inline">\(Graph(-,K_n)\cong nColor\)</span>. （这个自然同构非常直观，可以把映射到顶点n想象成染上颜色n）。</p>
+<p>此时，universal property of <span class="math inline">\(K_n\)</span>就是：</p>
+<ul>
+<li>a representable functor <span class="math inline">\(nColor\)</span></li>
+<li>a universal element <span class="math inline">\(x\in nColor\ K_n\)</span></li>
+</ul>
+<p>使得<span class="math inline">\(x\)</span>由Yoneda lemma定义的natural transformation是个natural isomorphism.</p>
+<p>由于该问题的特殊性，<span class="math inline">\(x\)</span>可以任取。</p>
+<p>考虑<span class="math inline">\(\int nColor\)</span>, 里面的objects是&quot;一个图+该图的一种染色方案=a n-colored graph&quot;, morphisms是保持颜色的图同态。所以<span class="math inline">\((c,x)\)</span>就是terminal n-colored graph.</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/category-theory/">Category Theory</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/higher_order_xxx/">
+            <span class="next-text nav-default">区分一些Higher-order开头的词</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+
+  <div id="utter-container"></div>
+    <script src="https://utteranc.es/client.js"
+        repo= 'thwfhk/blog_comments_utteranc'
+        issue-term= "pathname"
+        theme= 'github-light'
+        crossorigin= "anonymous"
+        async>
+    </script>
+
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:thwfhk@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/thwfhk" class="iconfont icon-github" title="github"></a>
+  <a href="https://thwfhk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Candy?</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

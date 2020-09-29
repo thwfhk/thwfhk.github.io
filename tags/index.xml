@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 25 Aug 2020 17:43:42 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2020 17:51:30 +0800</lastBuildDate>
     
 	<atom:link href="https://thwfhk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Category Theory</title>
+      <link>https://thwfhk.github.io/tags/category-theory/</link>
+      <pubDate>Tue, 29 Sep 2020 17:51:30 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/tags/category-theory/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Haskell</title>
@@ -26,15 +35,6 @@
       <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
       
       <guid>https://thwfhk.github.io/tags/programming-language-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Category Theory</title>
-      <link>https://thwfhk.github.io/tags/category-theory/</link>
-      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/category-theory/</guid>
       <description></description>
     </item>
     

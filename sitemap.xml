@@ -3,20 +3,41 @@
   
   <url>
     <loc>https://thwfhk.github.io/</loc>
-    <lastmod>2020-08-25T17:43:42+08:00</lastmod>
+    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://thwfhk.github.io/tags/haskell/</loc>
-    <lastmod>2020-08-25T17:43:42+08:00</lastmod>
+    <loc>https://thwfhk.github.io/tags/category-theory/</loc>
+    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://thwfhk.github.io/post/</loc>
+    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/tags/</loc>
+    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/post/yoneda_lemma/</loc>
+    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://thwfhk.github.io/tags/haskell/</loc>
     <lastmod>2020-08-25T17:43:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -30,22 +51,8 @@
   </url>
   
   <url>
-    <loc>https://thwfhk.github.io/tags/</loc>
-    <lastmod>2020-08-25T17:43:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://thwfhk.github.io/post/higher_order_xxx/</loc>
     <lastmod>2020-08-25T17:43:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://thwfhk.github.io/tags/category-theory/</loc>
-    <lastmod>2020-08-22T22:25:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

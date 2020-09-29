@@ -6,10 +6,21 @@
     <description>Recent content in Category Theory on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 22 Aug 2020 22:25:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2020 17:51:30 +0800</lastBuildDate>
     
 	<atom:link href="https://thwfhk.github.io/tags/category-theory/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>万有性质和米田引理</title>
+      <link>https://thwfhk.github.io/post/yoneda_lemma/</link>
+      <pubDate>Tue, 29 Sep 2020 17:51:30 +0800</pubDate>
+      
+      <guid>https://thwfhk.github.io/post/yoneda_lemma/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;人的本质是一切社会关系的总和&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
     
     <item>
       <title>Monad是自函子范畴上的幺半群</title>
