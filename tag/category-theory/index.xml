@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Category Theory | </title>
+    <link>thwfhk.github.io/tag/category-theory/</link>
+      <atom:link href="thwfhk.github.io/tag/category-theory/index.xml" rel="self" type="application/rss+xml" />
+    <description>Category Theory</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 29 Sep 2020 17:51:30 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Category Theory</title>
+      <link>thwfhk.github.io/tag/category-theory/</link>
+    </image>
+    
+    <item>
+      <title>万有性质和米田引理</title>
+      <link>thwfhk.github.io/post/yoneda_lemma/</link>
+      <pubDate>Tue, 29 Sep 2020 17:51:30 +0800</pubDate>
+      <guid>thwfhk.github.io/post/yoneda_lemma/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;人的本质是一切社会关系的总和&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是一篇关于&lt;em&gt;Category Theory in Context&lt;/em&gt;的第二章&lt;em&gt;Universal Properties, Representability, and the Yoneda Lemma&lt;/em&gt;的学习笔记，记录了核心内容与一些个人理解。&lt;/p&gt;
+&lt;p&gt;Motivation: 最基本的描述universal property的方式是：某个object是某个category的initial/terminal object。这种方式的问题在于需要构造复杂的category。我们希望有一种更方便的描述universal property的方式：通过representable functor来描述从c映射出/映射到c的所有映射的样子。&lt;/p&gt;
+&lt;h2 id=&#34;representable-functors&#34;&gt;Representable Functors&lt;/h2&gt;
+&lt;p&gt;以下均假设&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is locally small.&lt;/p&gt;
+&lt;p&gt;[Def] &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is &lt;em&gt;locally small&lt;/em&gt;, &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(C(c,-):C\to Set\)&lt;/span&gt;是 &lt;strong&gt;covariant functor represented by &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(C(-,c):C^{op}\to Set\)&lt;/span&gt;是 &lt;strong&gt;contravariant functor represented by &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;thwfhk.github.io/images/yoneda_lemma.assets/截屏2020-08-08%20上午12.08.56.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(f:x\to y\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(C(c,f) = f_* : C(c,x)\to C(c,y)\)&lt;/span&gt;是&lt;strong&gt;post-composition&lt;/strong&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(c,f) g = f g\)&lt;/span&gt; 将f在g之后（左）作用上&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(f:x\to y\)&lt;/span&gt; ,&lt;span class=&#34;math inline&#34;&gt;\(C(f,c):C(y,c)\to C(x,c)\)&lt;/span&gt;是&lt;strong&gt;pre-composition&lt;/strong&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(-,c) f\ g = gf\)&lt;/span&gt;将f在g之前（右）作用上&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Def] &lt;strong&gt;two-sided represented functor&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{C}(-,-): \mathrm{C}^{\mathrm{op}} \times \mathrm{C} \rightarrow \text { Set }\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(f:w\to x, h:y\to z\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(f,h):C(x,y)\to C(w,z)\)&lt;/span&gt;分别将f复合在g前，h复合在g后。&lt;span class=&#34;math inline&#34;&gt;\(g:x\to y\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(f,h)g = hgf\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Def] &lt;strong&gt;Representable functor&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is &lt;em&gt;locally small&lt;/em&gt;, &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A covariant functor &lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt; is &lt;strong&gt;representable&lt;/strong&gt; if &lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;A contravariant functor &lt;span class=&#34;math inline&#34;&gt;\(F:C^{op}\to Set\)&lt;/span&gt; is &lt;strong&gt;representable&lt;/strong&gt; if &lt;span class=&#34;math inline&#34;&gt;\(C(-,c)\cong F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;称&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is represented by &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;称为the representing object&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;yoneda-lemma&#34;&gt;Yoneda Lemma&lt;/h2&gt;
+&lt;p&gt;为了用representable functor描述universal property，我们需要知道构造一个&lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt;需要什么？我们先看更一般的情况，构造&lt;span class=&#34;math inline&#34;&gt;\(\alpha : C(c,-)\Rightarrow F\)&lt;/span&gt;需要什么。Yoneda lemma告诉我们，只要给出一个&lt;span class=&#34;math inline&#34;&gt;\(x\in F\ c\)&lt;/span&gt;就可以构造出一个&lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;[Thm] &lt;strong&gt;Yoneda lemma&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is &lt;em&gt;locally small&lt;/em&gt;, 对于&lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt;, 有双射&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(c,-),F)\cong F\ c\)&lt;/span&gt;, 且natural in &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F:C^{op}\to Set\)&lt;/span&gt;, 有双射&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(-,c),F)\cong F\ c\)&lt;/span&gt;, 且natural in &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理解：这个双射说明natural transformation &lt;span class=&#34;math inline&#34;&gt;\(\alpha:C(c,-)\Rightarrow F\)&lt;/span&gt; 与 &lt;span class=&#34;math inline&#34;&gt;\(x\in F\ c\)&lt;/span&gt; 之间的一一对应&lt;/li&gt;
+&lt;li&gt;从左到右，&lt;span class=&#34;math inline&#34;&gt;\(\alpha_c(1_c)\)&lt;/span&gt;就是&lt;span class=&#34;math inline&#34;&gt;\(F\ c\)&lt;/span&gt;中的一个元素&lt;/li&gt;
+&lt;li&gt;从右到左，给出&lt;span class=&#34;math inline&#34;&gt;\(x\in F\ c\)&lt;/span&gt;，再利用&lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;的naturality就可以确定一个natural transformation &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. 实际上，给出的就是&lt;span class=&#34;math inline&#34;&gt;\(\alpha_c(1_c)\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;双射具体构造：&lt;/li&gt;
+&lt;li&gt;从左到右 &lt;span class=&#34;math inline&#34;&gt;\(\Phi: \operatorname{Hom}(\mathrm{C}(c,-), F) \rightarrow F c\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\Phi(\alpha):=\alpha_{c}\left(1_{c}\right)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;从右到左 &lt;span class=&#34;math inline&#34;&gt;\(\Psi: F c \rightarrow \operatorname{Hom}(\mathrm{C}(c,-), F)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)\)&lt;/span&gt;就是某个natural transformatiton &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)\)&lt;/span&gt;定义为对于&lt;span class=&#34;math inline&#34;&gt;\(f:c\to d\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)_d(f) = F f(x)\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;构造的核心想法是在如下交换图中&lt;span class=&#34;math inline&#34;&gt;\(1_c\)&lt;/span&gt;的沿着两条路径计算结果相等，证明只要验证&lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)\)&lt;/span&gt;的naturality、$&lt;span class=&#34;math inline&#34;&gt;\(是\)&lt;/span&gt;$的逆以及整个双射natural in c and F.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;thwfhk.github.io/images/yoneda_lemma.assets/image-20200929132020885.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;一个关于size的问题：由于&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is locally small, 由functor category部分的结论不能保证&lt;span class=&#34;math inline&#34;&gt;\(Set^C\)&lt;/span&gt; is locally small, 但是从Yoneda lemma可以得知&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(c,-),F)\)&lt;/span&gt;（这是&lt;span class=&#34;math inline&#34;&gt;\(Set^C\)&lt;/span&gt;中两个objects之间的mophisms集合）确实是一个set.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Yoneda lemma的等价表述：&lt;span class=&#34;math inline&#34;&gt;\(\Phi : \mathrm{Hom}(y(-),-)\Rightarrow ev\)&lt;/span&gt; is a natural isomorphism.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;其中functor &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; 定义如下图所示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;thwfhk.github.io/images/yoneda_lemma.assets/image-20200929132411475.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;具体解释略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;yoneda-embedding&#34;&gt;Yoneda Embedding&lt;/h2&gt;
+&lt;p&gt;Yoneda lemma的一个重要应用是Yoneda embedding，这可以告诉我们用universal property刻画的objects之间同构。&lt;/p&gt;
+&lt;p&gt;[Thm] &lt;strong&gt;Yoneda embedding&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; is a &lt;strong&gt;&lt;em&gt;full and faithful embedding&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理解：以&lt;strong&gt;covariant Yoneda embedding&lt;/strong&gt;为例，这说明&lt;span class=&#34;math inline&#34;&gt;\(\forall c,d\in C\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(C(c,d)\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(-,c),C(-,d))\)&lt;/span&gt;之间有双射，并且该双射保持composition和identity（这是&lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;的functoriality要求，无需证明）. 这个双射将&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;映射到&lt;span class=&#34;math inline&#34;&gt;\(f_*\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;full and faithful embedding说明&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is isomorphic to a full subcategory of &lt;span class=&#34;math inline&#34;&gt;\(Set^{C^{op}}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;证明中，证明是满射用到了yoneda lemma&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Prop] Yoneda embedding的推论&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(x\cong y\)&lt;/span&gt;, 则&lt;span class=&#34;math inline&#34;&gt;\(C(x,-)\cong C(y,-)\)&lt;/span&gt;且&lt;span class=&#34;math inline&#34;&gt;\(C(-,x)\cong C(-,y)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(C(x,-)\cong C(y,-)\)&lt;/span&gt;或&lt;span class=&#34;math inline&#34;&gt;\(C(-,x)\cong C(-,y)\)&lt;/span&gt;，则&lt;span class=&#34;math inline&#34;&gt;\(x\cong y\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;universal-property&#34;&gt;Universal Property&lt;/h2&gt;
+&lt;p&gt;有了之前的准备，就可以给出universal property的描述了！&lt;/p&gt;
+&lt;p&gt;[Def] &lt;strong&gt;Universal property&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;定义为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a reprensentable functor &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;universal element&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(x\in F c\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;s.t. 它们通过Yoneda lemma给出了一个natural isomorphism &lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt; (F covariant)或者 &lt;span class=&#34;math inline&#34;&gt;\(C(-,c)\cong F\)&lt;/span&gt; (F contravariant).&lt;/p&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由Yoneda lemma，&lt;span class=&#34;math inline&#34;&gt;\(x\in F c\)&lt;/span&gt;对应了一个natural transformation &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;, 并且我们希望它是natural isomorphism. 这个&lt;span class=&#34;math inline&#34;&gt;\(\alpha : C(c,-)\Rightarrow F\)&lt;/span&gt;的定义如下：&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\alpha_c(1_c) = x\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(f:c\to d,\ \alpha_d(f) = F f(x)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;由Yoneda embedding的推论，&lt;strong&gt;&lt;em&gt;&lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;在同构意义下唯一&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;直观上，一个universal property of c刻画了c出/入映射的性质&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种universal property的描述与之前的描述有什么联系呢？下面我们想说明：一个universal element是某个category中的initial/terminal object.&lt;/p&gt;
+&lt;p&gt;[Def] &lt;strong&gt;Category of elements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt;, Category of elements &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;objects：&lt;span class=&#34;math inline&#34;&gt;\((c,x)\)&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(c\in C,\ x\in F\ c\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;morphisms: a morphism &lt;span class=&#34;math inline&#34;&gt;\((c,x)\to (c&amp;#39;,x&amp;#39;)\)&lt;/span&gt; is a &lt;span class=&#34;math inline&#34;&gt;\(f:c\to c&amp;#39;\)&lt;/span&gt; s.t. &lt;span class=&#34;math inline&#34;&gt;\(F f(x)=x&amp;#39;\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(F:C^{op }\to Set\)&lt;/span&gt;, Category of elements &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;objects：&lt;span class=&#34;math inline&#34;&gt;\((c,x)\)&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(c\in C,\ x\in F\ c\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;morphisms: a morphism &lt;span class=&#34;math inline&#34;&gt;\((c,x)\to (c&amp;#39;,x&amp;#39;)\)&lt;/span&gt; is a &lt;span class=&#34;math inline&#34;&gt;\(f:c\to c&amp;#39;\)&lt;/span&gt; s.t. &lt;span class=&#34;math inline&#34;&gt;\(F f(x&amp;#39;)=x\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remarks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直观理解，&lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;把所有集合&lt;span class=&#34;math inline&#34;&gt;\(F\ c\)&lt;/span&gt;中的元素拿出来作为objects&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Prop]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt; is reprensentable iff &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt; has an initial element&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F^{op}:C\to Set\)&lt;/span&gt; is reprensentable iff &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt; has an terminal element&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;这个推论说明，initial element &lt;span class=&#34;math inline&#34;&gt;\((c,x)\in \int F\)&lt;/span&gt; 中的&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; 就是 universal property of &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;中的universal element &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;，也就是说它通过Yoneda lemma给出了一个natural isomorphism.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;a representation of &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; 是&lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;和自然同构&lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt;. 注意到这和initial object &lt;span class=&#34;math inline&#34;&gt;\((c,x)\in \int F\)&lt;/span&gt;等价，因此有时候也说a representation of &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is the initial object in &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
+&lt;h3 id=&#34;initial-object&#34;&gt;1. initial object&lt;/h3&gt;
+&lt;p&gt;考虑initial object &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;的universal property，是constant functor &lt;span class=&#34;math inline&#34;&gt;\(*:C\to Set\)&lt;/span&gt; (将任意&lt;span class=&#34;math inline&#34;&gt;\(d\in C\)&lt;/span&gt;映射到singleton set &lt;span class=&#34;math inline&#34;&gt;\(*\)&lt;/span&gt;)和universal element &lt;span class=&#34;math inline&#34;&gt;\(x\in *\)&lt;/span&gt; (只有唯一一个元素)使得&lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong *\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\((c,x)\in \int *\)&lt;/span&gt; 是initial object实际上就是说&lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;是initial object（因为x位置上只有x这一个元素）。&lt;/p&gt;
+&lt;h3 id=&#34;图染色&#34;&gt;2. 图染色&lt;/h3&gt;
+&lt;p&gt;这个例子来自&lt;em&gt;Category in Context&lt;/em&gt;, 我觉得这个例子很形象很CS。&lt;/p&gt;
+&lt;p&gt;考虑functor &lt;span class=&#34;math inline&#34;&gt;\(nColor：Graph^{op}\to Set\)&lt;/span&gt; 将图g映射到g的所有n染色方案的集合。&lt;span class=&#34;math inline&#34;&gt;\(nColor\)&lt;/span&gt;是contravariant的因为有了图同态&lt;span class=&#34;math inline&#34;&gt;\(f:G\to G&amp;#39;\)&lt;/span&gt; ，利用图同构保持顶点相邻关系，可以从&lt;span class=&#34;math inline&#34;&gt;\(G&amp;#39;\)&lt;/span&gt;的染色方案得到&lt;span class=&#34;math inline&#34;&gt;\(G\)&lt;/span&gt;的染色方案。&lt;/p&gt;
+&lt;p&gt;我们宣称完全图&lt;span class=&#34;math inline&#34;&gt;\(K_n\)&lt;/span&gt; represents &lt;span class=&#34;math inline&#34;&gt;\(nColor\)&lt;/span&gt;, 也就是说&lt;span class=&#34;math inline&#34;&gt;\(Graph(-,K_n)\cong nColor\)&lt;/span&gt;. （这个自然同构非常直观，可以把映射到顶点n想象成染上颜色n）。&lt;/p&gt;
+&lt;p&gt;此时，universal property of &lt;span class=&#34;math inline&#34;&gt;\(K_n\)&lt;/span&gt;就是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a representable functor &lt;span class=&#34;math inline&#34;&gt;\(nColor\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;a universal element &lt;span class=&#34;math inline&#34;&gt;\(x\in nColor\ K_n\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使得&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;由Yoneda lemma定义的natural transformation是个natural isomorphism.&lt;/p&gt;
+&lt;p&gt;由于该问题的特殊性，&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;可以任取。&lt;/p&gt;
+&lt;p&gt;考虑&lt;span class=&#34;math inline&#34;&gt;\(\int nColor\)&lt;/span&gt;, 里面的objects是&amp;quot;一个图+该图的一种染色方案=a n-colored graph&amp;quot;, morphisms是保持颜色的图同态。所以&lt;span class=&#34;math inline&#34;&gt;\((c,x)\)&lt;/span&gt;就是terminal n-colored graph.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monad是自函子范畴上的幺半群</title>
+      <link>thwfhk.github.io/post/monad_is_a_monoid/</link>
+      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
+      <guid>thwfhk.github.io/post/monad_is_a_monoid/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;All told, monad is just a monoid in the category of endofunctors.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;连鸽两个月后终于在八月份的末尾再次更新（填坑）。&lt;/p&gt;
+&lt;p&gt;寒假的时候写过一个关于“Haskell中monad与范畴论有什么联系”的文章，当时写得很&lt;del&gt;naive&lt;/del&gt;，现在了解的更多了一点，于是决定重写一下。主要参考资料是&lt;em&gt;Category Theory for Programmers&lt;/em&gt;和&lt;em&gt;Category Theory in Context&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;monads-in-haskell&#34;&gt;Monads in Haskell&lt;/h2&gt;
+&lt;p&gt;首先回顾一下Haskell中的monad。&lt;/p&gt;
+&lt;p&gt;Haskell中的Monad &lt;code&gt;m&lt;/code&gt;是一个typeclass，他本身是一个函子（因此&lt;code&gt;m :: * -&amp;gt; *&lt;/code&gt;），带有一些满足特殊性质的运算。&lt;/p&gt;
+&lt;p&gt;在Haskell中对monad有三种等价的定义，分别使用fish, bind, join配合return.&lt;/p&gt;
+&lt;h3 id=&#34;fish&#34;&gt;fish🐟&lt;/h3&gt;
+&lt;p&gt;对于category $C$和endofunctor $m$，我们可以将a到b的morphisms换成$a\to m\ b$的函数（这样的函数称为&lt;strong&gt;Kleisli arrows&lt;/strong&gt;）， 若可以定义满足条件的composition和identity morphism，得到的新范畴就是$C$对应的&lt;strong&gt;Kleisli category&lt;/strong&gt; $K$ ，此时称$m$是一个&lt;strong&gt;monad&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在haskell中是这样定义的：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Monad m where
+	(&amp;gt;=&amp;gt;) :: (a -&amp;gt; m b) -&amp;gt; (b -&amp;gt; m c) -&amp;gt; (a -&amp;gt; m c) 
+	return :: a -&amp;gt; m a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意到&lt;code&gt;&amp;gt;=&amp;gt;&lt;/code&gt;(fish operator)就是composition，&lt;code&gt;return&lt;/code&gt;是identity morphism（的polymorphic版本）。&lt;/p&gt;
+&lt;p&gt;此时monad laws反应的就是Kleisli category对composition的要求：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;return &amp;gt;=&amp;gt; f = f -- left unit
+f &amp;gt;=&amp;gt; return = f -- right unit
+(f &amp;gt;=&amp;gt; g) &amp;gt;=&amp;gt; h = f &amp;gt;=&amp;gt; (g &amp;gt;=&amp;gt; h) -- associativity 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;bind&#34;&gt;bind&lt;/h3&gt;
+&lt;p&gt;观察到&lt;code&gt;&amp;gt;=&amp;gt;&lt;/code&gt;第一步必定是将&lt;code&gt;a -&amp;gt; m b&lt;/code&gt;作用于a，因此可以将第一个&lt;code&gt;a -&amp;gt; m b&lt;/code&gt;换成&lt;code&gt;m b&lt;/code&gt;，简化得到&lt;code&gt;&amp;gt;&amp;gt;=&lt;/code&gt;（bind），这是haskell中标准的monad的定义：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Monad m where
+	(&amp;gt;&amp;gt;=) :: m a -&amp;gt; (a -&amp;gt; m b) -&amp;gt; m b 
+	return :: a -&amp;gt; m a
+(&amp;gt;&amp;gt;) :: m a -&amp;gt; m b -&amp;gt; m b
+m &amp;gt;&amp;gt; k = m &amp;gt;&amp;gt;= (\_ -&amp;gt; k)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;直观上，bind将一个有context的value给了一个&lt;code&gt;a -&amp;gt; m b&lt;/code&gt;类型的函数，他提供了一种“从context里拿出值”的方法。&lt;/p&gt;
+&lt;p&gt;与fish互相表示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;f &amp;gt;=&amp;gt; g = \x -&amp;gt; f x &amp;gt;&amp;gt;= g
+x &amp;gt;&amp;gt;= f = ((\_ -&amp;gt; x) &amp;gt;=&amp;gt; f) () -- one possible version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以将fish表示的monad laws转换为等价的bind表示的monad laws：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;return x &amp;gt;&amp;gt;= f = f x
+mx &amp;gt;&amp;gt;= return = mx
+(mx &amp;gt;&amp;gt;= f) &amp;gt;&amp;gt;= g = mx &amp;gt;&amp;gt;= (\x -&amp;gt; f x &amp;gt;&amp;gt;= g)
+-- 或者写成(m &amp;gt;&amp;gt;= \x -&amp;gt; f x) &amp;gt;&amp;gt;= g = m &amp;gt;&amp;gt;= (\x -&amp;gt; f x &amp;gt;&amp;gt;= g)更清楚一点
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;join&#34;&gt;join&lt;/h3&gt;
+&lt;p&gt;观察到我们可以借助&lt;code&gt;fmap&lt;/code&gt;来应用函数f，因此只要一个&lt;code&gt;join :: m(m a) -&amp;gt; m a&lt;/code&gt;就可以实现bind的功能：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Functor m =&amp;gt; Monad m where
+    join :: m (m a) -&amp;gt; m a
+    return :: a -&amp;gt; m a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;与bind互相表示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;x &amp;gt;&amp;gt;= f = join (fmap f x)
+join x = x &amp;gt;&amp;gt;= id
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;join表示的monad laws在下文中会从Category Theory中对$\eta,\mu$的要求中推出，可以验证这两条和之前的monad laws等价。&lt;/p&gt;
+&lt;h3 id=&#34;do-notation&#34;&gt;do notation&lt;/h3&gt;
+&lt;p&gt;do实际上是一个syntactic sugar:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;do {x1 &amp;lt;- m1; x2 &amp;lt;- m2; f x1 x2} =
+m1 &amp;gt;&amp;gt;= \x1 -&amp;gt; m2 &amp;gt;&amp;gt;= \x2 -&amp;gt; f x1 x2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以类似命令式来写函数式。&lt;/p&gt;
+&lt;p&gt;上述monad laws用do notation表示的话就是：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;do {x&#39; &amp;lt;- return x; return x&#39;} = do {f x}
+do {x &amp;lt;- mx; return x} = do {mx}
+do {y &amp;lt;- do {x &amp;lt;- mx; f x}; g y} = do {x &amp;lt;- mx; y &amp;lt;- f x; g y}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;monads-in-category-theory&#34;&gt;Monads in Category Theory&lt;/h2&gt;
+&lt;p&gt;在Category Theory中，monad的形式化定义如下：&lt;/p&gt;
+&lt;p&gt;[Def] A &lt;strong&gt;monad&lt;/strong&gt; on a category $C$ consists of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an endofunctor $T:C\to C$&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;multiplication&lt;/strong&gt; natural transformation $\mu : T^2 \Rightarrow T$&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;unit&lt;/strong&gt; natural transformation $\eta : 1_C\Rightarrow T$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Coherence conditions: the following diagrams commute&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/monad/monad diagram.png&#34; alt=&#34;截屏2020-08-18 下午8.40.09&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;我们假设Haskell有一个Hask范畴（objects是type，morphims是functions）的话，Haskell中的monad就是Hask范畴上的monad，其中&lt;code&gt;return&lt;/code&gt;就是$\eta$，&lt;code&gt;join&lt;/code&gt;就是$\mu$（准确的说是components $\eta_a,\mu_a$的polymorphic版本），他们需要满足的monad laws就是$\eta,\mu$的两个图交换：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\mu \circ T \mu  = \mu \circ \mu T$ :  &lt;code&gt;join . fmap (join) = join . join&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;$\mu \circ T \eta = \mu \circ \eta T = 1_T$  : &lt;code&gt;join . fmap (unit) = join . unit = id&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然$\eta,\mu$还要满足作为自然变换的coherence conditions，不过这两个条件由于&lt;em&gt;&lt;strong&gt;Theorems for Free&lt;/strong&gt;&lt;/em&gt;而自动满足：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;return . f = fmap f . return&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;join . fmap (fmap f) = fmap f . join&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以Haskell中的monad与Category Theory中的monad是一致的，接下来只要解释Category Theory中monad为什么是a monoid in the endofunctor category. 我们需要先补充一些Category Theory中的概念。&lt;/p&gt;
+&lt;h2 id=&#34;monoid-and-monoidal-category&#34;&gt;Monoid and Monoidal Category&lt;/h2&gt;
+&lt;h3 id=&#34;monoid&#34;&gt;Monoid&lt;/h3&gt;
+&lt;p&gt;经典的monoid（幺半群）是在集合上定义的，人如其名，有乘法运算和单位元。&lt;/p&gt;
+&lt;p&gt;[Def] A &lt;strong&gt;monoid&lt;/strong&gt; is an object $M\in Set$ together with two morphisms $\mu : M\times M\to M$ and $\eta :1\to M$.&lt;/p&gt;
+&lt;p&gt;Coherence conditions: the following diagrams commute&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/monad/monoid diagram.png&#34; alt=&#34;截屏2020-08-18 上午10.27.32&#34; style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这个定义和抽象代数中是等价的，$\mu$给出了一个二元运算并满足结合律（图1），$\eta$给出了一个单位元（图2）。&lt;/p&gt;
+&lt;p&gt;我们可以把monoid从Set上&lt;em&gt;&lt;strong&gt;推广到其他category上&lt;/strong&gt;&lt;/em&gt;，能在上面定义monoid的category需要满足一定条件，称为monoidal category。&lt;/p&gt;
+&lt;h3 id=&#34;monoidal-category&#34;&gt;Monoidal Category&lt;/h3&gt;
+&lt;p&gt;直观上，要想在一个category上定义monoid，这个category需要有一个objects之间的&lt;em&gt;&lt;strong&gt;product&lt;/strong&gt;&lt;/em&gt;，还要能从每个objects中拿出一个unit element。我们不能从category的objects里拿东西，但可以利用terminal object到其他objects的映射来取单位元，所以这个category要有一个类似&lt;em&gt;&lt;strong&gt;terminal object&lt;/strong&gt;&lt;/em&gt;的东西。。&lt;/p&gt;
+&lt;p&gt;monoidal category的形式化定义如下：&lt;/p&gt;
+&lt;p&gt;[Def] A &lt;strong&gt;symetric monoidal category&lt;/strong&gt;$(V,\otimes,*)$ is a category $V$ together with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a &lt;em&gt;&lt;strong&gt;bifunctor&lt;/strong&gt;&lt;/em&gt; $-\otimes-:V\times V\to V$ called &lt;strong&gt;monoidal product&lt;/strong&gt; (or tensor product)&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;unit object&lt;/strong&gt; $*$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Coherence conditions: three coherence natural isomorphisms&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/monad/monoidal cat.png&#34; alt=&#34;截屏2020-08-18 上午10.31.38&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Remarks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;注意$\alpha$这些natural isomorphisms是multifunctors之间的，他的components是$\alpha_{u,v,w}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三个coherence conditions分别是symetric, associativity, unit conditions on the monoidal product. 只满足后两个的话称为&lt;strong&gt;monoidal category&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果这些natural isomorphisms可以取identity natural isomorphisms的话，称为&lt;strong&gt;strict monoidal category&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All categories with ﬁnite products such as $(Set,\times, * ), (Top,\times,*),(Cat,\times,1)$, where the monoidal unit in each case is the terminal object. 对偶地，finite coproduct和initial object也构成symmetric monoidal category，如$(Set,+,{})$.&lt;/li&gt;
+&lt;li&gt;Hask范畴可以近似看成Set，因此product（coproduct）在同构意义下满足条件，terminal object是&lt;code&gt;()&lt;/code&gt;（&lt;code&gt;Empty&lt;/code&gt;），因此Hask是monoidal category。&lt;/li&gt;
+&lt;li&gt;A commutative monoid看作discrete category(即只有identity morphisms)的话也定义了一个symetric monoidal category，此时natural isomorphisms就是identities。另一方面，经典的monoid就是Set上的monoid。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;monoid-in-a-monoidal-category&#34;&gt;Monoid in a Monoidal Category&lt;/h3&gt;
+&lt;p&gt;在monoidal category$(V,\otimes,*)$上定义monoid，我们需要取一个object $M\in V$以及两个morphisms $\mu : M\otimes M\to M$, $\eta : * \to M$. Coherence conditions和经典monoid相同。&lt;/p&gt;
+&lt;h2 id=&#34;monad-as-a-monoid&#34;&gt;Monad as a Monoid&lt;/h2&gt;
+&lt;p&gt;终于来到了正题。实际上经过前面的铺垫，剩下的内容就很简单了：&lt;/p&gt;
+&lt;p&gt;我们考虑&lt;strong&gt;functor category $C^C$&lt;/strong&gt;，它的objects是functors，morphisms是natural transformations。它是一个&lt;em&gt;&lt;strong&gt;strict monoidal category&lt;/strong&gt;&lt;/em&gt;，monoidal product是&lt;em&gt;composition between functors&lt;/em&gt;，unit object是identity endofunctor。注意此时composition(一般省略运算符) $-\circ -:C^C \times C^C \to C^C$是一个bifunctor，它是可以作用于natural transformation的，作用效果就是natural transformation的&lt;em&gt;&lt;strong&gt;horizontal composition&lt;/strong&gt;&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;那么$C^C$上的monoid是什么样的呢？取object $T\in C^C$，morphisms $\mu,\eta\in C^C$满足条件。 $T$就是一个monad！所以&lt;em&gt;A monad on $C$ is a monoid in the monoidal category $C^C$ of endofunctors on $C$&lt;/em&gt;. Bingo!&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实这篇文章一点也不友好，&lt;del&gt;只能作为给自己看的复习笔记&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;monad相关还有好多有趣的内容，比如comonad、adjunctions等等，&lt;del&gt;有时间一定写&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;希望以后多更新一点有趣的东西（喂至少做到月更啊&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>什么是自然数</title>
+      <link>thwfhk.github.io/post/natural_numbers/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      <guid>thwfhk.github.io/post/natural_numbers/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;0,1,2,3,4,....我好像可以无穷无尽的数下去啊？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是&amp;quot;&lt;strong&gt;什么是什么(What is What)&lt;/strong&gt;&amp;quot;系列的第一篇文章，首先介绍一下这个系列：&lt;/p&gt;
+&lt;p&gt;我有时会发现自己在不同的地方学到的东西以某种微妙的方式联系在一起，这种体验非常有趣；另一方面，有些事物又是难以界定的，即使读再多次它的定义，仍会感到琢磨不透。因此，我希望开始这样一个系列，将我在&lt;em&gt;不同的地方看到的同一事物&lt;/em&gt;总结在一起，希望能够发现它们之间的某种联系，从而对事物本身有更清晰的认识。&lt;/p&gt;
+&lt;p&gt;第一个事物是“&lt;strong&gt;自然数(Natural Numbers)&lt;/strong&gt;”.&lt;/p&gt;
+&lt;h2 id=&#34;自然语言&#34;&gt;1. 自然语言&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自日常生活和中学数学。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数就是&lt;code&gt;0,1,2,3,4,...&lt;/code&gt;这样数下去得到的所有的数。&lt;/p&gt;
+&lt;p&gt;自然数就是所有的正整数，包含0.（PS: 我至今记得高中时我分不清&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;中有没有0，然后同桌一脸鄙夷的说“N是自然数的缩写吧，应该包含0”）&lt;/p&gt;
+&lt;h2 id=&#34;peano公理&#34;&gt;2. Peano公理&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少是和自然数集同构的）。&lt;/p&gt;
+&lt;p&gt;一种Peano公理的描述为：设三元组&lt;span class=&#34;math inline&#34;&gt;\((N,F,0)\)&lt;/span&gt;满足：&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; is closed under &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;, i.e. &lt;span class=&#34;math inline&#34;&gt;\(F(N)=\{F(n)\mid n\in N\} \subset N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\notin \text{ran}\ F\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is injective.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Suppose a subset &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; of &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; satisfies &lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F(A)\subset A\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(A=N\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;就是自然数集。&lt;/p&gt;
+&lt;p&gt;事实上，&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;指定了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;上的一种“后继”运算，这种后继运算给了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中每个元素一个独一无二的后继，并且每个后继都在&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中，这和自然数是相符的。第5条可以算是“最关键”的一条，它实际上说明了自然数集&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足这个条件的&lt;strong&gt;最小&lt;/strong&gt;集合。&lt;/p&gt;
+&lt;h2 id=&#34;集合论set-theory&#34;&gt;3. 集合论(Set Theory)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是&lt;strong&gt;最小&lt;/strong&gt;的&lt;strong&gt;归纳集(minimal inductive set)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;其中一个集合&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是归纳集(inductive set)，当且仅当：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\forall a\in A,\ a^+\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;的后继运算。&lt;/p&gt;
+&lt;p&gt;可以发现，这种定义和Peano公理几乎是一样的，&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;就是&lt;span class=&#34;math inline&#34;&gt;\(F(a)\)&lt;/span&gt;。Peano公理中的第5条实际上就是保证了&lt;em&gt;&amp;quot;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足&lt;span class=&#34;math inline&#34;&gt;\(0\in A\land F(A)\subset A\)&lt;/span&gt;的最小集合&amp;quot;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;另外，在集合论中有一种对自然数的经典构造：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0=\{\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(1=\{0\} = \{\{\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(2=\{0,1\}=\{\{\},\{\{\}\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(n+1 = n\cup \{n\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种构造的一个好处在于&lt;span class=&#34;math inline&#34;&gt;\(a\le b\)&lt;/span&gt;可以表达成&lt;span class=&#34;math inline&#34;&gt;\(a\subseteq b\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;不动点fixed-point&#34;&gt;4. 不动点(Fixed Point)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自&lt;em&gt;Types and Programming Languages&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的&lt;strong&gt;最小不动点(the least fixed point)&lt;/strong&gt;，其中集合到集合的函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;定义为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F(X) = \{0\}\cup \{x^+\mid x\in X\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的不动点是指满足&lt;span class=&#34;math inline&#34;&gt;\(X=F(X)\)&lt;/span&gt;的集合&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;这个定义在本质上和前面是一样的，只不过是从不动点的角度。&lt;/p&gt;
+&lt;p&gt;最小不动点和最大不动点构造常用来定义程序语言中的&lt;strong&gt;recursive datatypes&lt;/strong&gt;，这里实际上将“自然数集”看成了“自然数类型”这个递归数据类型。&lt;/p&gt;
+&lt;p&gt;更多信息可以参考&lt;em&gt;Types and Programming Languages&lt;/em&gt;的21章。&lt;/p&gt;
+&lt;h2 id=&#34;f-代数f-algebra&#34;&gt;5. F-代数(F-Algebra)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Program Calculation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;记&lt;span class=&#34;math inline&#34;&gt;\(F=\underline 1\hat{+} Id\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(Nat = \mu F\)&lt;/span&gt;，即自然数集是函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的初始代数的Carrier。&lt;span class=&#34;math inline&#34;&gt;\((Nat,in_F::F\ \mu F\to\mu F)\)&lt;/span&gt;是F-初始代数(&lt;strong&gt;the initial &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;-algebra&lt;/strong&gt;)。&lt;/p&gt;
+&lt;p&gt;这种使用intial F-algebra来定义的数据类型又叫做&lt;strong&gt;Algebraic Datatypes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;这里使用&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;而不是&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;，是为了看起来更像一个数据类型，而不是自然数集合。虽然在使用&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴的时候，他们是一样的。&lt;/p&gt;
+&lt;p&gt;The initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra 意味着在某种意义上，&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;是函子&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;的“最小不动点”，即满足&lt;span class=&#34;math inline&#34;&gt;\(Nat = 1+Nat\)&lt;/span&gt;的最小集合。&lt;/p&gt;
+&lt;p&gt;在Program Calculation中借用了范畴论的一些概念，这里不严格的稍作解释：我们取&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴，可以认为&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中每个object都是一个类型，每个arrow都是函数（&lt;span class=&#34;math inline&#34;&gt;\(f:A\to B\)&lt;/span&gt;将类型&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;的元素映射到类型&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;的元素）。自函子(endo-functor)就是范畴到自身的映射，将objects和arrows映射到objects和arrows。我们考虑一个自函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;，它的F-algebra定义为一个pair &lt;span class=&#34;math inline&#34;&gt;\((A,f),\ f::F\ A \to A\)&lt;/span&gt; ，&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中的一个object。Initial F-algebra 就是&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;，满足从&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;到任何其他F-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;都有一个homomorphism。利用initial F-algebra以及和它对偶的final F-algebra这两种构造，可以形式化的描述fold(catamorphism)和unfold(anamorphism)。&lt;/p&gt;
+&lt;p&gt;更严格的描述可以参考&lt;em&gt;Calculating Functional Programs&lt;/em&gt;或者其他有关Program Calculation的材料。&lt;/p&gt;
+&lt;h2 id=&#34;与自然数上递归定理的联系&#34;&gt;与自然数上递归定理的联系&lt;/h2&gt;
+&lt;p&gt;顺便提一下，使用F-algebra定义的自然数自带了到其他F-algebra的唯一同态，而这与&lt;strong&gt;自然数上的递归定理&lt;/strong&gt;产生了某种联系：&lt;/p&gt;
+&lt;p&gt;先回顾一下自然数上的递归定理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设集合&lt;span class=&#34;math inline&#34;&gt;\(A,\ a\in A,\ F:A\to A\)&lt;/span&gt;，则存在唯一的&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足 &lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;写成point-free就是&lt;span class=&#34;math inline&#34;&gt;\(h\circ succ = F\circ h\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(succ(n) = n^+\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而由于&lt;span class=&#34;math inline&#34;&gt;\((\mathbb{N},zero\triangledown succ)\)&lt;/span&gt;是一个initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra，所以从它到任何其他&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;存在唯一的同态&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;啊哈，实际上“&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;” 和 “&lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;” 这两个描述的性质是一模一样的！&lt;/p&gt;
+&lt;p&gt;这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！这个同态其实就是fold(catamorphism)！想要计算&lt;span class=&#34;math inline&#34;&gt;\(h(n)\)&lt;/span&gt;，实际上就是将n中的0换成&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(^+\)&lt;/span&gt;换成&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;从这里推广，对于任意一个algebraic datatype，我们都可以得到一个类似的“递归定理”，实际上就是catamorphism。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实本来是读&lt;em&gt;Calculating Functional Programs&lt;/em&gt;想到的这个问题，回顾了一下Discrete Math后发现原来还有这么多联系，非常有趣。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

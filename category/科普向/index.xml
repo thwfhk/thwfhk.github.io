@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>科普向 | </title>
+    <link>thwfhk.github.io/category/%E7%A7%91%E6%99%AE%E5%90%91/</link>
+      <atom:link href="thwfhk.github.io/category/%E7%A7%91%E6%99%AE%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
+    <description>科普向</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 16 May 2020 09:49:46 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>科普向</title>
+      <link>thwfhk.github.io/category/%E7%A7%91%E6%99%AE%E5%90%91/</link>
+    </image>
+    
+    <item>
+      <title>如何安全地知道对方是否喜欢你</title>
+      <link>thwfhk.github.io/post/do_u_like_me/</link>
+      <pubDate>Sat, 16 May 2020 09:49:46 +0800</pubDate>
+      <guid>thwfhk.github.io/post/do_u_like_me/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;爱情其实就是阿妮玛/阿尼姆斯在对方身上的投射。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是一篇科普小短文，尽量使用了通俗易懂的语言来描述，希望能给读者带来一点乐趣！&lt;/p&gt;
+&lt;!--我想从生活中的一些有趣的问题出发，介绍一些有关CS,math等等方面的知识，尽可能写的简单易懂，方便非专业人士阅读并获得乐趣。虽然我的水平也仅限于入门，但还是希望能给读者带来一点乐趣。--&gt;
+&lt;p&gt;下面开始正文：&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;生活中有一种&lt;del&gt;常见&lt;/del&gt;的情景：“Alice很喜欢Bob，想要向Bob表白，但是又害怕对方不喜欢自己而引起尴尬。”&lt;/p&gt;
+&lt;p&gt;很多人都会陷入这种两难（dilemma）中，那么有什么办法可以在不暴露自己是否喜欢对方的前提下得知对方是否喜欢自己呢？&lt;/p&gt;
+&lt;p&gt;一个简单的做法是，Alice和Bob分别告诉Carol自己是否喜欢对方，然后Carol同时告诉Alice和Bob你们&lt;em&gt;是否相互喜欢对方&lt;/em&gt;。但是这种方法有一个明显的问题：你可能并不想让Carol知道自己的心意。&lt;/p&gt;
+&lt;p&gt;那有没有&lt;strong&gt;更安全&lt;/strong&gt;的方法呢？&lt;/p&gt;
+&lt;p&gt;当然是有的。事实上，我们可以做到“Alice和Bob可以得知两人是否互相喜欢对方，并且自己是否喜欢对方这个信息不会被泄露给任何一个人”（当然了，“最后结果是相互喜欢”这种泄露不算）。并且，这一过程只需要&lt;strong&gt;交谈和2以内的加法乘法&lt;/strong&gt;就可以完成，无需借助计算机等设备。&lt;/p&gt;
+&lt;h2 id=&#34;一种安全的方法&#34;&gt;一种安全的方法&lt;/h2&gt;
+&lt;p&gt;为了表达方便，下面所有的数都要么是0要么是1，并且定义运算&lt;span class=&#34;math inline&#34;&gt;\(x\land y = x\times y,\ x\oplus y = (x+y) \bmod 2\)&lt;/span&gt;（&lt;span class=&#34;math inline&#34;&gt;\(\bmod 2\)&lt;/span&gt;表示除2取余数），实际上就是二进制的and运算和xor运算。&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Alice手里有一个数&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;，如果Alice喜欢Bob，那么&lt;span class=&#34;math inline&#34;&gt;\(x=1\)&lt;/span&gt;，否则&lt;span class=&#34;math inline&#34;&gt;\(x=0\)&lt;/span&gt;；同样的，Bob手里也有一个数&lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;，如果Bob喜欢Alice，那么&lt;span class=&#34;math inline&#34;&gt;\(y=1\)&lt;/span&gt;，否则&lt;span class=&#34;math inline&#34;&gt;\(y=0\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Alice将&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;任意拆成&lt;span class=&#34;math inline&#34;&gt;\(x=x_1\oplus x_2\)&lt;/span&gt;；同样的，Bob也将&lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;任意拆成&lt;span class=&#34;math inline&#34;&gt;\(y=y_1\oplus y_2\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Alice将&lt;span class=&#34;math inline&#34;&gt;\(x_1\)&lt;/span&gt;留下，&lt;span class=&#34;math inline&#34;&gt;\(x_2\)&lt;/span&gt;告诉Bob；类似的，Bob将&lt;span class=&#34;math inline&#34;&gt;\(y_2\)&lt;/span&gt;留下，&lt;span class=&#34;math inline&#34;&gt;\(y_1\)&lt;/span&gt;告诉Alice。此时Alice知道&lt;span class=&#34;math inline&#34;&gt;\(x_1,y_1\)&lt;/span&gt;，Bob知道&lt;span class=&#34;math inline&#34;&gt;\(x_2,y_2\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;需要有一个第三方Carol，Carol要随机想好一个等式&lt;span class=&#34;math inline&#34;&gt;\(c=a\land b\)&lt;/span&gt;，然后将&lt;span class=&#34;math inline&#34;&gt;\(c,x,y\)&lt;/span&gt;分别拆成&lt;span class=&#34;math inline&#34;&gt;\(c=c_1\oplus c_2,\ a=a_1\oplus a_2,\ b=b_1\oplus b_2\)&lt;/span&gt;；将&lt;span class=&#34;math inline&#34;&gt;\(a_1,b_1,c_1\)&lt;/span&gt;告诉Alice，&lt;span class=&#34;math inline&#34;&gt;\(a_2,b_2,c_2\)&lt;/span&gt;告诉Bob，Carol的任务就完成了。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Alice计算&lt;span class=&#34;math inline&#34;&gt;\(e_1=a_1\oplus x_1,\ f_1=b_1\oplus y_1\)&lt;/span&gt;；同样的，Bob计算&lt;span class=&#34;math inline&#34;&gt;\(e_2=a_2\oplus x_2,\ f_2=b_2\oplus y_2\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;Alice和Bob将&lt;span class=&#34;math inline&#34;&gt;\(e_1,f_1\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(e_2,f_2\)&lt;/span&gt;告诉对方，一起计算&lt;span class=&#34;math inline&#34;&gt;\(e=e_1\oplus e_2,\ f=f_1\oplus f_2\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;Alice计算&lt;span class=&#34;math inline&#34;&gt;\(z_1 = (f\land a_1)\oplus (e\land b_1)\oplus c_1\)&lt;/span&gt;；同样的，Bob计算&lt;span class=&#34;math inline&#34;&gt;\(z_2 = (f\land a_2)\oplus (e\land b_2)\oplus c_2\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最后，Alice和Bob将&lt;span class=&#34;math inline&#34;&gt;\(z_1\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(z_2\)&lt;/span&gt;告诉对方，一起计算出&lt;span class=&#34;math inline&#34;&gt;\(z=z_1\oplus z_2\)&lt;/span&gt;，我们就完成了！如果&lt;span class=&#34;math inline&#34;&gt;\(z=1\)&lt;/span&gt;，说明Alice和Bob互相喜欢；如果&lt;span class=&#34;math inline&#34;&gt;\(z=0\)&lt;/span&gt;，说明Alice和Bob当中至少有一个人不喜欢对方。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;原理是什么&#34;&gt;原理是什么？&lt;/h2&gt;
+&lt;p&gt;实际上，我们刚才的过程就是在“双方安全的计算两个数的乘积”，只不过是在模2意义下的单bit形式。&lt;/p&gt;
+&lt;p&gt;这个问题属于&lt;strong&gt;多方安全计算(Secure Multi-Party Computation)&lt;/strong&gt;领域，刚才的过程实际上通过一种叫做&lt;strong&gt;秘密共享(Secret Sharing)&lt;/strong&gt;的方法完成的。&lt;/p&gt;
+&lt;p&gt;直观上，Alice秘密就是&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，然后Alice将他/她的秘密的一部分&lt;span class=&#34;math inline&#34;&gt;\(a_2\)&lt;/span&gt;分享给了Bob；Bob也是同理。&lt;/p&gt;
+&lt;p&gt;更具体的解释，可以自行Google，或者参考&lt;em&gt;ABY–A Framework for Efficient Mixed-Protocol Secure Two-Party Computation&lt;/em&gt;这篇文章的第三部分。&lt;/p&gt;
+&lt;h2 id=&#34;它真的正确吗&#34;&gt;它真的正确吗？&lt;/h2&gt;
+&lt;p&gt;是真的。不信的话，你可以马上找身边的人陪你玩一下。&lt;/p&gt;
+&lt;h2 id=&#34;它真的安全吗&#34;&gt;它真的安全吗？&lt;/h2&gt;
+&lt;p&gt;只要你不把不该告诉对方的东西说出去，它就是安全的。&lt;/p&gt;
+&lt;p&gt;当然了，如果Carol和对方串通一气的话就不好了。&lt;/p&gt;
+&lt;p&gt;事实上，Carol并不是必须的，我们可以通过&lt;strong&gt;Homomorphic Encryption(HE)&lt;/strong&gt;或者&lt;strong&gt;Obilivious Transfer(OT)&lt;/strong&gt;的方法来计算这个multiplication triple &lt;span class=&#34;math inline&#34;&gt;\((c_1\oplus c_2)= (a_1\oplus a_2)\land (b_1\oplus b_2)\)&lt;/span&gt;。然而，HE和OT并不是能手算的东西。并且既然都HE了，直接用HE来安全的计算&lt;span class=&#34;math inline&#34;&gt;\(x\land y\)&lt;/span&gt;不好吗🙃&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;遇到生活中有趣的问题，还能与近期学的一些知识产生联系的概率真的很小QwQ。&lt;/p&gt;
+&lt;p&gt;希望这个系列能活下去...&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

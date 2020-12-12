@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm | </title>
+    <link>thwfhk.github.io/tag/algorithm/</link>
+      <atom:link href="thwfhk.github.io/tag/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <description>Algorithm</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 11 Feb 2020 15:31:46 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Algorithm</title>
+      <link>thwfhk.github.io/tag/algorithm/</link>
+    </image>
+    
+    <item>
+      <title>如何用Haskell写一棵红黑树</title>
+      <link>thwfhk.github.io/post/haskell_red_black_tree/</link>
+      <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
+      <guid>thwfhk.github.io/post/haskell_red_black_tree/</guid>
+      <description>&lt;p&gt;Candy?在上学期的数算课上学了红黑树，但是他一直没写过。&lt;/p&gt;
+&lt;p&gt;最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于是就去学了一下如何用Haskell写红黑树，发现只要不到60行！（包括空行和类型签名）&lt;/p&gt;
+&lt;p&gt;下面是一个简单的小教程。&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;PS: 其实下面的算法和数算学的那个一点关系都没有&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id=&#34;定义类型&#34;&gt;定义类型&lt;/h2&gt;
+&lt;p&gt;和普通二叉树一样哒，只不过加上了一个颜色信息&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;data Tree a = Nil | Node Color (Tree a) a (Tree a) deriving (Show, Eq)
+data Color = R | B deriving (Show, Eq)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;辅助函数&#34;&gt;辅助函数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;将树根染黑：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;makeBlack :: Tree a -&amp;gt; Tree a
+makeBlack Nil = Nil
+makeBlack (Node _ l x r) = Node B l x r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;将树根染红：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;makeRed :: Tree a -&amp;gt; Tree a
+makeRed Nil = Nil
+makeRed (Node _ l x r) = Node R l x r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;插入操作&#34;&gt;插入操作&lt;/h2&gt;
+&lt;p&gt;一般的红黑树插入不太方便用纯函数式来写，&lt;em&gt;Okasaki在1999年提出了一种新的插入方法&lt;/em&gt;，将插入统一为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先默认插入红色节点，然后从下向上进行balance操作；&lt;/li&gt;
+&lt;li&gt;balance操作会处理&lt;strong&gt;当前子树的children和grandchildren&lt;/strong&gt;出现双红的情况，并且会&lt;strong&gt;将当前子树的根变红&lt;/strong&gt;（balance操作并不会改变rank）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;插入操作的框架很简单，需要注意的是最后要让整棵树的根变黑：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;insert :: (Ord a) =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+insert x = makeBlack . ins 
+  where ins Nil = Node R Nil x Nil
+        ins t@(Node c l y r) | x &amp;lt; y     = balance $ Node c (ins l) y r
+                             | x &amp;gt; y     = balance $ Node c l y (ins r)
+                             | otherwise = t
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;balance操作要处理四种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/haskell_rbt/rbt1.jpg&#34; alt=&#34;rbt1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以方便的用pattern matching来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;balance :: Tree a -&amp;gt; Tree a
+balance (Node B (Node R (Node R a x b) y c) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B (Node R a x (Node R b y c)) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R (Node R b y c) z d)) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R b y (Node R c z d))) = Node R (Node B a x b) y (Node B c z d)
+balance t@(Node c x l r) = t
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;删除操作&#34;&gt;删除操作&lt;/h2&gt;
+&lt;p&gt;插入操作只要处理“双红”，删除操作还要处理“黑色节点数相等”，比较麻烦。&lt;/p&gt;
+&lt;p&gt;这里采用了&lt;em&gt;Stefan Kahrs在2001年提出的方法&lt;/em&gt;，主要特点是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不&lt;/strong&gt;将待删除节点与后继交换&lt;/li&gt;
+&lt;li&gt;维持一个&lt;strong&gt;新的invariant&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;从黑根子树中删除节点，该子树高度会-1&lt;/li&gt;
+&lt;li&gt;从红根子树中删除节点，该子树高度不变&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们有balanceL和balanceR两个操作，分别处理“左子树比右子树短1”和“右子树比左子树短1”的情况，将整棵树的高度变成&lt;strong&gt;较短&lt;/strong&gt;那个的状态。&lt;/p&gt;
+&lt;p&gt;删除操作的框架如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;delete :: Ord a =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+delete x = makeBlack . del
+  where
+    del Nil = Nil
+    del t@(Node _ l y r) | x &amp;lt; y     = delL t
+                         | x &amp;gt; y     = delR t
+                         | otherwise = app l r
+    delL (Node _ l@(Node B _ _ _) y r) = balanceL $ Node B (del l) y r
+    delL (Node _ l y r)                = Node R (del l) y r
+    delR (Node _ l y r@(Node B _ _ _)) = balanceR $ Node B l y (del r)
+    delR (Node _ l y r)                = Node R l y (del r)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以待插入节点将插入左子树为例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前节点y的左子树为黑根时，会在删除后将y染黑并进行balanceL操作&lt;/li&gt;
+&lt;li&gt;当前节点y的左子树为红根时，会在删除后将y染红&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;容易发现，这样操作是可以维持新的invariant的（枚举当前节点颜色情况证明即可）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;由于delete中在balanceL/R之前会染黑，balanceL/R只要处理根为黑的情况即可，有三种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/haskell_rbt/rbt2.jpg&#34; alt=&#34;rbt2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同样用pattern matching来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;balanceL :: Tree a -&amp;gt; Tree a 
+balanceL (Node B (Node R a x b) y r) = Node R (Node B a x b) y r
+balanceL (Node B l y (Node B a z b)) = balance $ Node B l y (Node R a z b)
+balanceL (Node B l y (Node R (Node B a u b) z c)) = Node R (Node B l y a) u (balance $ Node B b z (makeRed c))
+
+balanceR :: Tree a -&amp;gt; Tree a 
+balanceR (Node B l y (Node R a x b)) = Node R l y (Node B a x b)
+balanceR (Node B (Node B a z b) y r) = balance $ Node B (Node R a z b) y r
+balanceR (Node B (Node R c z (Node B a u b)) y r) = Node R (balance $ Node B (makeRed c) z a) u (Node B b y r)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;app会合并两个子树，有三种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/haskell_rbt/rbt3.jpg&#34; alt=&#34;rbt3&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同样用pattern matching来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;app :: Tree a -&amp;gt; Tree a -&amp;gt; Tree a
+app Nil t = t
+app t Nil = t 
+app (Node R a x b) (Node R c y d) = 
+  case app b c of
+    Node R b&#39; z c&#39; -&amp;gt; Node R (Node R a x b&#39;) z (Node R c&#39; y d)
+    s -&amp;gt; Node R a x (Node R s y d)
+app (Node B a x b) (Node B c y d) =
+  case app b c of
+    Node r b&#39; z c&#39; -&amp;gt; Node R (Node B a x b&#39;) z (Node B c&#39; y d)
+    s -&amp;gt; balanceL $ Node B a x (Node B s y d)
+app (Node R a x b) t = Node R a x (app b t)
+app t (Node R a x b) = Node R (app t a) x b
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;完整代码&#34;&gt;完整代码&lt;/h2&gt;
+&lt;p&gt;只要60行！&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;data Tree a = Nil | Node Color (Tree a) a (Tree a) deriving (Show, Eq)
+data Color = R | B deriving (Show, Eq)
+
+makeBlack :: Tree a -&amp;gt; Tree a
+makeBlack Nil = Nil
+makeBlack (Node _ l x r) = Node B l x r
+
+makeRed :: Tree a -&amp;gt; Tree a
+makeRed Nil = Nil
+makeRed (Node _ l x r) = Node R l x r
+
+insert :: (Ord a) =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+insert x = makeBlack . ins 
+  where ins Nil = Node R Nil x Nil
+        ins t@(Node c l y r) | x &amp;lt; y     = balance $ Node c (ins l) y r
+                             | x &amp;gt; y     = balance $ Node c l y (ins r)
+                             | otherwise = t
+
+balance :: Tree a -&amp;gt; Tree a
+balance (Node B (Node R (Node R a x b) y c) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B (Node R a x (Node R b y c)) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R (Node R b y c) z d)) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R b y (Node R c z d))) = Node R (Node B a x b) y (Node B c z d)
+balance t@(Node c x l r) = t
+
+delete :: Ord a =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+delete x = makeBlack . del
+  where
+    del Nil = Nil
+    del t@(Node _ l y r) | x &amp;lt; y     = delL t
+                         | x &amp;gt; y     = delR t
+                         | otherwise = app l r
+    delL (Node _ l@(Node B _ _ _) y r) = balanceL $ Node B (del l) y r
+    delL (Node _ l y r)                = Node R (del l) y r
+    delR (Node _ l y r@(Node B _ _ _)) = balanceR $ Node B l y (del r)
+    delR (Node _ l y r)                = Node R l y (del r)
+
+balanceL :: Tree a -&amp;gt; Tree a 
+balanceL (Node B (Node R a x b) y r) = Node R (Node B a x b) y r
+balanceL (Node B l y (Node B a z b)) = balance $ Node B l y (Node R a z b)
+balanceL (Node B l y (Node R (Node B a u b) z c)) = Node R (Node B l y a) u (balance $ Node B b z (makeRed c))
+
+balanceR :: Tree a -&amp;gt; Tree a 
+balanceR (Node B l y (Node R a x b)) = Node R l y (Node B a x b)
+balanceR (Node B (Node B a z b) y r) = balance $ Node B (Node R a z b) y r
+balanceR (Node B (Node R c z (Node B a u b)) y r) = Node R (balance $ Node B (makeRed c) z a) u (Node B b y r)
+
+app :: Tree a -&amp;gt; Tree a -&amp;gt; Tree a
+app Nil t = t
+app t Nil = t 
+app (Node R a x b) (Node R c y d) = 
+  case app b c of
+    Node R b&#39; z c&#39; -&amp;gt; Node R (Node R a x b&#39;) z (Node R c&#39; y d)
+    s -&amp;gt; Node R a x (Node R s y d)
+app (Node B a x b) (Node B c y d) =
+  case app b c of
+    Node r b&#39; z c&#39; -&amp;gt; Node R (Node B a x b&#39;) z (Node B c&#39; y d)
+    s -&amp;gt; balanceL $ Node B a x (Node B s y d)
+app (Node R a x b) t = Node R a x (app b t)
+app t (Node R a x b) = Node R (app t a) x b
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;其他api&#34;&gt;其他API&lt;/h2&gt;
+&lt;p&gt;一些其他常规操作的API：序列和树之间转换、查找、求后继&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;tree2List :: Tree a -&amp;gt; [a]
+tree2List Nil = []
+tree2List (Node c l x r) = tree2List l ++ [x] ++ tree2List r
+
+list2Tree :: Ord a =&amp;gt; [a] -&amp;gt; Tree a
+list2Tree = foldl (flip insert) Nil 
+
+search :: (Ord a) =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Bool
+search _ Nil = False
+search x (Node _ l y r) 
+  | x == y    = True
+  | x &amp;lt; y     = search x l
+  | otherwise = search x r
+
+successor :: Ord a =&amp;gt; a -&amp;gt; Tree a -&amp;gt; a
+successor x Nil = x
+successor x (Node _ l y r) 
+  | x &amp;lt;  y = let t = successor x l in if x == t then y else t
+  | x &amp;gt;= y = successor x r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;PS：因为没有维护size信息所以没法求第k小QwQ，不过加上size信息应该也不难写。&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://abhiroop.github.io/Haskell-Red-Black-Tree/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;一篇讲的很好的博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cs.kent.ac.uk/people/staff/smk/redblack/Untyped.hs&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;一份代码实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kahrs, Stefan. (2001). Red-black trees with types. Journal of Functional Programming. 11. 10.1017/S0956796801004026.&lt;/li&gt;
+&lt;li&gt;另外，Matt Might提出了一种更加简洁的删除操作的实现，详情参阅&lt;a href=&#34;http://matt.might.net/articles/red-black-delete/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;他的博客&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Facial Filters</title>
+      <link>thwfhk.github.io/project/facial-filter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>thwfhk.github.io/project/facial-filter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Subgraph Isomorphism</title>
+      <link>thwfhk.github.io/project/subgraph-isomorphism/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>thwfhk.github.io/project/subgraph-isomorphism/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

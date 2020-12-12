@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hello | </title>
+    <link>thwfhk.github.io/tag/hello/</link>
+      <atom:link href="thwfhk.github.io/tag/hello/index.xml" rel="self" type="application/rss+xml" />
+    <description>hello</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 24 Aug 2019 19:07:26 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>hello</title>
+      <link>thwfhk.github.io/tag/hello/</link>
+    </image>
+    
+    <item>
+      <title>First</title>
+      <link>thwfhk.github.io/post/first/</link>
+      <pubDate>Sat, 24 Aug 2019 19:07:26 +0800</pubDate>
+      <guid>thwfhk.github.io/post/first/</guid>
+      <description>&lt;h1 id=&#34;my-first-blog&#34;&gt;My first blog&lt;/h1&gt;
+&lt;p&gt;This is my new home!&lt;/p&gt;
+&lt;h2 id=&#34;the-second-title&#34;&gt;the second title&lt;/h2&gt;
+&lt;p&gt;我爱中文！&lt;/p&gt;
+&lt;p&gt;$$
+\sum_{k=1}^{\infty} \frac{1}{k}
+$$&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;import CandyQwQ
+CandyQwQ.sayhi()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;走向隐晦和未知，要通过更为隐晦和未知的事物。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

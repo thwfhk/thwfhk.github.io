@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computation Theory | </title>
+    <link>thwfhk.github.io/tag/computation-theory/</link>
+      <atom:link href="thwfhk.github.io/tag/computation-theory/index.xml" rel="self" type="application/rss+xml" />
+    <description>Computation Theory</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 31 Mar 2020 22:55:23 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Computation Theory</title>
+      <link>thwfhk.github.io/tag/computation-theory/</link>
+    </image>
+    
+    <item>
+      <title>停机问题与康托定理</title>
+      <link>thwfhk.github.io/post/halting_problem_and_cantor_theorem/</link>
+      <pubDate>Tue, 31 Mar 2020 22:55:23 +0800</pubDate>
+      <guid>thwfhk.github.io/post/halting_problem_and_cantor_theorem/</guid>
+      <description>&lt;p&gt;今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。&lt;/p&gt;
+&lt;p&gt;Candy?发现停机问题的证明和上学期离散数学课程学到的康托定理(Cantor&#39;s Theorem)的证明非常像，于是思考了一下他们之间的联系，总结如下，&lt;del&gt;以求赶在三月末尾水一篇博客&lt;/del&gt;。如有错误欢迎指出。&lt;/p&gt;
+&lt;h2 id=&#34;cantors-theorem&#34;&gt;Cantor&#39;s Theorem&lt;/h2&gt;
+&lt;p&gt;康托定理说的是“&lt;strong&gt;任何集合和它的幂集不等势&lt;/strong&gt;”，也就是说&lt;span class=&#34;math inline&#34;&gt;\(A \not\approx P(A)\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;Proof: 反证，假设&lt;span class=&#34;math inline&#34;&gt;\(\exists f:A\to P(A)\)&lt;/span&gt; 是一个双射。&lt;/p&gt;
+&lt;p&gt;考虑 &lt;span class=&#34;math inline&#34;&gt;\(B=\{x:x\in A \land x\notin f(x)\} \in P(A)\)&lt;/span&gt;。设 &lt;span class=&#34;math inline&#34;&gt;\(f(x_0) = B\)&lt;/span&gt;，考虑&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;是否在&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;集合内：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(x_0 \in B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(x_0 \notin f(x_0) = B\)&lt;/span&gt;，产生矛盾；&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(x_0\notin B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(x_0 \in f(x_0) =B\)&lt;/span&gt;，产生矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以并不存在这样的双射&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;halting-problem&#34;&gt;Halting Problem&lt;/h2&gt;
+&lt;p&gt;停机问题是说，&lt;strong&gt;对于程序&lt;span class=&#34;math inline&#34;&gt;\(P\)&lt;/span&gt;在输入&lt;span class=&#34;math inline&#34;&gt;\(I\)&lt;/span&gt;下的计算过程&lt;span class=&#34;math inline&#34;&gt;\(P(I)\)&lt;/span&gt;，其是否会在有限步终止是不可计算的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;经典的证明方法是这样的：&lt;/p&gt;
+&lt;p&gt;反证，假设&lt;span class=&#34;math inline&#34;&gt;\(\exists\ \text{program}\ H\)&lt;/span&gt;可以判定是否会停机，即 &lt;span class=&#34;math display&#34;&gt;\[
+H(P,I) = 
+\begin{cases}
+h &amp;amp; \textrm{if $P(I)$ halts in finite steps},\quad \\
+l &amp;amp; \textrm{if $P(I)$ loops forever}\\ 
+\end{cases}
+\]&lt;/span&gt; 考虑program &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;， &lt;span class=&#34;math display&#34;&gt;\[
+K(P)  
+\begin{cases}
+\text{halts in finite steps} &amp;amp; \textrm{if $H(P,P) = l$},\quad \\
+\text{loops forever} &amp;amp; \textrm{if $H(P,P)=h$}\\ 
+\end{cases}
+\]&lt;/span&gt; 考虑&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)\)&lt;/span&gt;的结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=h\)&lt;/span&gt;，即&lt;span class=&#34;math inline&#34;&gt;\(K(K)\)&lt;/span&gt; halts，由&lt;span class=&#34;math inline&#34;&gt;\(K(P)\)&lt;/span&gt;定义有&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=l\)&lt;/span&gt;，产生矛盾；&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=l\)&lt;/span&gt;，即&lt;span class=&#34;math inline&#34;&gt;\(K(K)\)&lt;/span&gt; loops forever，由&lt;span class=&#34;math inline&#34;&gt;\(K(P)\)&lt;/span&gt;定义有&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=h\)&lt;/span&gt;产生矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以不存在这样的program &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;它们之间的联系&#34;&gt;它们之间的联系&lt;/h2&gt;
+&lt;p&gt;直觉上这两个证明是非常像的。&lt;/p&gt;
+&lt;p&gt;实际上，可以&lt;strong&gt;改写Halting Problem的证明&lt;/strong&gt;，得到和Cantor&#39;s Theorem的证明相似的形式：&lt;/p&gt;
+&lt;p&gt;同样假设&lt;span class=&#34;math inline&#34;&gt;\(\exists\ \text{program}\ H\)&lt;/span&gt;可以判定是否会停机。设所有program的集合是&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;（这个集合是良定义的，毕竟&lt;span class=&#34;math inline&#34;&gt;\(A=\Sigma^*\)&lt;/span&gt;加上一个确定的语法检查过程），对于&lt;span class=&#34;math inline&#34;&gt;\(\forall P\in A\)&lt;/span&gt;，可以定义集合&lt;span class=&#34;math inline&#34;&gt;\(f(P) = \{I : P(I)\ \text{halts in finite steps}\}\)&lt;/span&gt;。&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是一个&lt;span class=&#34;math inline&#34;&gt;\(A\to P(A)\)&lt;/span&gt;的映射。&lt;/p&gt;
+&lt;p&gt;考虑&lt;span class=&#34;math inline&#34;&gt;\(B=\{P:P\in A \land P \notin f(P)\}\)&lt;/span&gt;。容易发现&lt;span class=&#34;math inline&#34;&gt;\(B = \{P:P\in A \land H(P,P) = l\}\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;同样定义program &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;： &lt;span class=&#34;math display&#34;&gt;\[
+K(P)  
+\begin{cases}
+\text{halts in finite steps} &amp;amp; \textrm{if $H(P,P) = l$},\quad \\
+\text{loops forever} &amp;amp; \textrm{if $H(P,P)=h$}\\ 
+\end{cases}
+\]&lt;/span&gt; 容易验证&lt;span class=&#34;math inline&#34;&gt;\(f(K) = B\)&lt;/span&gt;，考虑&lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;是否在&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;集合内：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(K \in B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(K \notin f(K) = B\)&lt;/span&gt;，产生矛盾；&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(K\notin B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(K \in f(K) =B\)&lt;/span&gt;，产生矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以不存在这样的program &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;现在这个证明就和Cantor&#39;s Theorem的证明一模一样了！&lt;/p&gt;
+&lt;p&gt;这个改写的核心就是，将原来的判断&lt;span class=&#34;math inline&#34;&gt;\(H(P,P) = l\)&lt;/span&gt;，变成判断&lt;span class=&#34;math inline&#34;&gt;\(P \in B\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;还有一点值得注意的地方：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cantor&#39;s Theorem的矛盾点是“&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;不是双射”，而这个证明的矛盾点是“&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;不存在”。其实这里是一致的，Cantor&#39;s Theorem的证明中&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是双射保证了能找到&lt;span class=&#34;math inline&#34;&gt;\(f^{-1}(B) = x_0\)&lt;/span&gt;，而这个证明中&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;存在保证了能找到&lt;span class=&#34;math inline&#34;&gt;\(f^{-1}(B)=K\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;在某种意义上“&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;存在”是比“&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是双射”弱的，因为&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;的存在只能找到&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;在映射下的逆，对于任意&lt;span class=&#34;math inline&#34;&gt;\(S \in P(A)\)&lt;/span&gt;不一定有&lt;span class=&#34;math inline&#34;&gt;\(f^{-1}(S)\)&lt;/span&gt;的存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;本来还想：如果有验证停机问题的程序&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;，就能得到&lt;span class=&#34;math inline&#34;&gt;\(A\to P(A)\)&lt;/span&gt;的双射了，结果发现想的不对。程序和(数学中)函数这两个概念还是要好好区分的，函数更强大，而程序只能算是函数的一个子集，只能给出某个&lt;strong&gt;可计算问题&lt;/strong&gt;所对应的映射。&lt;/p&gt;
+&lt;p&gt;另外，停机问题还与lambda calculus、哥德尔定理等等有紧密的联系，发现了一篇不错的&lt;a href=&#34;http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/&#34;&gt;blog&lt;/a&gt;。恰好最近在上DPPL，对lambda calculus比较感兴趣，有时间仔细研究一下。(&lt;del&gt;咕咕咕&lt;/del&gt;)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

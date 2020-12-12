@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming Language Theory | </title>
+    <link>thwfhk.github.io/tag/programming-language-theory/</link>
+      <atom:link href="thwfhk.github.io/tag/programming-language-theory/index.xml" rel="self" type="application/rss+xml" />
+    <description>Programming Language Theory</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 25 Aug 2020 17:43:42 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Programming Language Theory</title>
+      <link>thwfhk.github.io/tag/programming-language-theory/</link>
+    </image>
+    
+    <item>
+      <title>区分一些Higher-order开头的词</title>
+      <link>thwfhk.github.io/post/higher_order_xxx/</link>
+      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
+      <guid>thwfhk.github.io/post/higher_order_xxx/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;某种意义上，高阶意味着一等公民（&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在阅读PL相关的论文以及函数式语言的相关资料的时候，经常会看到&amp;quot;&lt;strong&gt;higher-order xxx&lt;/strong&gt;&amp;ldquo;或者&amp;rdquo;&lt;strong&gt;higher-xxx yyy&lt;/strong&gt;&amp;ldquo;这种格式的词语，仿佛是一切东西前面都能加个higher-order。我时常分不清他们的含义，于是我想从语言的角度总结一下各种higher/higher-order开头的词语。可以发现他们之间还是很相似的。&lt;/p&gt;
+&lt;h2 id=&#34;higher-order-functions&#34;&gt;Higher-order Functions&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;higher-order function&lt;/strong&gt; 指接受函数作为参数的函数（有时候返回函数的函数也算），比如&lt;code&gt;map :: (a -&amp;gt; b) -&amp;gt; [a] -&amp;gt; [b]&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果我们把type写成一棵语法树，可以对于higher-order function的type，它从根走到某个$(a\to b)$的路径上至少有一次是&lt;strong&gt;走了某个$\to$节点的左边&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在支持higher-order function的语言中，函数是&lt;strong&gt;一等公民（first-class citizen）&lt;/strong&gt;，也就是说函数可以作为参数传递。严格来说一等公民还应该支持赋值、存储等操作，但我觉得已经支持作为参数传递和返回了，其他的应该也都支持（纯粹的函数式语言不在意这些🐶）。&lt;/p&gt;
+&lt;p&gt;如果出现&lt;strong&gt;higher-order language&lt;/strong&gt;这个词，一般指支持higher-order function的语言。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：simply typed lambda calculus $\lambda_\to$.&lt;/p&gt;
+&lt;h2 id=&#34;higher-order-type-operators&#34;&gt;Higher-order Type (Operators)&lt;/h2&gt;
+&lt;p&gt;首先简单介绍一下关于type operator和kind的前置知识：&lt;/p&gt;
+&lt;p&gt;我们想要讨论&lt;strong&gt;type-level functions&lt;/strong&gt; (or &lt;strong&gt;type operators&lt;/strong&gt;, type constructors), 比如&lt;code&gt;Ref T&lt;/code&gt; , &lt;code&gt;Pair S T&lt;/code&gt;等等。因此在type层面引入了abstraction $\lambda X::K.T$ 和application $T\ T$。这样就有了type operators。&lt;/p&gt;
+&lt;p&gt;为了从arity上区分type (operators)，我们引入&lt;strong&gt;kinds&lt;/strong&gt; (the types of types):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a single atomic kind $*$ (pronounced &amp;ldquo;type&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;a single constructor $\Rightarrow$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一些例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$*$ : the kind of &lt;strong&gt;proper types&lt;/strong&gt; (or ground types, the sorts of type expressions that are actually used to classify terms), like $Bool,\ Nat\to Nat,\ \forall X.X\to X$&lt;/li&gt;
+&lt;li&gt;$*\Rightarrow &lt;em&gt;$ : the kind of &lt;strong&gt;type operators&lt;/strong&gt; (functions from proper types to proper types), like $\lambda X.T$ (abbreviation for $\lambda X::&lt;/em&gt;.T$)&lt;/li&gt;
+&lt;li&gt;$* \Rightarrow * \Rightarrow *$ : the kind of functions from proper types to type operators&lt;/li&gt;
+&lt;li&gt;$(* \Rightarrow *) \Rightarrow *$ : the kind of functions from type operators to proper types.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有$*\Rightarrow \cdots \Rightarrow *$ 这种kind的type称为type operator或者&lt;strong&gt;first-order type operator&lt;/strong&gt;；&lt;/p&gt;
+&lt;p&gt;而如果有$(*\Rightarrow *)$出现在某个$\Rightarrow$的左子树，这种type operator称为&lt;strong&gt;higher-order type operators&lt;/strong&gt; or &lt;strong&gt;higher-kinded type operators&lt;/strong&gt;。这个定义和higher-order function是完全一致的，别忘了type operator是type之间的function。&lt;/p&gt;
+&lt;p&gt;higher-order type operator很少出现。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：$\lambda_\omega$&lt;/p&gt;
+&lt;h2 id=&#34;higher-rank-polymorphism&#34;&gt;Higher-rank Polymorphism&lt;/h2&gt;
+&lt;p&gt;Polymorphism有很多种，higher-rank polymorphism是对于parametric polymorphism来说的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Parametric polymorphism&lt;/strong&gt;允许在type中出现type variable和quantifier （如$\lambda X.t :: \forall X.T$），并在evaluation时用不同的type实例化type variable。他与&lt;strong&gt;ad-hoc polymorphism&lt;/strong&gt;的很大一个不同在于：The polymorphic functions act on different types &lt;em&gt;&lt;strong&gt;uniformly&lt;/strong&gt;&lt;/em&gt;. 这也是&lt;strong&gt;parametricity&lt;/strong&gt;(see theorem for free)的来源。&lt;/p&gt;
+&lt;p&gt;一些例子：System $F$，FP中大部分语言，面向对象中的generics，C++中的template。&lt;/p&gt;
+&lt;p&gt;几种分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;let-polymorphsim(prenex polymorphism)&lt;/strong&gt;: 只允许polymorphism出现在top-level let-bindings，也就是说quantifier只能出现在最外层，因此type variables只能instantiate成quntifier-free type。又称为&lt;strong&gt;rank-1 polymorphism&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rank-2 polymorphism&lt;/strong&gt;: 把type写成语法树树，从根到任一个$\forall$ quantifier的路径不走&lt;strong&gt;两次或以上&lt;/strong&gt;$\to$节点的左边。比如$(\forall X.X\to X)\to Nat$就是走了一次。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rank-k polymorphism&lt;/strong&gt; (如上类推)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rank-n polymorphism&lt;/strong&gt;又称为&lt;strong&gt;higher-rank polymorphism&lt;/strong&gt; or impredicative (first-class) polymorphism，允许任意多次。注意到，此时我们可以将polymorphic function任意的当作参数进行传递，因此polymorphic function变成了一等公民。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Haskell支持rank-n polymorphism，&lt;code&gt;{-# LANGUAGE Rank2Types #-} {-# LANGUAGE Rank2Types #-}&lt;/code&gt;实际上就是用来开启rank-n polymorphism. 这样就可以写出&lt;code&gt;f :: (forall n. n-&amp;gt;n) -&amp;gt; (Int, Double)&lt;/code&gt;这种函数。注意它与&lt;code&gt;f :: forall n . (n-&amp;gt;n) -&amp;gt; (Int, Double)&lt;/code&gt;的区别：前者接受一个能作用于任意类型n并返回类型n的函数，后者接受的函数中n是任意一个具体的类型了。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：polymorphic lambda calculus $F$ (System F)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;值得注意的是，Haskell的function并不支持explicit type-level abstraction（而System F中支持），因为这会使type inference变成undecidable。Haskell的编译器会自动推断type variable应该实例化成哪个类型。&lt;/p&gt;
+&lt;p&gt;在加入pragma&lt;code&gt;{-# language TypeApplications #-}&lt;/code&gt;后可以写出&lt;code&gt;idInt = id @Int&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;higher-order-polymorphism&#34;&gt;Higher-order Polymorphism&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;higher-order polymorphism&lt;/strong&gt; or &lt;strong&gt;higher-kinded polymorphism&lt;/strong&gt;也是对于parametric polymorphism来说的，就是将前两节提到的higher-kinded type与higher-rank polymorphism结合到一起，允许parametric polymorphism的type variable遍历type operator。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type Ground = Int
+type FirstOrder a = Maybe a  -- a is ground
+type SecondOrder c = c Int   -- c is a first-order constructor
+type ThirdOrder c = c Maybe  -- c is second-order
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Haskell中&lt;code&gt;fmap :: forall f. Functor f =&amp;gt; (a -&amp;gt; b) -&amp;gt; f a -&amp;gt; f b&lt;/code&gt;，&lt;code&gt;f :: *-&amp;gt;*&lt;/code&gt;是一个type operator，所以这是个higher-order polymorphism。这个例子中只用到了rank-1 polymorphism，我们也可以写出同时用到rank-2 polymorphism和higher-order polymorphism的例子：&lt;code&gt;ret :: Monad m&#39; =&amp;gt; (forall m. Monad m =&amp;gt; a -&amp;gt; m a) -&amp;gt; a -&amp;gt; m&#39; a&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：Higher-order polymorphic lambda-calculus $F_\omega$&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;本来想写parametricity结果发现坑越来越大，于是&lt;del&gt;水点简单的东西&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;希望有时间去认真学一下他们与logic的联系。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>什么是自然数</title>
+      <link>thwfhk.github.io/post/natural_numbers/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      <guid>thwfhk.github.io/post/natural_numbers/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;0,1,2,3,4,....我好像可以无穷无尽的数下去啊？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是&amp;quot;&lt;strong&gt;什么是什么(What is What)&lt;/strong&gt;&amp;quot;系列的第一篇文章，首先介绍一下这个系列：&lt;/p&gt;
+&lt;p&gt;我有时会发现自己在不同的地方学到的东西以某种微妙的方式联系在一起，这种体验非常有趣；另一方面，有些事物又是难以界定的，即使读再多次它的定义，仍会感到琢磨不透。因此，我希望开始这样一个系列，将我在&lt;em&gt;不同的地方看到的同一事物&lt;/em&gt;总结在一起，希望能够发现它们之间的某种联系，从而对事物本身有更清晰的认识。&lt;/p&gt;
+&lt;p&gt;第一个事物是“&lt;strong&gt;自然数(Natural Numbers)&lt;/strong&gt;”.&lt;/p&gt;
+&lt;h2 id=&#34;自然语言&#34;&gt;1. 自然语言&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自日常生活和中学数学。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数就是&lt;code&gt;0,1,2,3,4,...&lt;/code&gt;这样数下去得到的所有的数。&lt;/p&gt;
+&lt;p&gt;自然数就是所有的正整数，包含0.（PS: 我至今记得高中时我分不清&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;中有没有0，然后同桌一脸鄙夷的说“N是自然数的缩写吧，应该包含0”）&lt;/p&gt;
+&lt;h2 id=&#34;peano公理&#34;&gt;2. Peano公理&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少是和自然数集同构的）。&lt;/p&gt;
+&lt;p&gt;一种Peano公理的描述为：设三元组&lt;span class=&#34;math inline&#34;&gt;\((N,F,0)\)&lt;/span&gt;满足：&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; is closed under &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;, i.e. &lt;span class=&#34;math inline&#34;&gt;\(F(N)=\{F(n)\mid n\in N\} \subset N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\notin \text{ran}\ F\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is injective.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Suppose a subset &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; of &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; satisfies &lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F(A)\subset A\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(A=N\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;就是自然数集。&lt;/p&gt;
+&lt;p&gt;事实上，&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;指定了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;上的一种“后继”运算，这种后继运算给了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中每个元素一个独一无二的后继，并且每个后继都在&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中，这和自然数是相符的。第5条可以算是“最关键”的一条，它实际上说明了自然数集&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足这个条件的&lt;strong&gt;最小&lt;/strong&gt;集合。&lt;/p&gt;
+&lt;h2 id=&#34;集合论set-theory&#34;&gt;3. 集合论(Set Theory)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是&lt;strong&gt;最小&lt;/strong&gt;的&lt;strong&gt;归纳集(minimal inductive set)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;其中一个集合&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是归纳集(inductive set)，当且仅当：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\forall a\in A,\ a^+\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;的后继运算。&lt;/p&gt;
+&lt;p&gt;可以发现，这种定义和Peano公理几乎是一样的，&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;就是&lt;span class=&#34;math inline&#34;&gt;\(F(a)\)&lt;/span&gt;。Peano公理中的第5条实际上就是保证了&lt;em&gt;&amp;quot;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足&lt;span class=&#34;math inline&#34;&gt;\(0\in A\land F(A)\subset A\)&lt;/span&gt;的最小集合&amp;quot;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;另外，在集合论中有一种对自然数的经典构造：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0=\{\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(1=\{0\} = \{\{\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(2=\{0,1\}=\{\{\},\{\{\}\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(n+1 = n\cup \{n\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种构造的一个好处在于&lt;span class=&#34;math inline&#34;&gt;\(a\le b\)&lt;/span&gt;可以表达成&lt;span class=&#34;math inline&#34;&gt;\(a\subseteq b\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;不动点fixed-point&#34;&gt;4. 不动点(Fixed Point)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自&lt;em&gt;Types and Programming Languages&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的&lt;strong&gt;最小不动点(the least fixed point)&lt;/strong&gt;，其中集合到集合的函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;定义为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F(X) = \{0\}\cup \{x^+\mid x\in X\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的不动点是指满足&lt;span class=&#34;math inline&#34;&gt;\(X=F(X)\)&lt;/span&gt;的集合&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;这个定义在本质上和前面是一样的，只不过是从不动点的角度。&lt;/p&gt;
+&lt;p&gt;最小不动点和最大不动点构造常用来定义程序语言中的&lt;strong&gt;recursive datatypes&lt;/strong&gt;，这里实际上将“自然数集”看成了“自然数类型”这个递归数据类型。&lt;/p&gt;
+&lt;p&gt;更多信息可以参考&lt;em&gt;Types and Programming Languages&lt;/em&gt;的21章。&lt;/p&gt;
+&lt;h2 id=&#34;f-代数f-algebra&#34;&gt;5. F-代数(F-Algebra)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Program Calculation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;记&lt;span class=&#34;math inline&#34;&gt;\(F=\underline 1\hat{+} Id\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(Nat = \mu F\)&lt;/span&gt;，即自然数集是函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的初始代数的Carrier。&lt;span class=&#34;math inline&#34;&gt;\((Nat,in_F::F\ \mu F\to\mu F)\)&lt;/span&gt;是F-初始代数(&lt;strong&gt;the initial &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;-algebra&lt;/strong&gt;)。&lt;/p&gt;
+&lt;p&gt;这种使用intial F-algebra来定义的数据类型又叫做&lt;strong&gt;Algebraic Datatypes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;这里使用&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;而不是&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;，是为了看起来更像一个数据类型，而不是自然数集合。虽然在使用&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴的时候，他们是一样的。&lt;/p&gt;
+&lt;p&gt;The initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra 意味着在某种意义上，&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;是函子&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;的“最小不动点”，即满足&lt;span class=&#34;math inline&#34;&gt;\(Nat = 1+Nat\)&lt;/span&gt;的最小集合。&lt;/p&gt;
+&lt;p&gt;在Program Calculation中借用了范畴论的一些概念，这里不严格的稍作解释：我们取&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴，可以认为&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中每个object都是一个类型，每个arrow都是函数（&lt;span class=&#34;math inline&#34;&gt;\(f:A\to B\)&lt;/span&gt;将类型&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;的元素映射到类型&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;的元素）。自函子(endo-functor)就是范畴到自身的映射，将objects和arrows映射到objects和arrows。我们考虑一个自函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;，它的F-algebra定义为一个pair &lt;span class=&#34;math inline&#34;&gt;\((A,f),\ f::F\ A \to A\)&lt;/span&gt; ，&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中的一个object。Initial F-algebra 就是&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;，满足从&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;到任何其他F-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;都有一个homomorphism。利用initial F-algebra以及和它对偶的final F-algebra这两种构造，可以形式化的描述fold(catamorphism)和unfold(anamorphism)。&lt;/p&gt;
+&lt;p&gt;更严格的描述可以参考&lt;em&gt;Calculating Functional Programs&lt;/em&gt;或者其他有关Program Calculation的材料。&lt;/p&gt;
+&lt;h2 id=&#34;与自然数上递归定理的联系&#34;&gt;与自然数上递归定理的联系&lt;/h2&gt;
+&lt;p&gt;顺便提一下，使用F-algebra定义的自然数自带了到其他F-algebra的唯一同态，而这与&lt;strong&gt;自然数上的递归定理&lt;/strong&gt;产生了某种联系：&lt;/p&gt;
+&lt;p&gt;先回顾一下自然数上的递归定理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设集合&lt;span class=&#34;math inline&#34;&gt;\(A,\ a\in A,\ F:A\to A\)&lt;/span&gt;，则存在唯一的&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足 &lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;写成point-free就是&lt;span class=&#34;math inline&#34;&gt;\(h\circ succ = F\circ h\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(succ(n) = n^+\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而由于&lt;span class=&#34;math inline&#34;&gt;\((\mathbb{N},zero\triangledown succ)\)&lt;/span&gt;是一个initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra，所以从它到任何其他&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;存在唯一的同态&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;啊哈，实际上“&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;” 和 “&lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;” 这两个描述的性质是一模一样的！&lt;/p&gt;
+&lt;p&gt;这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！这个同态其实就是fold(catamorphism)！想要计算&lt;span class=&#34;math inline&#34;&gt;\(h(n)\)&lt;/span&gt;，实际上就是将n中的0换成&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(^+\)&lt;/span&gt;换成&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;从这里推广，对于任意一个algebraic datatype，我们都可以得到一个类似的“递归定理”，实际上就是catamorphism。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实本来是读&lt;em&gt;Calculating Functional Programs&lt;/em&gt;想到的这个问题，回顾了一下Discrete Math后发现原来还有这么多联系，非常有趣。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

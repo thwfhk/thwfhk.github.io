@@ -33,6 +33,821 @@
     </item>
     
     <item>
+      <title>万有性质和米田引理</title>
+      <link>thwfhk.github.io/post/yoneda_lemma/</link>
+      <pubDate>Tue, 29 Sep 2020 17:51:30 +0800</pubDate>
+      <guid>thwfhk.github.io/post/yoneda_lemma/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;人的本质是一切社会关系的总和&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是一篇关于&lt;em&gt;Category Theory in Context&lt;/em&gt;的第二章&lt;em&gt;Universal Properties, Representability, and the Yoneda Lemma&lt;/em&gt;的学习笔记，记录了核心内容与一些个人理解。&lt;/p&gt;
+&lt;p&gt;Motivation: 最基本的描述universal property的方式是：某个object是某个category的initial/terminal object。这种方式的问题在于需要构造复杂的category。我们希望有一种更方便的描述universal property的方式：通过representable functor来描述从c映射出/映射到c的所有映射的样子。&lt;/p&gt;
+&lt;h2 id=&#34;representable-functors&#34;&gt;Representable Functors&lt;/h2&gt;
+&lt;p&gt;以下均假设&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is locally small.&lt;/p&gt;
+&lt;p&gt;[Def] &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is &lt;em&gt;locally small&lt;/em&gt;, &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(C(c,-):C\to Set\)&lt;/span&gt;是 &lt;strong&gt;covariant functor represented by &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(C(-,c):C^{op}\to Set\)&lt;/span&gt;是 &lt;strong&gt;contravariant functor represented by &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;thwfhk.github.io/images/yoneda_lemma.assets/截屏2020-08-08%20上午12.08.56.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(f:x\to y\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(C(c,f) = f_* : C(c,x)\to C(c,y)\)&lt;/span&gt;是&lt;strong&gt;post-composition&lt;/strong&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(c,f) g = f g\)&lt;/span&gt; 将f在g之后（左）作用上&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(f:x\to y\)&lt;/span&gt; ,&lt;span class=&#34;math inline&#34;&gt;\(C(f,c):C(y,c)\to C(x,c)\)&lt;/span&gt;是&lt;strong&gt;pre-composition&lt;/strong&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(-,c) f\ g = gf\)&lt;/span&gt;将f在g之前（右）作用上&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Def] &lt;strong&gt;two-sided represented functor&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{C}(-,-): \mathrm{C}^{\mathrm{op}} \times \mathrm{C} \rightarrow \text { Set }\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(f:w\to x, h:y\to z\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(f,h):C(x,y)\to C(w,z)\)&lt;/span&gt;分别将f复合在g前，h复合在g后。&lt;span class=&#34;math inline&#34;&gt;\(g:x\to y\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(C(f,h)g = hgf\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Def] &lt;strong&gt;Representable functor&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is &lt;em&gt;locally small&lt;/em&gt;, &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A covariant functor &lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt; is &lt;strong&gt;representable&lt;/strong&gt; if &lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;A contravariant functor &lt;span class=&#34;math inline&#34;&gt;\(F:C^{op}\to Set\)&lt;/span&gt; is &lt;strong&gt;representable&lt;/strong&gt; if &lt;span class=&#34;math inline&#34;&gt;\(C(-,c)\cong F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;称&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is represented by &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;称为the representing object&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;yoneda-lemma&#34;&gt;Yoneda Lemma&lt;/h2&gt;
+&lt;p&gt;为了用representable functor描述universal property，我们需要知道构造一个&lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt;需要什么？我们先看更一般的情况，构造&lt;span class=&#34;math inline&#34;&gt;\(\alpha : C(c,-)\Rightarrow F\)&lt;/span&gt;需要什么。Yoneda lemma告诉我们，只要给出一个&lt;span class=&#34;math inline&#34;&gt;\(x\in F\ c\)&lt;/span&gt;就可以构造出一个&lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;[Thm] &lt;strong&gt;Yoneda lemma&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is &lt;em&gt;locally small&lt;/em&gt;, 对于&lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt;, 有双射&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(c,-),F)\cong F\ c\)&lt;/span&gt;, 且natural in &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F:C^{op}\to Set\)&lt;/span&gt;, 有双射&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(-,c),F)\cong F\ c\)&lt;/span&gt;, 且natural in &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理解：这个双射说明natural transformation &lt;span class=&#34;math inline&#34;&gt;\(\alpha:C(c,-)\Rightarrow F\)&lt;/span&gt; 与 &lt;span class=&#34;math inline&#34;&gt;\(x\in F\ c\)&lt;/span&gt; 之间的一一对应&lt;/li&gt;
+&lt;li&gt;从左到右，&lt;span class=&#34;math inline&#34;&gt;\(\alpha_c(1_c)\)&lt;/span&gt;就是&lt;span class=&#34;math inline&#34;&gt;\(F\ c\)&lt;/span&gt;中的一个元素&lt;/li&gt;
+&lt;li&gt;从右到左，给出&lt;span class=&#34;math inline&#34;&gt;\(x\in F\ c\)&lt;/span&gt;，再利用&lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;的naturality就可以确定一个natural transformation &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. 实际上，给出的就是&lt;span class=&#34;math inline&#34;&gt;\(\alpha_c(1_c)\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;双射具体构造：&lt;/li&gt;
+&lt;li&gt;从左到右 &lt;span class=&#34;math inline&#34;&gt;\(\Phi: \operatorname{Hom}(\mathrm{C}(c,-), F) \rightarrow F c\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\Phi(\alpha):=\alpha_{c}\left(1_{c}\right)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;从右到左 &lt;span class=&#34;math inline&#34;&gt;\(\Psi: F c \rightarrow \operatorname{Hom}(\mathrm{C}(c,-), F)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)\)&lt;/span&gt;就是某个natural transformatiton &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)\)&lt;/span&gt;定义为对于&lt;span class=&#34;math inline&#34;&gt;\(f:c\to d\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)_d(f) = F f(x)\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;构造的核心想法是在如下交换图中&lt;span class=&#34;math inline&#34;&gt;\(1_c\)&lt;/span&gt;的沿着两条路径计算结果相等，证明只要验证&lt;span class=&#34;math inline&#34;&gt;\(\Psi(x)\)&lt;/span&gt;的naturality、$&lt;span class=&#34;math inline&#34;&gt;\(是\)&lt;/span&gt;$的逆以及整个双射natural in c and F.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;thwfhk.github.io/images/yoneda_lemma.assets/image-20200929132020885.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;一个关于size的问题：由于&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is locally small, 由functor category部分的结论不能保证&lt;span class=&#34;math inline&#34;&gt;\(Set^C\)&lt;/span&gt; is locally small, 但是从Yoneda lemma可以得知&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(c,-),F)\)&lt;/span&gt;（这是&lt;span class=&#34;math inline&#34;&gt;\(Set^C\)&lt;/span&gt;中两个objects之间的mophisms集合）确实是一个set.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Yoneda lemma的等价表述：&lt;span class=&#34;math inline&#34;&gt;\(\Phi : \mathrm{Hom}(y(-),-)\Rightarrow ev\)&lt;/span&gt; is a natural isomorphism.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;其中functor &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; 定义如下图所示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;thwfhk.github.io/images/yoneda_lemma.assets/image-20200929132411475.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;具体解释略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;yoneda-embedding&#34;&gt;Yoneda Embedding&lt;/h2&gt;
+&lt;p&gt;Yoneda lemma的一个重要应用是Yoneda embedding，这可以告诉我们用universal property刻画的objects之间同构。&lt;/p&gt;
+&lt;p&gt;[Thm] &lt;strong&gt;Yoneda embedding&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; is a &lt;strong&gt;&lt;em&gt;full and faithful embedding&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理解：以&lt;strong&gt;covariant Yoneda embedding&lt;/strong&gt;为例，这说明&lt;span class=&#34;math inline&#34;&gt;\(\forall c,d\in C\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(C(c,d)\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Hom}(C(-,c),C(-,d))\)&lt;/span&gt;之间有双射，并且该双射保持composition和identity（这是&lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;的functoriality要求，无需证明）. 这个双射将&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;映射到&lt;span class=&#34;math inline&#34;&gt;\(f_*\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;full and faithful embedding说明&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; is isomorphic to a full subcategory of &lt;span class=&#34;math inline&#34;&gt;\(Set^{C^{op}}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;证明中，证明是满射用到了yoneda lemma&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Prop] Yoneda embedding的推论&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(x\cong y\)&lt;/span&gt;, 则&lt;span class=&#34;math inline&#34;&gt;\(C(x,-)\cong C(y,-)\)&lt;/span&gt;且&lt;span class=&#34;math inline&#34;&gt;\(C(-,x)\cong C(-,y)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(C(x,-)\cong C(y,-)\)&lt;/span&gt;或&lt;span class=&#34;math inline&#34;&gt;\(C(-,x)\cong C(-,y)\)&lt;/span&gt;，则&lt;span class=&#34;math inline&#34;&gt;\(x\cong y\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;universal-property&#34;&gt;Universal Property&lt;/h2&gt;
+&lt;p&gt;有了之前的准备，就可以给出universal property的描述了！&lt;/p&gt;
+&lt;p&gt;[Def] &lt;strong&gt;Universal property&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;定义为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a reprensentable functor &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;universal element&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(x\in F c\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;s.t. 它们通过Yoneda lemma给出了一个natural isomorphism &lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt; (F covariant)或者 &lt;span class=&#34;math inline&#34;&gt;\(C(-,c)\cong F\)&lt;/span&gt; (F contravariant).&lt;/p&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由Yoneda lemma，&lt;span class=&#34;math inline&#34;&gt;\(x\in F c\)&lt;/span&gt;对应了一个natural transformation &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;, 并且我们希望它是natural isomorphism. 这个&lt;span class=&#34;math inline&#34;&gt;\(\alpha : C(c,-)\Rightarrow F\)&lt;/span&gt;的定义如下：&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\alpha_c(1_c) = x\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(f:c\to d,\ \alpha_d(f) = F f(x)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;由Yoneda embedding的推论，&lt;strong&gt;&lt;em&gt;&lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;在同构意义下唯一&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;直观上，一个universal property of c刻画了c出/入映射的性质&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种universal property的描述与之前的描述有什么联系呢？下面我们想说明：一个universal element是某个category中的initial/terminal object.&lt;/p&gt;
+&lt;p&gt;[Def] &lt;strong&gt;Category of elements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt;, Category of elements &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;objects：&lt;span class=&#34;math inline&#34;&gt;\((c,x)\)&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(c\in C,\ x\in F\ c\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;morphisms: a morphism &lt;span class=&#34;math inline&#34;&gt;\((c,x)\to (c&amp;#39;,x&amp;#39;)\)&lt;/span&gt; is a &lt;span class=&#34;math inline&#34;&gt;\(f:c\to c&amp;#39;\)&lt;/span&gt; s.t. &lt;span class=&#34;math inline&#34;&gt;\(F f(x)=x&amp;#39;\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;对于&lt;span class=&#34;math inline&#34;&gt;\(F:C^{op }\to Set\)&lt;/span&gt;, Category of elements &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;objects：&lt;span class=&#34;math inline&#34;&gt;\((c,x)\)&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(c\in C,\ x\in F\ c\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;morphisms: a morphism &lt;span class=&#34;math inline&#34;&gt;\((c,x)\to (c&amp;#39;,x&amp;#39;)\)&lt;/span&gt; is a &lt;span class=&#34;math inline&#34;&gt;\(f:c\to c&amp;#39;\)&lt;/span&gt; s.t. &lt;span class=&#34;math inline&#34;&gt;\(F f(x&amp;#39;)=x\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remarks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直观理解，&lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;把所有集合&lt;span class=&#34;math inline&#34;&gt;\(F\ c\)&lt;/span&gt;中的元素拿出来作为objects&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Prop]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F:C\to Set\)&lt;/span&gt; is reprensentable iff &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt; has an initial element&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F^{op}:C\to Set\)&lt;/span&gt; is reprensentable iff &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt; has an terminal element&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remark:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;这个推论说明，initial element &lt;span class=&#34;math inline&#34;&gt;\((c,x)\in \int F\)&lt;/span&gt; 中的&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; 就是 universal property of &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;中的universal element &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;，也就是说它通过Yoneda lemma给出了一个natural isomorphism.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;a representation of &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; 是&lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;和自然同构&lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong F\)&lt;/span&gt;. 注意到这和initial object &lt;span class=&#34;math inline&#34;&gt;\((c,x)\in \int F\)&lt;/span&gt;等价，因此有时候也说a representation of &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is the initial object in &lt;span class=&#34;math inline&#34;&gt;\(\int F\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
+&lt;h3 id=&#34;initial-object&#34;&gt;1. initial object&lt;/h3&gt;
+&lt;p&gt;考虑initial object &lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;的universal property，是constant functor &lt;span class=&#34;math inline&#34;&gt;\(*:C\to Set\)&lt;/span&gt; (将任意&lt;span class=&#34;math inline&#34;&gt;\(d\in C\)&lt;/span&gt;映射到singleton set &lt;span class=&#34;math inline&#34;&gt;\(*\)&lt;/span&gt;)和universal element &lt;span class=&#34;math inline&#34;&gt;\(x\in *\)&lt;/span&gt; (只有唯一一个元素)使得&lt;span class=&#34;math inline&#34;&gt;\(C(c,-)\cong *\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\((c,x)\in \int *\)&lt;/span&gt; 是initial object实际上就是说&lt;span class=&#34;math inline&#34;&gt;\(c\in C\)&lt;/span&gt;是initial object（因为x位置上只有x这一个元素）。&lt;/p&gt;
+&lt;h3 id=&#34;图染色&#34;&gt;2. 图染色&lt;/h3&gt;
+&lt;p&gt;这个例子来自&lt;em&gt;Category in Context&lt;/em&gt;, 我觉得这个例子很形象很CS。&lt;/p&gt;
+&lt;p&gt;考虑functor &lt;span class=&#34;math inline&#34;&gt;\(nColor：Graph^{op}\to Set\)&lt;/span&gt; 将图g映射到g的所有n染色方案的集合。&lt;span class=&#34;math inline&#34;&gt;\(nColor\)&lt;/span&gt;是contravariant的因为有了图同态&lt;span class=&#34;math inline&#34;&gt;\(f:G\to G&amp;#39;\)&lt;/span&gt; ，利用图同构保持顶点相邻关系，可以从&lt;span class=&#34;math inline&#34;&gt;\(G&amp;#39;\)&lt;/span&gt;的染色方案得到&lt;span class=&#34;math inline&#34;&gt;\(G\)&lt;/span&gt;的染色方案。&lt;/p&gt;
+&lt;p&gt;我们宣称完全图&lt;span class=&#34;math inline&#34;&gt;\(K_n\)&lt;/span&gt; represents &lt;span class=&#34;math inline&#34;&gt;\(nColor\)&lt;/span&gt;, 也就是说&lt;span class=&#34;math inline&#34;&gt;\(Graph(-,K_n)\cong nColor\)&lt;/span&gt;. （这个自然同构非常直观，可以把映射到顶点n想象成染上颜色n）。&lt;/p&gt;
+&lt;p&gt;此时，universal property of &lt;span class=&#34;math inline&#34;&gt;\(K_n\)&lt;/span&gt;就是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a representable functor &lt;span class=&#34;math inline&#34;&gt;\(nColor\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;a universal element &lt;span class=&#34;math inline&#34;&gt;\(x\in nColor\ K_n\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使得&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;由Yoneda lemma定义的natural transformation是个natural isomorphism.&lt;/p&gt;
+&lt;p&gt;由于该问题的特殊性，&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;可以任取。&lt;/p&gt;
+&lt;p&gt;考虑&lt;span class=&#34;math inline&#34;&gt;\(\int nColor\)&lt;/span&gt;, 里面的objects是&amp;quot;一个图+该图的一种染色方案=a n-colored graph&amp;quot;, morphisms是保持颜色的图同态。所以&lt;span class=&#34;math inline&#34;&gt;\((c,x)\)&lt;/span&gt;就是terminal n-colored graph.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>区分一些Higher-order开头的词</title>
+      <link>thwfhk.github.io/post/higher_order_xxx/</link>
+      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
+      <guid>thwfhk.github.io/post/higher_order_xxx/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;某种意义上，高阶意味着一等公民（&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在阅读PL相关的论文以及函数式语言的相关资料的时候，经常会看到&amp;quot;&lt;strong&gt;higher-order xxx&lt;/strong&gt;&amp;ldquo;或者&amp;rdquo;&lt;strong&gt;higher-xxx yyy&lt;/strong&gt;&amp;ldquo;这种格式的词语，仿佛是一切东西前面都能加个higher-order。我时常分不清他们的含义，于是我想从语言的角度总结一下各种higher/higher-order开头的词语。可以发现他们之间还是很相似的。&lt;/p&gt;
+&lt;h2 id=&#34;higher-order-functions&#34;&gt;Higher-order Functions&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;higher-order function&lt;/strong&gt; 指接受函数作为参数的函数（有时候返回函数的函数也算），比如&lt;code&gt;map :: (a -&amp;gt; b) -&amp;gt; [a] -&amp;gt; [b]&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果我们把type写成一棵语法树，可以对于higher-order function的type，它从根走到某个$(a\to b)$的路径上至少有一次是&lt;strong&gt;走了某个$\to$节点的左边&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在支持higher-order function的语言中，函数是&lt;strong&gt;一等公民（first-class citizen）&lt;/strong&gt;，也就是说函数可以作为参数传递。严格来说一等公民还应该支持赋值、存储等操作，但我觉得已经支持作为参数传递和返回了，其他的应该也都支持（纯粹的函数式语言不在意这些🐶）。&lt;/p&gt;
+&lt;p&gt;如果出现&lt;strong&gt;higher-order language&lt;/strong&gt;这个词，一般指支持higher-order function的语言。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：simply typed lambda calculus $\lambda_\to$.&lt;/p&gt;
+&lt;h2 id=&#34;higher-order-type-operators&#34;&gt;Higher-order Type (Operators)&lt;/h2&gt;
+&lt;p&gt;首先简单介绍一下关于type operator和kind的前置知识：&lt;/p&gt;
+&lt;p&gt;我们想要讨论&lt;strong&gt;type-level functions&lt;/strong&gt; (or &lt;strong&gt;type operators&lt;/strong&gt;, type constructors), 比如&lt;code&gt;Ref T&lt;/code&gt; , &lt;code&gt;Pair S T&lt;/code&gt;等等。因此在type层面引入了abstraction $\lambda X::K.T$ 和application $T\ T$。这样就有了type operators。&lt;/p&gt;
+&lt;p&gt;为了从arity上区分type (operators)，我们引入&lt;strong&gt;kinds&lt;/strong&gt; (the types of types):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a single atomic kind $*$ (pronounced &amp;ldquo;type&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;a single constructor $\Rightarrow$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一些例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$*$ : the kind of &lt;strong&gt;proper types&lt;/strong&gt; (or ground types, the sorts of type expressions that are actually used to classify terms), like $Bool,\ Nat\to Nat,\ \forall X.X\to X$&lt;/li&gt;
+&lt;li&gt;$*\Rightarrow &lt;em&gt;$ : the kind of &lt;strong&gt;type operators&lt;/strong&gt; (functions from proper types to proper types), like $\lambda X.T$ (abbreviation for $\lambda X::&lt;/em&gt;.T$)&lt;/li&gt;
+&lt;li&gt;$* \Rightarrow * \Rightarrow *$ : the kind of functions from proper types to type operators&lt;/li&gt;
+&lt;li&gt;$(* \Rightarrow *) \Rightarrow *$ : the kind of functions from type operators to proper types.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有$*\Rightarrow \cdots \Rightarrow *$ 这种kind的type称为type operator或者&lt;strong&gt;first-order type operator&lt;/strong&gt;；&lt;/p&gt;
+&lt;p&gt;而如果有$(*\Rightarrow *)$出现在某个$\Rightarrow$的左子树，这种type operator称为&lt;strong&gt;higher-order type operators&lt;/strong&gt; or &lt;strong&gt;higher-kinded type operators&lt;/strong&gt;。这个定义和higher-order function是完全一致的，别忘了type operator是type之间的function。&lt;/p&gt;
+&lt;p&gt;higher-order type operator很少出现。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：$\lambda_\omega$&lt;/p&gt;
+&lt;h2 id=&#34;higher-rank-polymorphism&#34;&gt;Higher-rank Polymorphism&lt;/h2&gt;
+&lt;p&gt;Polymorphism有很多种，higher-rank polymorphism是对于parametric polymorphism来说的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Parametric polymorphism&lt;/strong&gt;允许在type中出现type variable和quantifier （如$\lambda X.t :: \forall X.T$），并在evaluation时用不同的type实例化type variable。他与&lt;strong&gt;ad-hoc polymorphism&lt;/strong&gt;的很大一个不同在于：The polymorphic functions act on different types &lt;em&gt;&lt;strong&gt;uniformly&lt;/strong&gt;&lt;/em&gt;. 这也是&lt;strong&gt;parametricity&lt;/strong&gt;(see theorem for free)的来源。&lt;/p&gt;
+&lt;p&gt;一些例子：System $F$，FP中大部分语言，面向对象中的generics，C++中的template。&lt;/p&gt;
+&lt;p&gt;几种分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;let-polymorphsim(prenex polymorphism)&lt;/strong&gt;: 只允许polymorphism出现在top-level let-bindings，也就是说quantifier只能出现在最外层，因此type variables只能instantiate成quntifier-free type。又称为&lt;strong&gt;rank-1 polymorphism&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rank-2 polymorphism&lt;/strong&gt;: 把type写成语法树树，从根到任一个$\forall$ quantifier的路径不走&lt;strong&gt;两次或以上&lt;/strong&gt;$\to$节点的左边。比如$(\forall X.X\to X)\to Nat$就是走了一次。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rank-k polymorphism&lt;/strong&gt; (如上类推)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rank-n polymorphism&lt;/strong&gt;又称为&lt;strong&gt;higher-rank polymorphism&lt;/strong&gt; or impredicative (first-class) polymorphism，允许任意多次。注意到，此时我们可以将polymorphic function任意的当作参数进行传递，因此polymorphic function变成了一等公民。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Haskell支持rank-n polymorphism，&lt;code&gt;{-# LANGUAGE Rank2Types #-} {-# LANGUAGE Rank2Types #-}&lt;/code&gt;实际上就是用来开启rank-n polymorphism. 这样就可以写出&lt;code&gt;f :: (forall n. n-&amp;gt;n) -&amp;gt; (Int, Double)&lt;/code&gt;这种函数。注意它与&lt;code&gt;f :: forall n . (n-&amp;gt;n) -&amp;gt; (Int, Double)&lt;/code&gt;的区别：前者接受一个能作用于任意类型n并返回类型n的函数，后者接受的函数中n是任意一个具体的类型了。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：polymorphic lambda calculus $F$ (System F)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;值得注意的是，Haskell的function并不支持explicit type-level abstraction（而System F中支持），因为这会使type inference变成undecidable。Haskell的编译器会自动推断type variable应该实例化成哪个类型。&lt;/p&gt;
+&lt;p&gt;在加入pragma&lt;code&gt;{-# language TypeApplications #-}&lt;/code&gt;后可以写出&lt;code&gt;idInt = id @Int&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;higher-order-polymorphism&#34;&gt;Higher-order Polymorphism&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;higher-order polymorphism&lt;/strong&gt; or &lt;strong&gt;higher-kinded polymorphism&lt;/strong&gt;也是对于parametric polymorphism来说的，就是将前两节提到的higher-kinded type与higher-rank polymorphism结合到一起，允许parametric polymorphism的type variable遍历type operator。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type Ground = Int
+type FirstOrder a = Maybe a  -- a is ground
+type SecondOrder c = c Int   -- c is a first-order constructor
+type ThirdOrder c = c Maybe  -- c is second-order
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Haskell中&lt;code&gt;fmap :: forall f. Functor f =&amp;gt; (a -&amp;gt; b) -&amp;gt; f a -&amp;gt; f b&lt;/code&gt;，&lt;code&gt;f :: *-&amp;gt;*&lt;/code&gt;是一个type operator，所以这是个higher-order polymorphism。这个例子中只用到了rank-1 polymorphism，我们也可以写出同时用到rank-2 polymorphism和higher-order polymorphism的例子：&lt;code&gt;ret :: Monad m&#39; =&amp;gt; (forall m. Monad m =&amp;gt; a -&amp;gt; m a) -&amp;gt; a -&amp;gt; m&#39; a&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;对应的lambda calculus的例子：Higher-order polymorphic lambda-calculus $F_\omega$&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;本来想写parametricity结果发现坑越来越大，于是&lt;del&gt;水点简单的东西&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;希望有时间去认真学一下他们与logic的联系。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monad是自函子范畴上的幺半群</title>
+      <link>thwfhk.github.io/post/monad_is_a_monoid/</link>
+      <pubDate>Sat, 22 Aug 2020 22:25:27 +0800</pubDate>
+      <guid>thwfhk.github.io/post/monad_is_a_monoid/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;All told, monad is just a monoid in the category of endofunctors.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;连鸽两个月后终于在八月份的末尾再次更新（填坑）。&lt;/p&gt;
+&lt;p&gt;寒假的时候写过一个关于“Haskell中monad与范畴论有什么联系”的文章，当时写得很&lt;del&gt;naive&lt;/del&gt;，现在了解的更多了一点，于是决定重写一下。主要参考资料是&lt;em&gt;Category Theory for Programmers&lt;/em&gt;和&lt;em&gt;Category Theory in Context&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;monads-in-haskell&#34;&gt;Monads in Haskell&lt;/h2&gt;
+&lt;p&gt;首先回顾一下Haskell中的monad。&lt;/p&gt;
+&lt;p&gt;Haskell中的Monad &lt;code&gt;m&lt;/code&gt;是一个typeclass，他本身是一个函子（因此&lt;code&gt;m :: * -&amp;gt; *&lt;/code&gt;），带有一些满足特殊性质的运算。&lt;/p&gt;
+&lt;p&gt;在Haskell中对monad有三种等价的定义，分别使用fish, bind, join配合return.&lt;/p&gt;
+&lt;h3 id=&#34;fish&#34;&gt;fish🐟&lt;/h3&gt;
+&lt;p&gt;对于category $C$和endofunctor $m$，我们可以将a到b的morphisms换成$a\to m\ b$的函数（这样的函数称为&lt;strong&gt;Kleisli arrows&lt;/strong&gt;）， 若可以定义满足条件的composition和identity morphism，得到的新范畴就是$C$对应的&lt;strong&gt;Kleisli category&lt;/strong&gt; $K$ ，此时称$m$是一个&lt;strong&gt;monad&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在haskell中是这样定义的：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Monad m where
+	(&amp;gt;=&amp;gt;) :: (a -&amp;gt; m b) -&amp;gt; (b -&amp;gt; m c) -&amp;gt; (a -&amp;gt; m c) 
+	return :: a -&amp;gt; m a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意到&lt;code&gt;&amp;gt;=&amp;gt;&lt;/code&gt;(fish operator)就是composition，&lt;code&gt;return&lt;/code&gt;是identity morphism（的polymorphic版本）。&lt;/p&gt;
+&lt;p&gt;此时monad laws反应的就是Kleisli category对composition的要求：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;return &amp;gt;=&amp;gt; f = f -- left unit
+f &amp;gt;=&amp;gt; return = f -- right unit
+(f &amp;gt;=&amp;gt; g) &amp;gt;=&amp;gt; h = f &amp;gt;=&amp;gt; (g &amp;gt;=&amp;gt; h) -- associativity 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;bind&#34;&gt;bind&lt;/h3&gt;
+&lt;p&gt;观察到&lt;code&gt;&amp;gt;=&amp;gt;&lt;/code&gt;第一步必定是将&lt;code&gt;a -&amp;gt; m b&lt;/code&gt;作用于a，因此可以将第一个&lt;code&gt;a -&amp;gt; m b&lt;/code&gt;换成&lt;code&gt;m b&lt;/code&gt;，简化得到&lt;code&gt;&amp;gt;&amp;gt;=&lt;/code&gt;（bind），这是haskell中标准的monad的定义：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Monad m where
+	(&amp;gt;&amp;gt;=) :: m a -&amp;gt; (a -&amp;gt; m b) -&amp;gt; m b 
+	return :: a -&amp;gt; m a
+(&amp;gt;&amp;gt;) :: m a -&amp;gt; m b -&amp;gt; m b
+m &amp;gt;&amp;gt; k = m &amp;gt;&amp;gt;= (\_ -&amp;gt; k)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;直观上，bind将一个有context的value给了一个&lt;code&gt;a -&amp;gt; m b&lt;/code&gt;类型的函数，他提供了一种“从context里拿出值”的方法。&lt;/p&gt;
+&lt;p&gt;与fish互相表示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;f &amp;gt;=&amp;gt; g = \x -&amp;gt; f x &amp;gt;&amp;gt;= g
+x &amp;gt;&amp;gt;= f = ((\_ -&amp;gt; x) &amp;gt;=&amp;gt; f) () -- one possible version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以将fish表示的monad laws转换为等价的bind表示的monad laws：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;return x &amp;gt;&amp;gt;= f = f x
+mx &amp;gt;&amp;gt;= return = mx
+(mx &amp;gt;&amp;gt;= f) &amp;gt;&amp;gt;= g = mx &amp;gt;&amp;gt;= (\x -&amp;gt; f x &amp;gt;&amp;gt;= g)
+-- 或者写成(m &amp;gt;&amp;gt;= \x -&amp;gt; f x) &amp;gt;&amp;gt;= g = m &amp;gt;&amp;gt;= (\x -&amp;gt; f x &amp;gt;&amp;gt;= g)更清楚一点
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;join&#34;&gt;join&lt;/h3&gt;
+&lt;p&gt;观察到我们可以借助&lt;code&gt;fmap&lt;/code&gt;来应用函数f，因此只要一个&lt;code&gt;join :: m(m a) -&amp;gt; m a&lt;/code&gt;就可以实现bind的功能：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;class Functor m =&amp;gt; Monad m where
+    join :: m (m a) -&amp;gt; m a
+    return :: a -&amp;gt; m a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;与bind互相表示：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;x &amp;gt;&amp;gt;= f = join (fmap f x)
+join x = x &amp;gt;&amp;gt;= id
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;join表示的monad laws在下文中会从Category Theory中对$\eta,\mu$的要求中推出，可以验证这两条和之前的monad laws等价。&lt;/p&gt;
+&lt;h3 id=&#34;do-notation&#34;&gt;do notation&lt;/h3&gt;
+&lt;p&gt;do实际上是一个syntactic sugar:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;do {x1 &amp;lt;- m1; x2 &amp;lt;- m2; f x1 x2} =
+m1 &amp;gt;&amp;gt;= \x1 -&amp;gt; m2 &amp;gt;&amp;gt;= \x2 -&amp;gt; f x1 x2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以类似命令式来写函数式。&lt;/p&gt;
+&lt;p&gt;上述monad laws用do notation表示的话就是：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;do {x&#39; &amp;lt;- return x; return x&#39;} = do {f x}
+do {x &amp;lt;- mx; return x} = do {mx}
+do {y &amp;lt;- do {x &amp;lt;- mx; f x}; g y} = do {x &amp;lt;- mx; y &amp;lt;- f x; g y}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;monads-in-category-theory&#34;&gt;Monads in Category Theory&lt;/h2&gt;
+&lt;p&gt;在Category Theory中，monad的形式化定义如下：&lt;/p&gt;
+&lt;p&gt;[Def] A &lt;strong&gt;monad&lt;/strong&gt; on a category $C$ consists of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an endofunctor $T:C\to C$&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;multiplication&lt;/strong&gt; natural transformation $\mu : T^2 \Rightarrow T$&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;unit&lt;/strong&gt; natural transformation $\eta : 1_C\Rightarrow T$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Coherence conditions: the following diagrams commute&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/monad/monad diagram.png&#34; alt=&#34;截屏2020-08-18 下午8.40.09&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;我们假设Haskell有一个Hask范畴（objects是type，morphims是functions）的话，Haskell中的monad就是Hask范畴上的monad，其中&lt;code&gt;return&lt;/code&gt;就是$\eta$，&lt;code&gt;join&lt;/code&gt;就是$\mu$（准确的说是components $\eta_a,\mu_a$的polymorphic版本），他们需要满足的monad laws就是$\eta,\mu$的两个图交换：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\mu \circ T \mu  = \mu \circ \mu T$ :  &lt;code&gt;join . fmap (join) = join . join&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;$\mu \circ T \eta = \mu \circ \eta T = 1_T$  : &lt;code&gt;join . fmap (unit) = join . unit = id&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然$\eta,\mu$还要满足作为自然变换的coherence conditions，不过这两个条件由于&lt;em&gt;&lt;strong&gt;Theorems for Free&lt;/strong&gt;&lt;/em&gt;而自动满足：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;return . f = fmap f . return&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;join . fmap (fmap f) = fmap f . join&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以Haskell中的monad与Category Theory中的monad是一致的，接下来只要解释Category Theory中monad为什么是a monoid in the endofunctor category. 我们需要先补充一些Category Theory中的概念。&lt;/p&gt;
+&lt;h2 id=&#34;monoid-and-monoidal-category&#34;&gt;Monoid and Monoidal Category&lt;/h2&gt;
+&lt;h3 id=&#34;monoid&#34;&gt;Monoid&lt;/h3&gt;
+&lt;p&gt;经典的monoid（幺半群）是在集合上定义的，人如其名，有乘法运算和单位元。&lt;/p&gt;
+&lt;p&gt;[Def] A &lt;strong&gt;monoid&lt;/strong&gt; is an object $M\in Set$ together with two morphisms $\mu : M\times M\to M$ and $\eta :1\to M$.&lt;/p&gt;
+&lt;p&gt;Coherence conditions: the following diagrams commute&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/monad/monoid diagram.png&#34; alt=&#34;截屏2020-08-18 上午10.27.32&#34; style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这个定义和抽象代数中是等价的，$\mu$给出了一个二元运算并满足结合律（图1），$\eta$给出了一个单位元（图2）。&lt;/p&gt;
+&lt;p&gt;我们可以把monoid从Set上&lt;em&gt;&lt;strong&gt;推广到其他category上&lt;/strong&gt;&lt;/em&gt;，能在上面定义monoid的category需要满足一定条件，称为monoidal category。&lt;/p&gt;
+&lt;h3 id=&#34;monoidal-category&#34;&gt;Monoidal Category&lt;/h3&gt;
+&lt;p&gt;直观上，要想在一个category上定义monoid，这个category需要有一个objects之间的&lt;em&gt;&lt;strong&gt;product&lt;/strong&gt;&lt;/em&gt;，还要能从每个objects中拿出一个unit element。我们不能从category的objects里拿东西，但可以利用terminal object到其他objects的映射来取单位元，所以这个category要有一个类似&lt;em&gt;&lt;strong&gt;terminal object&lt;/strong&gt;&lt;/em&gt;的东西。。&lt;/p&gt;
+&lt;p&gt;monoidal category的形式化定义如下：&lt;/p&gt;
+&lt;p&gt;[Def] A &lt;strong&gt;symetric monoidal category&lt;/strong&gt;$(V,\otimes,*)$ is a category $V$ together with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a &lt;em&gt;&lt;strong&gt;bifunctor&lt;/strong&gt;&lt;/em&gt; $-\otimes-:V\times V\to V$ called &lt;strong&gt;monoidal product&lt;/strong&gt; (or tensor product)&lt;/li&gt;
+&lt;li&gt;a &lt;strong&gt;unit object&lt;/strong&gt; $*$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Coherence conditions: three coherence natural isomorphisms&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/monad/monoidal cat.png&#34; alt=&#34;截屏2020-08-18 上午10.31.38&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Remarks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;注意$\alpha$这些natural isomorphisms是multifunctors之间的，他的components是$\alpha_{u,v,w}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三个coherence conditions分别是symetric, associativity, unit conditions on the monoidal product. 只满足后两个的话称为&lt;strong&gt;monoidal category&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果这些natural isomorphisms可以取identity natural isomorphisms的话，称为&lt;strong&gt;strict monoidal category&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All categories with ﬁnite products such as $(Set,\times, * ), (Top,\times,*),(Cat,\times,1)$, where the monoidal unit in each case is the terminal object. 对偶地，finite coproduct和initial object也构成symmetric monoidal category，如$(Set,+,{})$.&lt;/li&gt;
+&lt;li&gt;Hask范畴可以近似看成Set，因此product（coproduct）在同构意义下满足条件，terminal object是&lt;code&gt;()&lt;/code&gt;（&lt;code&gt;Empty&lt;/code&gt;），因此Hask是monoidal category。&lt;/li&gt;
+&lt;li&gt;A commutative monoid看作discrete category(即只有identity morphisms)的话也定义了一个symetric monoidal category，此时natural isomorphisms就是identities。另一方面，经典的monoid就是Set上的monoid。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;monoid-in-a-monoidal-category&#34;&gt;Monoid in a Monoidal Category&lt;/h3&gt;
+&lt;p&gt;在monoidal category$(V,\otimes,*)$上定义monoid，我们需要取一个object $M\in V$以及两个morphisms $\mu : M\otimes M\to M$, $\eta : * \to M$. Coherence conditions和经典monoid相同。&lt;/p&gt;
+&lt;h2 id=&#34;monad-as-a-monoid&#34;&gt;Monad as a Monoid&lt;/h2&gt;
+&lt;p&gt;终于来到了正题。实际上经过前面的铺垫，剩下的内容就很简单了：&lt;/p&gt;
+&lt;p&gt;我们考虑&lt;strong&gt;functor category $C^C$&lt;/strong&gt;，它的objects是functors，morphisms是natural transformations。它是一个&lt;em&gt;&lt;strong&gt;strict monoidal category&lt;/strong&gt;&lt;/em&gt;，monoidal product是&lt;em&gt;composition between functors&lt;/em&gt;，unit object是identity endofunctor。注意此时composition(一般省略运算符) $-\circ -:C^C \times C^C \to C^C$是一个bifunctor，它是可以作用于natural transformation的，作用效果就是natural transformation的&lt;em&gt;&lt;strong&gt;horizontal composition&lt;/strong&gt;&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;那么$C^C$上的monoid是什么样的呢？取object $T\in C^C$，morphisms $\mu,\eta\in C^C$满足条件。 $T$就是一个monad！所以&lt;em&gt;A monad on $C$ is a monoid in the monoidal category $C^C$ of endofunctors on $C$&lt;/em&gt;. Bingo!&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实这篇文章一点也不友好，&lt;del&gt;只能作为给自己看的复习笔记&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;monad相关还有好多有趣的内容，比如comonad、adjunctions等等，&lt;del&gt;有时间一定写&lt;/del&gt;。&lt;/p&gt;
+&lt;p&gt;希望以后多更新一点有趣的东西（喂至少做到月更啊&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>如何安全地知道对方是否喜欢你</title>
+      <link>thwfhk.github.io/post/do_u_like_me/</link>
+      <pubDate>Sat, 16 May 2020 09:49:46 +0800</pubDate>
+      <guid>thwfhk.github.io/post/do_u_like_me/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;爱情其实就是阿妮玛/阿尼姆斯在对方身上的投射。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是一篇科普小短文，尽量使用了通俗易懂的语言来描述，希望能给读者带来一点乐趣！&lt;/p&gt;
+&lt;!--我想从生活中的一些有趣的问题出发，介绍一些有关CS,math等等方面的知识，尽可能写的简单易懂，方便非专业人士阅读并获得乐趣。虽然我的水平也仅限于入门，但还是希望能给读者带来一点乐趣。--&gt;
+&lt;p&gt;下面开始正文：&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;生活中有一种&lt;del&gt;常见&lt;/del&gt;的情景：“Alice很喜欢Bob，想要向Bob表白，但是又害怕对方不喜欢自己而引起尴尬。”&lt;/p&gt;
+&lt;p&gt;很多人都会陷入这种两难（dilemma）中，那么有什么办法可以在不暴露自己是否喜欢对方的前提下得知对方是否喜欢自己呢？&lt;/p&gt;
+&lt;p&gt;一个简单的做法是，Alice和Bob分别告诉Carol自己是否喜欢对方，然后Carol同时告诉Alice和Bob你们&lt;em&gt;是否相互喜欢对方&lt;/em&gt;。但是这种方法有一个明显的问题：你可能并不想让Carol知道自己的心意。&lt;/p&gt;
+&lt;p&gt;那有没有&lt;strong&gt;更安全&lt;/strong&gt;的方法呢？&lt;/p&gt;
+&lt;p&gt;当然是有的。事实上，我们可以做到“Alice和Bob可以得知两人是否互相喜欢对方，并且自己是否喜欢对方这个信息不会被泄露给任何一个人”（当然了，“最后结果是相互喜欢”这种泄露不算）。并且，这一过程只需要&lt;strong&gt;交谈和2以内的加法乘法&lt;/strong&gt;就可以完成，无需借助计算机等设备。&lt;/p&gt;
+&lt;h2 id=&#34;一种安全的方法&#34;&gt;一种安全的方法&lt;/h2&gt;
+&lt;p&gt;为了表达方便，下面所有的数都要么是0要么是1，并且定义运算&lt;span class=&#34;math inline&#34;&gt;\(x\land y = x\times y,\ x\oplus y = (x+y) \bmod 2\)&lt;/span&gt;（&lt;span class=&#34;math inline&#34;&gt;\(\bmod 2\)&lt;/span&gt;表示除2取余数），实际上就是二进制的and运算和xor运算。&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Alice手里有一个数&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;，如果Alice喜欢Bob，那么&lt;span class=&#34;math inline&#34;&gt;\(x=1\)&lt;/span&gt;，否则&lt;span class=&#34;math inline&#34;&gt;\(x=0\)&lt;/span&gt;；同样的，Bob手里也有一个数&lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;，如果Bob喜欢Alice，那么&lt;span class=&#34;math inline&#34;&gt;\(y=1\)&lt;/span&gt;，否则&lt;span class=&#34;math inline&#34;&gt;\(y=0\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Alice将&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;任意拆成&lt;span class=&#34;math inline&#34;&gt;\(x=x_1\oplus x_2\)&lt;/span&gt;；同样的，Bob也将&lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;任意拆成&lt;span class=&#34;math inline&#34;&gt;\(y=y_1\oplus y_2\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Alice将&lt;span class=&#34;math inline&#34;&gt;\(x_1\)&lt;/span&gt;留下，&lt;span class=&#34;math inline&#34;&gt;\(x_2\)&lt;/span&gt;告诉Bob；类似的，Bob将&lt;span class=&#34;math inline&#34;&gt;\(y_2\)&lt;/span&gt;留下，&lt;span class=&#34;math inline&#34;&gt;\(y_1\)&lt;/span&gt;告诉Alice。此时Alice知道&lt;span class=&#34;math inline&#34;&gt;\(x_1,y_1\)&lt;/span&gt;，Bob知道&lt;span class=&#34;math inline&#34;&gt;\(x_2,y_2\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;需要有一个第三方Carol，Carol要随机想好一个等式&lt;span class=&#34;math inline&#34;&gt;\(c=a\land b\)&lt;/span&gt;，然后将&lt;span class=&#34;math inline&#34;&gt;\(c,x,y\)&lt;/span&gt;分别拆成&lt;span class=&#34;math inline&#34;&gt;\(c=c_1\oplus c_2,\ a=a_1\oplus a_2,\ b=b_1\oplus b_2\)&lt;/span&gt;；将&lt;span class=&#34;math inline&#34;&gt;\(a_1,b_1,c_1\)&lt;/span&gt;告诉Alice，&lt;span class=&#34;math inline&#34;&gt;\(a_2,b_2,c_2\)&lt;/span&gt;告诉Bob，Carol的任务就完成了。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Alice计算&lt;span class=&#34;math inline&#34;&gt;\(e_1=a_1\oplus x_1,\ f_1=b_1\oplus y_1\)&lt;/span&gt;；同样的，Bob计算&lt;span class=&#34;math inline&#34;&gt;\(e_2=a_2\oplus x_2,\ f_2=b_2\oplus y_2\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;Alice和Bob将&lt;span class=&#34;math inline&#34;&gt;\(e_1,f_1\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(e_2,f_2\)&lt;/span&gt;告诉对方，一起计算&lt;span class=&#34;math inline&#34;&gt;\(e=e_1\oplus e_2,\ f=f_1\oplus f_2\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;Alice计算&lt;span class=&#34;math inline&#34;&gt;\(z_1 = (f\land a_1)\oplus (e\land b_1)\oplus c_1\)&lt;/span&gt;；同样的，Bob计算&lt;span class=&#34;math inline&#34;&gt;\(z_2 = (f\land a_2)\oplus (e\land b_2)\oplus c_2\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最后，Alice和Bob将&lt;span class=&#34;math inline&#34;&gt;\(z_1\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(z_2\)&lt;/span&gt;告诉对方，一起计算出&lt;span class=&#34;math inline&#34;&gt;\(z=z_1\oplus z_2\)&lt;/span&gt;，我们就完成了！如果&lt;span class=&#34;math inline&#34;&gt;\(z=1\)&lt;/span&gt;，说明Alice和Bob互相喜欢；如果&lt;span class=&#34;math inline&#34;&gt;\(z=0\)&lt;/span&gt;，说明Alice和Bob当中至少有一个人不喜欢对方。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;原理是什么&#34;&gt;原理是什么？&lt;/h2&gt;
+&lt;p&gt;实际上，我们刚才的过程就是在“双方安全的计算两个数的乘积”，只不过是在模2意义下的单bit形式。&lt;/p&gt;
+&lt;p&gt;这个问题属于&lt;strong&gt;多方安全计算(Secure Multi-Party Computation)&lt;/strong&gt;领域，刚才的过程实际上通过一种叫做&lt;strong&gt;秘密共享(Secret Sharing)&lt;/strong&gt;的方法完成的。&lt;/p&gt;
+&lt;p&gt;直观上，Alice秘密就是&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，然后Alice将他/她的秘密的一部分&lt;span class=&#34;math inline&#34;&gt;\(a_2\)&lt;/span&gt;分享给了Bob；Bob也是同理。&lt;/p&gt;
+&lt;p&gt;更具体的解释，可以自行Google，或者参考&lt;em&gt;ABY–A Framework for Efficient Mixed-Protocol Secure Two-Party Computation&lt;/em&gt;这篇文章的第三部分。&lt;/p&gt;
+&lt;h2 id=&#34;它真的正确吗&#34;&gt;它真的正确吗？&lt;/h2&gt;
+&lt;p&gt;是真的。不信的话，你可以马上找身边的人陪你玩一下。&lt;/p&gt;
+&lt;h2 id=&#34;它真的安全吗&#34;&gt;它真的安全吗？&lt;/h2&gt;
+&lt;p&gt;只要你不把不该告诉对方的东西说出去，它就是安全的。&lt;/p&gt;
+&lt;p&gt;当然了，如果Carol和对方串通一气的话就不好了。&lt;/p&gt;
+&lt;p&gt;事实上，Carol并不是必须的，我们可以通过&lt;strong&gt;Homomorphic Encryption(HE)&lt;/strong&gt;或者&lt;strong&gt;Obilivious Transfer(OT)&lt;/strong&gt;的方法来计算这个multiplication triple &lt;span class=&#34;math inline&#34;&gt;\((c_1\oplus c_2)= (a_1\oplus a_2)\land (b_1\oplus b_2)\)&lt;/span&gt;。然而，HE和OT并不是能手算的东西。并且既然都HE了，直接用HE来安全的计算&lt;span class=&#34;math inline&#34;&gt;\(x\land y\)&lt;/span&gt;不好吗🙃&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;遇到生活中有趣的问题，还能与近期学的一些知识产生联系的概率真的很小QwQ。&lt;/p&gt;
+&lt;p&gt;希望这个系列能活下去...&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>什么是自然数</title>
+      <link>thwfhk.github.io/post/natural_numbers/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      <guid>thwfhk.github.io/post/natural_numbers/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;0,1,2,3,4,....我好像可以无穷无尽的数下去啊？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是&amp;quot;&lt;strong&gt;什么是什么(What is What)&lt;/strong&gt;&amp;quot;系列的第一篇文章，首先介绍一下这个系列：&lt;/p&gt;
+&lt;p&gt;我有时会发现自己在不同的地方学到的东西以某种微妙的方式联系在一起，这种体验非常有趣；另一方面，有些事物又是难以界定的，即使读再多次它的定义，仍会感到琢磨不透。因此，我希望开始这样一个系列，将我在&lt;em&gt;不同的地方看到的同一事物&lt;/em&gt;总结在一起，希望能够发现它们之间的某种联系，从而对事物本身有更清晰的认识。&lt;/p&gt;
+&lt;p&gt;第一个事物是“&lt;strong&gt;自然数(Natural Numbers)&lt;/strong&gt;”.&lt;/p&gt;
+&lt;h2 id=&#34;自然语言&#34;&gt;1. 自然语言&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自日常生活和中学数学。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数就是&lt;code&gt;0,1,2,3,4,...&lt;/code&gt;这样数下去得到的所有的数。&lt;/p&gt;
+&lt;p&gt;自然数就是所有的正整数，包含0.（PS: 我至今记得高中时我分不清&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;中有没有0，然后同桌一脸鄙夷的说“N是自然数的缩写吧，应该包含0”）&lt;/p&gt;
+&lt;h2 id=&#34;peano公理&#34;&gt;2. Peano公理&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少是和自然数集同构的）。&lt;/p&gt;
+&lt;p&gt;一种Peano公理的描述为：设三元组&lt;span class=&#34;math inline&#34;&gt;\((N,F,0)\)&lt;/span&gt;满足：&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; is closed under &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;, i.e. &lt;span class=&#34;math inline&#34;&gt;\(F(N)=\{F(n)\mid n\in N\} \subset N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\notin \text{ran}\ F\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is injective.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Suppose a subset &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; of &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; satisfies &lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F(A)\subset A\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(A=N\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;就是自然数集。&lt;/p&gt;
+&lt;p&gt;事实上，&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;指定了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;上的一种“后继”运算，这种后继运算给了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中每个元素一个独一无二的后继，并且每个后继都在&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中，这和自然数是相符的。第5条可以算是“最关键”的一条，它实际上说明了自然数集&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足这个条件的&lt;strong&gt;最小&lt;/strong&gt;集合。&lt;/p&gt;
+&lt;h2 id=&#34;集合论set-theory&#34;&gt;3. 集合论(Set Theory)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是&lt;strong&gt;最小&lt;/strong&gt;的&lt;strong&gt;归纳集(minimal inductive set)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;其中一个集合&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是归纳集(inductive set)，当且仅当：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\forall a\in A,\ a^+\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;的后继运算。&lt;/p&gt;
+&lt;p&gt;可以发现，这种定义和Peano公理几乎是一样的，&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;就是&lt;span class=&#34;math inline&#34;&gt;\(F(a)\)&lt;/span&gt;。Peano公理中的第5条实际上就是保证了&lt;em&gt;&amp;quot;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足&lt;span class=&#34;math inline&#34;&gt;\(0\in A\land F(A)\subset A\)&lt;/span&gt;的最小集合&amp;quot;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;另外，在集合论中有一种对自然数的经典构造：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0=\{\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(1=\{0\} = \{\{\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(2=\{0,1\}=\{\{\},\{\{\}\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(n+1 = n\cup \{n\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种构造的一个好处在于&lt;span class=&#34;math inline&#34;&gt;\(a\le b\)&lt;/span&gt;可以表达成&lt;span class=&#34;math inline&#34;&gt;\(a\subseteq b\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;不动点fixed-point&#34;&gt;4. 不动点(Fixed Point)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自&lt;em&gt;Types and Programming Languages&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的&lt;strong&gt;最小不动点(the least fixed point)&lt;/strong&gt;，其中集合到集合的函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;定义为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F(X) = \{0\}\cup \{x^+\mid x\in X\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的不动点是指满足&lt;span class=&#34;math inline&#34;&gt;\(X=F(X)\)&lt;/span&gt;的集合&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;这个定义在本质上和前面是一样的，只不过是从不动点的角度。&lt;/p&gt;
+&lt;p&gt;最小不动点和最大不动点构造常用来定义程序语言中的&lt;strong&gt;recursive datatypes&lt;/strong&gt;，这里实际上将“自然数集”看成了“自然数类型”这个递归数据类型。&lt;/p&gt;
+&lt;p&gt;更多信息可以参考&lt;em&gt;Types and Programming Languages&lt;/em&gt;的21章。&lt;/p&gt;
+&lt;h2 id=&#34;f-代数f-algebra&#34;&gt;5. F-代数(F-Algebra)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Program Calculation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;记&lt;span class=&#34;math inline&#34;&gt;\(F=\underline 1\hat{+} Id\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(Nat = \mu F\)&lt;/span&gt;，即自然数集是函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的初始代数的Carrier。&lt;span class=&#34;math inline&#34;&gt;\((Nat,in_F::F\ \mu F\to\mu F)\)&lt;/span&gt;是F-初始代数(&lt;strong&gt;the initial &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;-algebra&lt;/strong&gt;)。&lt;/p&gt;
+&lt;p&gt;这种使用intial F-algebra来定义的数据类型又叫做&lt;strong&gt;Algebraic Datatypes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;这里使用&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;而不是&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;，是为了看起来更像一个数据类型，而不是自然数集合。虽然在使用&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴的时候，他们是一样的。&lt;/p&gt;
+&lt;p&gt;The initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra 意味着在某种意义上，&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;是函子&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;的“最小不动点”，即满足&lt;span class=&#34;math inline&#34;&gt;\(Nat = 1+Nat\)&lt;/span&gt;的最小集合。&lt;/p&gt;
+&lt;p&gt;在Program Calculation中借用了范畴论的一些概念，这里不严格的稍作解释：我们取&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴，可以认为&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中每个object都是一个类型，每个arrow都是函数（&lt;span class=&#34;math inline&#34;&gt;\(f:A\to B\)&lt;/span&gt;将类型&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;的元素映射到类型&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;的元素）。自函子(endo-functor)就是范畴到自身的映射，将objects和arrows映射到objects和arrows。我们考虑一个自函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;，它的F-algebra定义为一个pair &lt;span class=&#34;math inline&#34;&gt;\((A,f),\ f::F\ A \to A\)&lt;/span&gt; ，&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中的一个object。Initial F-algebra 就是&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;，满足从&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;到任何其他F-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;都有一个homomorphism。利用initial F-algebra以及和它对偶的final F-algebra这两种构造，可以形式化的描述fold(catamorphism)和unfold(anamorphism)。&lt;/p&gt;
+&lt;p&gt;更严格的描述可以参考&lt;em&gt;Calculating Functional Programs&lt;/em&gt;或者其他有关Program Calculation的材料。&lt;/p&gt;
+&lt;h2 id=&#34;与自然数上递归定理的联系&#34;&gt;与自然数上递归定理的联系&lt;/h2&gt;
+&lt;p&gt;顺便提一下，使用F-algebra定义的自然数自带了到其他F-algebra的唯一同态，而这与&lt;strong&gt;自然数上的递归定理&lt;/strong&gt;产生了某种联系：&lt;/p&gt;
+&lt;p&gt;先回顾一下自然数上的递归定理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设集合&lt;span class=&#34;math inline&#34;&gt;\(A,\ a\in A,\ F:A\to A\)&lt;/span&gt;，则存在唯一的&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足 &lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;写成point-free就是&lt;span class=&#34;math inline&#34;&gt;\(h\circ succ = F\circ h\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(succ(n) = n^+\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而由于&lt;span class=&#34;math inline&#34;&gt;\((\mathbb{N},zero\triangledown succ)\)&lt;/span&gt;是一个initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra，所以从它到任何其他&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;存在唯一的同态&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;啊哈，实际上“&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;” 和 “&lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;” 这两个描述的性质是一模一样的！&lt;/p&gt;
+&lt;p&gt;这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！这个同态其实就是fold(catamorphism)！想要计算&lt;span class=&#34;math inline&#34;&gt;\(h(n)\)&lt;/span&gt;，实际上就是将n中的0换成&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(^+\)&lt;/span&gt;换成&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;从这里推广，对于任意一个algebraic datatype，我们都可以得到一个类似的“递归定理”，实际上就是catamorphism。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实本来是读&lt;em&gt;Calculating Functional Programs&lt;/em&gt;想到的这个问题，回顾了一下Discrete Math后发现原来还有这么多联系，非常有趣。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>停机问题与康托定理</title>
+      <link>thwfhk.github.io/post/halting_problem_and_cantor_theorem/</link>
+      <pubDate>Tue, 31 Mar 2020 22:55:23 +0800</pubDate>
+      <guid>thwfhk.github.io/post/halting_problem_and_cantor_theorem/</guid>
+      <description>&lt;p&gt;今天的信息论课上讲Kolmogorov Complexity的时候提到了停机问题(Halting Problem)的一点内容，其中有讲到停机问题的证明。&lt;/p&gt;
+&lt;p&gt;Candy?发现停机问题的证明和上学期离散数学课程学到的康托定理(Cantor&#39;s Theorem)的证明非常像，于是思考了一下他们之间的联系，总结如下，&lt;del&gt;以求赶在三月末尾水一篇博客&lt;/del&gt;。如有错误欢迎指出。&lt;/p&gt;
+&lt;h2 id=&#34;cantors-theorem&#34;&gt;Cantor&#39;s Theorem&lt;/h2&gt;
+&lt;p&gt;康托定理说的是“&lt;strong&gt;任何集合和它的幂集不等势&lt;/strong&gt;”，也就是说&lt;span class=&#34;math inline&#34;&gt;\(A \not\approx P(A)\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;Proof: 反证，假设&lt;span class=&#34;math inline&#34;&gt;\(\exists f:A\to P(A)\)&lt;/span&gt; 是一个双射。&lt;/p&gt;
+&lt;p&gt;考虑 &lt;span class=&#34;math inline&#34;&gt;\(B=\{x:x\in A \land x\notin f(x)\} \in P(A)\)&lt;/span&gt;。设 &lt;span class=&#34;math inline&#34;&gt;\(f(x_0) = B\)&lt;/span&gt;，考虑&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;是否在&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;集合内：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(x_0 \in B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(x_0 \notin f(x_0) = B\)&lt;/span&gt;，产生矛盾；&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(x_0\notin B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(x_0 \in f(x_0) =B\)&lt;/span&gt;，产生矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以并不存在这样的双射&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;halting-problem&#34;&gt;Halting Problem&lt;/h2&gt;
+&lt;p&gt;停机问题是说，&lt;strong&gt;对于程序&lt;span class=&#34;math inline&#34;&gt;\(P\)&lt;/span&gt;在输入&lt;span class=&#34;math inline&#34;&gt;\(I\)&lt;/span&gt;下的计算过程&lt;span class=&#34;math inline&#34;&gt;\(P(I)\)&lt;/span&gt;，其是否会在有限步终止是不可计算的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;经典的证明方法是这样的：&lt;/p&gt;
+&lt;p&gt;反证，假设&lt;span class=&#34;math inline&#34;&gt;\(\exists\ \text{program}\ H\)&lt;/span&gt;可以判定是否会停机，即 &lt;span class=&#34;math display&#34;&gt;\[
+H(P,I) = 
+\begin{cases}
+h &amp;amp; \textrm{if $P(I)$ halts in finite steps},\quad \\
+l &amp;amp; \textrm{if $P(I)$ loops forever}\\ 
+\end{cases}
+\]&lt;/span&gt; 考虑program &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;， &lt;span class=&#34;math display&#34;&gt;\[
+K(P)  
+\begin{cases}
+\text{halts in finite steps} &amp;amp; \textrm{if $H(P,P) = l$},\quad \\
+\text{loops forever} &amp;amp; \textrm{if $H(P,P)=h$}\\ 
+\end{cases}
+\]&lt;/span&gt; 考虑&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)\)&lt;/span&gt;的结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=h\)&lt;/span&gt;，即&lt;span class=&#34;math inline&#34;&gt;\(K(K)\)&lt;/span&gt; halts，由&lt;span class=&#34;math inline&#34;&gt;\(K(P)\)&lt;/span&gt;定义有&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=l\)&lt;/span&gt;，产生矛盾；&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=l\)&lt;/span&gt;，即&lt;span class=&#34;math inline&#34;&gt;\(K(K)\)&lt;/span&gt; loops forever，由&lt;span class=&#34;math inline&#34;&gt;\(K(P)\)&lt;/span&gt;定义有&lt;span class=&#34;math inline&#34;&gt;\(H(K,K)=h\)&lt;/span&gt;产生矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以不存在这样的program &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;它们之间的联系&#34;&gt;它们之间的联系&lt;/h2&gt;
+&lt;p&gt;直觉上这两个证明是非常像的。&lt;/p&gt;
+&lt;p&gt;实际上，可以&lt;strong&gt;改写Halting Problem的证明&lt;/strong&gt;，得到和Cantor&#39;s Theorem的证明相似的形式：&lt;/p&gt;
+&lt;p&gt;同样假设&lt;span class=&#34;math inline&#34;&gt;\(\exists\ \text{program}\ H\)&lt;/span&gt;可以判定是否会停机。设所有program的集合是&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;（这个集合是良定义的，毕竟&lt;span class=&#34;math inline&#34;&gt;\(A=\Sigma^*\)&lt;/span&gt;加上一个确定的语法检查过程），对于&lt;span class=&#34;math inline&#34;&gt;\(\forall P\in A\)&lt;/span&gt;，可以定义集合&lt;span class=&#34;math inline&#34;&gt;\(f(P) = \{I : P(I)\ \text{halts in finite steps}\}\)&lt;/span&gt;。&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是一个&lt;span class=&#34;math inline&#34;&gt;\(A\to P(A)\)&lt;/span&gt;的映射。&lt;/p&gt;
+&lt;p&gt;考虑&lt;span class=&#34;math inline&#34;&gt;\(B=\{P:P\in A \land P \notin f(P)\}\)&lt;/span&gt;。容易发现&lt;span class=&#34;math inline&#34;&gt;\(B = \{P:P\in A \land H(P,P) = l\}\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;同样定义program &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;： &lt;span class=&#34;math display&#34;&gt;\[
+K(P)  
+\begin{cases}
+\text{halts in finite steps} &amp;amp; \textrm{if $H(P,P) = l$},\quad \\
+\text{loops forever} &amp;amp; \textrm{if $H(P,P)=h$}\\ 
+\end{cases}
+\]&lt;/span&gt; 容易验证&lt;span class=&#34;math inline&#34;&gt;\(f(K) = B\)&lt;/span&gt;，考虑&lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;是否在&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;集合内：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(K \in B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(K \notin f(K) = B\)&lt;/span&gt;，产生矛盾；&lt;/li&gt;
+&lt;li&gt;若&lt;span class=&#34;math inline&#34;&gt;\(K\notin B\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(K \in f(K) =B\)&lt;/span&gt;，产生矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以不存在这样的program &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;现在这个证明就和Cantor&#39;s Theorem的证明一模一样了！&lt;/p&gt;
+&lt;p&gt;这个改写的核心就是，将原来的判断&lt;span class=&#34;math inline&#34;&gt;\(H(P,P) = l\)&lt;/span&gt;，变成判断&lt;span class=&#34;math inline&#34;&gt;\(P \in B\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;还有一点值得注意的地方：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cantor&#39;s Theorem的矛盾点是“&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;不是双射”，而这个证明的矛盾点是“&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;不存在”。其实这里是一致的，Cantor&#39;s Theorem的证明中&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是双射保证了能找到&lt;span class=&#34;math inline&#34;&gt;\(f^{-1}(B) = x_0\)&lt;/span&gt;，而这个证明中&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;存在保证了能找到&lt;span class=&#34;math inline&#34;&gt;\(f^{-1}(B)=K\)&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;在某种意义上“&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;存在”是比“&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是双射”弱的，因为&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;的存在只能找到&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;在映射下的逆，对于任意&lt;span class=&#34;math inline&#34;&gt;\(S \in P(A)\)&lt;/span&gt;不一定有&lt;span class=&#34;math inline&#34;&gt;\(f^{-1}(S)\)&lt;/span&gt;的存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;本来还想：如果有验证停机问题的程序&lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt;，就能得到&lt;span class=&#34;math inline&#34;&gt;\(A\to P(A)\)&lt;/span&gt;的双射了，结果发现想的不对。程序和(数学中)函数这两个概念还是要好好区分的，函数更强大，而程序只能算是函数的一个子集，只能给出某个&lt;strong&gt;可计算问题&lt;/strong&gt;所对应的映射。&lt;/p&gt;
+&lt;p&gt;另外，停机问题还与lambda calculus、哥德尔定理等等有紧密的联系，发现了一篇不错的&lt;a href=&#34;http://mindhacks.cn/2006/10/15/cantor-godel-turing-an-eternal-golden-diagonal/&#34;&gt;blog&lt;/a&gt;。恰好最近在上DPPL，对lambda calculus比较感兴趣，有时间仔细研究一下。(&lt;del&gt;咕咕咕&lt;/del&gt;)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>如何用Haskell写一棵红黑树</title>
+      <link>thwfhk.github.io/post/haskell_red_black_tree/</link>
+      <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
+      <guid>thwfhk.github.io/post/haskell_red_black_tree/</guid>
+      <description>&lt;p&gt;Candy?在上学期的数算课上学了红黑树，但是他一直没写过。&lt;/p&gt;
+&lt;p&gt;最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于是就去学了一下如何用Haskell写红黑树，发现只要不到60行！（包括空行和类型签名）&lt;/p&gt;
+&lt;p&gt;下面是一个简单的小教程。&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;PS: 其实下面的算法和数算学的那个一点关系都没有&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id=&#34;定义类型&#34;&gt;定义类型&lt;/h2&gt;
+&lt;p&gt;和普通二叉树一样哒，只不过加上了一个颜色信息&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;data Tree a = Nil | Node Color (Tree a) a (Tree a) deriving (Show, Eq)
+data Color = R | B deriving (Show, Eq)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;辅助函数&#34;&gt;辅助函数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;将树根染黑：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;makeBlack :: Tree a -&amp;gt; Tree a
+makeBlack Nil = Nil
+makeBlack (Node _ l x r) = Node B l x r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;将树根染红：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;makeRed :: Tree a -&amp;gt; Tree a
+makeRed Nil = Nil
+makeRed (Node _ l x r) = Node R l x r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;插入操作&#34;&gt;插入操作&lt;/h2&gt;
+&lt;p&gt;一般的红黑树插入不太方便用纯函数式来写，&lt;em&gt;Okasaki在1999年提出了一种新的插入方法&lt;/em&gt;，将插入统一为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先默认插入红色节点，然后从下向上进行balance操作；&lt;/li&gt;
+&lt;li&gt;balance操作会处理&lt;strong&gt;当前子树的children和grandchildren&lt;/strong&gt;出现双红的情况，并且会&lt;strong&gt;将当前子树的根变红&lt;/strong&gt;（balance操作并不会改变rank）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;插入操作的框架很简单，需要注意的是最后要让整棵树的根变黑：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;insert :: (Ord a) =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+insert x = makeBlack . ins 
+  where ins Nil = Node R Nil x Nil
+        ins t@(Node c l y r) | x &amp;lt; y     = balance $ Node c (ins l) y r
+                             | x &amp;gt; y     = balance $ Node c l y (ins r)
+                             | otherwise = t
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;balance操作要处理四种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/haskell_rbt/rbt1.jpg&#34; alt=&#34;rbt1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以方便的用pattern matching来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;balance :: Tree a -&amp;gt; Tree a
+balance (Node B (Node R (Node R a x b) y c) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B (Node R a x (Node R b y c)) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R (Node R b y c) z d)) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R b y (Node R c z d))) = Node R (Node B a x b) y (Node B c z d)
+balance t@(Node c x l r) = t
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;删除操作&#34;&gt;删除操作&lt;/h2&gt;
+&lt;p&gt;插入操作只要处理“双红”，删除操作还要处理“黑色节点数相等”，比较麻烦。&lt;/p&gt;
+&lt;p&gt;这里采用了&lt;em&gt;Stefan Kahrs在2001年提出的方法&lt;/em&gt;，主要特点是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不&lt;/strong&gt;将待删除节点与后继交换&lt;/li&gt;
+&lt;li&gt;维持一个&lt;strong&gt;新的invariant&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;从黑根子树中删除节点，该子树高度会-1&lt;/li&gt;
+&lt;li&gt;从红根子树中删除节点，该子树高度不变&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们有balanceL和balanceR两个操作，分别处理“左子树比右子树短1”和“右子树比左子树短1”的情况，将整棵树的高度变成&lt;strong&gt;较短&lt;/strong&gt;那个的状态。&lt;/p&gt;
+&lt;p&gt;删除操作的框架如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;delete :: Ord a =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+delete x = makeBlack . del
+  where
+    del Nil = Nil
+    del t@(Node _ l y r) | x &amp;lt; y     = delL t
+                         | x &amp;gt; y     = delR t
+                         | otherwise = app l r
+    delL (Node _ l@(Node B _ _ _) y r) = balanceL $ Node B (del l) y r
+    delL (Node _ l y r)                = Node R (del l) y r
+    delR (Node _ l y r@(Node B _ _ _)) = balanceR $ Node B l y (del r)
+    delR (Node _ l y r)                = Node R l y (del r)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以待插入节点将插入左子树为例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前节点y的左子树为黑根时，会在删除后将y染黑并进行balanceL操作&lt;/li&gt;
+&lt;li&gt;当前节点y的左子树为红根时，会在删除后将y染红&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;容易发现，这样操作是可以维持新的invariant的（枚举当前节点颜色情况证明即可）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;由于delete中在balanceL/R之前会染黑，balanceL/R只要处理根为黑的情况即可，有三种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/haskell_rbt/rbt2.jpg&#34; alt=&#34;rbt2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同样用pattern matching来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;balanceL :: Tree a -&amp;gt; Tree a 
+balanceL (Node B (Node R a x b) y r) = Node R (Node B a x b) y r
+balanceL (Node B l y (Node B a z b)) = balance $ Node B l y (Node R a z b)
+balanceL (Node B l y (Node R (Node B a u b) z c)) = Node R (Node B l y a) u (balance $ Node B b z (makeRed c))
+
+balanceR :: Tree a -&amp;gt; Tree a 
+balanceR (Node B l y (Node R a x b)) = Node R l y (Node B a x b)
+balanceR (Node B (Node B a z b) y r) = balance $ Node B (Node R a z b) y r
+balanceR (Node B (Node R c z (Node B a u b)) y r) = Node R (balance $ Node B (makeRed c) z a) u (Node B b y r)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;app会合并两个子树，有三种情况：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/haskell_rbt/rbt3.jpg&#34; alt=&#34;rbt3&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同样用pattern matching来实现：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;app :: Tree a -&amp;gt; Tree a -&amp;gt; Tree a
+app Nil t = t
+app t Nil = t 
+app (Node R a x b) (Node R c y d) = 
+  case app b c of
+    Node R b&#39; z c&#39; -&amp;gt; Node R (Node R a x b&#39;) z (Node R c&#39; y d)
+    s -&amp;gt; Node R a x (Node R s y d)
+app (Node B a x b) (Node B c y d) =
+  case app b c of
+    Node r b&#39; z c&#39; -&amp;gt; Node R (Node B a x b&#39;) z (Node B c&#39; y d)
+    s -&amp;gt; balanceL $ Node B a x (Node B s y d)
+app (Node R a x b) t = Node R a x (app b t)
+app t (Node R a x b) = Node R (app t a) x b
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;完整代码&#34;&gt;完整代码&lt;/h2&gt;
+&lt;p&gt;只要60行！&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;data Tree a = Nil | Node Color (Tree a) a (Tree a) deriving (Show, Eq)
+data Color = R | B deriving (Show, Eq)
+
+makeBlack :: Tree a -&amp;gt; Tree a
+makeBlack Nil = Nil
+makeBlack (Node _ l x r) = Node B l x r
+
+makeRed :: Tree a -&amp;gt; Tree a
+makeRed Nil = Nil
+makeRed (Node _ l x r) = Node R l x r
+
+insert :: (Ord a) =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+insert x = makeBlack . ins 
+  where ins Nil = Node R Nil x Nil
+        ins t@(Node c l y r) | x &amp;lt; y     = balance $ Node c (ins l) y r
+                             | x &amp;gt; y     = balance $ Node c l y (ins r)
+                             | otherwise = t
+
+balance :: Tree a -&amp;gt; Tree a
+balance (Node B (Node R (Node R a x b) y c) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B (Node R a x (Node R b y c)) z d) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R (Node R b y c) z d)) = Node R (Node B a x b) y (Node B c z d)
+balance (Node B a x (Node R b y (Node R c z d))) = Node R (Node B a x b) y (Node B c z d)
+balance t@(Node c x l r) = t
+
+delete :: Ord a =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Tree a
+delete x = makeBlack . del
+  where
+    del Nil = Nil
+    del t@(Node _ l y r) | x &amp;lt; y     = delL t
+                         | x &amp;gt; y     = delR t
+                         | otherwise = app l r
+    delL (Node _ l@(Node B _ _ _) y r) = balanceL $ Node B (del l) y r
+    delL (Node _ l y r)                = Node R (del l) y r
+    delR (Node _ l y r@(Node B _ _ _)) = balanceR $ Node B l y (del r)
+    delR (Node _ l y r)                = Node R l y (del r)
+
+balanceL :: Tree a -&amp;gt; Tree a 
+balanceL (Node B (Node R a x b) y r) = Node R (Node B a x b) y r
+balanceL (Node B l y (Node B a z b)) = balance $ Node B l y (Node R a z b)
+balanceL (Node B l y (Node R (Node B a u b) z c)) = Node R (Node B l y a) u (balance $ Node B b z (makeRed c))
+
+balanceR :: Tree a -&amp;gt; Tree a 
+balanceR (Node B l y (Node R a x b)) = Node R l y (Node B a x b)
+balanceR (Node B (Node B a z b) y r) = balance $ Node B (Node R a z b) y r
+balanceR (Node B (Node R c z (Node B a u b)) y r) = Node R (balance $ Node B (makeRed c) z a) u (Node B b y r)
+
+app :: Tree a -&amp;gt; Tree a -&amp;gt; Tree a
+app Nil t = t
+app t Nil = t 
+app (Node R a x b) (Node R c y d) = 
+  case app b c of
+    Node R b&#39; z c&#39; -&amp;gt; Node R (Node R a x b&#39;) z (Node R c&#39; y d)
+    s -&amp;gt; Node R a x (Node R s y d)
+app (Node B a x b) (Node B c y d) =
+  case app b c of
+    Node r b&#39; z c&#39; -&amp;gt; Node R (Node B a x b&#39;) z (Node B c&#39; y d)
+    s -&amp;gt; balanceL $ Node B a x (Node B s y d)
+app (Node R a x b) t = Node R a x (app b t)
+app t (Node R a x b) = Node R (app t a) x b
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;其他api&#34;&gt;其他API&lt;/h2&gt;
+&lt;p&gt;一些其他常规操作的API：序列和树之间转换、查找、求后继&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;tree2List :: Tree a -&amp;gt; [a]
+tree2List Nil = []
+tree2List (Node c l x r) = tree2List l ++ [x] ++ tree2List r
+
+list2Tree :: Ord a =&amp;gt; [a] -&amp;gt; Tree a
+list2Tree = foldl (flip insert) Nil 
+
+search :: (Ord a) =&amp;gt; a -&amp;gt; Tree a -&amp;gt; Bool
+search _ Nil = False
+search x (Node _ l y r) 
+  | x == y    = True
+  | x &amp;lt; y     = search x l
+  | otherwise = search x r
+
+successor :: Ord a =&amp;gt; a -&amp;gt; Tree a -&amp;gt; a
+successor x Nil = x
+successor x (Node _ l y r) 
+  | x &amp;lt;  y = let t = successor x l in if x == t then y else t
+  | x &amp;gt;= y = successor x r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;PS：因为没有维护size信息所以没法求第k小QwQ，不过加上size信息应该也不难写。&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://abhiroop.github.io/Haskell-Red-Black-Tree/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;一篇讲的很好的博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cs.kent.ac.uk/people/staff/smk/redblack/Untyped.hs&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;一份代码实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kahrs, Stefan. (2001). Red-black trees with types. Journal of Functional Programming. 11. 10.1017/S0956796801004026.&lt;/li&gt;
+&lt;li&gt;另外，Matt Might提出了一种更加简洁的删除操作的实现，详情参阅&lt;a href=&#34;http://matt.might.net/articles/red-black-delete/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;他的博客&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>为什么2月只有28天</title>
+      <link>thwfhk.github.io/post/february/</link>
+      <pubDate>Mon, 23 Sep 2019 23:53:20 +0800</pubDate>
+      <guid>thwfhk.github.io/post/february/</guid>
+      <description>&lt;p&gt;故事是这样开始的：&lt;/p&gt;
+&lt;p&gt;今天下午ICS课的时候昕神跟我说：“国庆节不会要放两个lab吧，国庆放几天啊”。&lt;/p&gt;
+&lt;p&gt;我看了一下校历，“从9月28号到10月6号，28、29、30、31，加6天，10天吧”&lt;/p&gt;
+&lt;p&gt;“你怎么判断9月的大小的啊？”，昕神这时还在数手指关节判断大月小月。&lt;/p&gt;
+&lt;p&gt;“奥奥，9月是小月啊，那应该是9天”，我恍然大悟。&lt;/p&gt;
+&lt;p&gt;“判断大小月好麻烦，不可以直接用奇偶性”&lt;/p&gt;
+&lt;p&gt;“主要是因为7月8月连续是大月，当初设计的时候为什么不2月29天然后8月也是小月”&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;于是我开始查2月只有28天的原因。&lt;/p&gt;
+&lt;p&gt;大多数中文资料都讲了这样一个故事：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;凯撒修改后的历法中2月是29天的并且8月是30天，屋大维继位后，不满足于自己出生的8月份只有30天于是从2月中拿了一天到8月。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;虽然非常具有戏剧性，但这个故事实在是太不可信，我又去google了一下，结果&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;thwfhk.github.io/images/februray/aogusidu.jpg&#34; alt=&#34;agsd&#34;&gt;&lt;/p&gt;
+&lt;p&gt;人家根本就不是8月出生的！（当然，有其他版本的故事说屋大维是8月获得奥古斯都的称号，所以将8月变成大月，但这也是不对的）&lt;/p&gt;
+&lt;p&gt;有很多&lt;a href=&#34;http://mentalfloss.com/article/55327/why-are-there-only-28-days-february&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;英文资料&lt;/a&gt;解释了这个原因，说法大致相同，概括来说就是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;罗马人最初到历法是月亮历，并且只有10个月，1月和2月没有命名，因为当时的罗马人觉得那段时间不重要（对耕种而言）。&lt;/p&gt;
+&lt;p&gt;这10个月中有6个30天4个31天，共304天。&lt;/p&gt;
+&lt;p&gt;后来罗马的第二个皇帝Numa将1月和2月加到了这10个月的最后，让总天数为355天。出于对“偶数不吉利”的认识，还将30天的月改成29天。这样一来，剩下57天分给两个月，必须让1个月是28天，于是就选择了最后一个2月。&lt;/p&gt;
+&lt;p&gt;但是355天显然不对，于是加入了“闰月”制度。&lt;/p&gt;
+&lt;p&gt;凯撒即位后将历法改革成太阳历，给一些月加了1到2天成了30天和31天，但保留了2月还是28天。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;而那种错误的解释，可以追溯到13世纪Sacrobosco的解释，详情可见&lt;a href=&#34;https://en.wikipedia.org/wiki/Julian_calendar&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;wiki&lt;/a&gt;中的说明。这个解释已经被许多史料证明是不对的。&lt;/p&gt;
+&lt;p&gt;值得一提的是，在实行闰月制度的时候，人们也记不清是否闰月，都是由priests宣布的，所以就会产生滥用权力进行&lt;strong&gt;时间攻击&lt;/strong&gt;的情况发生，比如“extend the terms of friends and trim the terms of enemies”，想想也是蛮酷的。&lt;/p&gt;
+&lt;br/&gt;
+&lt;p&gt;最后总结，这个故事告诉我们：放假真好！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;PS：今天晚上autolab真的修好了，第一个lab也发布了，due竟然是9月30号，然后我本周离散作业还没写，wysl😢&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>First</title>
+      <link>thwfhk.github.io/post/first/</link>
+      <pubDate>Sat, 24 Aug 2019 19:07:26 +0800</pubDate>
+      <guid>thwfhk.github.io/post/first/</guid>
+      <description>&lt;h1 id=&#34;my-first-blog&#34;&gt;My first blog&lt;/h1&gt;
+&lt;p&gt;This is my new home!&lt;/p&gt;
+&lt;h2 id=&#34;the-second-title&#34;&gt;the second title&lt;/h2&gt;
+&lt;p&gt;我爱中文！&lt;/p&gt;
+&lt;p&gt;$$
+\sum_{k=1}^{\infty} \frac{1}{k}
+$$&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;import CandyQwQ
+CandyQwQ.sayhi()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;走向隐晦和未知，要通过更为隐晦和未知的事物。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Slides</title>
       <link>thwfhk.github.io/slides/example/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
@@ -162,35 +977,35 @@ Three
     </item>
     
     <item>
-      <title>Example Project</title>
-      <link>thwfhk.github.io/project/example/</link>
+      <title>LambdaM</title>
+      <link>thwfhk.github.io/project/lambdam/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>thwfhk.github.io/project/example/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
+      <guid>thwfhk.github.io/project/lambdam/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>An example conference paper</title>
+      <title>Facial Filters</title>
+      <link>thwfhk.github.io/project/facial-filter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>thwfhk.github.io/project/facial-filter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>I have no publication yet.</title>
       <link>thwfhk.github.io/publication/example/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>thwfhk.github.io/publication/example/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Subgraph Isomorphism</title>
+      <link>thwfhk.github.io/project/subgraph-isomorphism/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>thwfhk.github.io/project/subgraph-isomorphism/</guid>
+      <description></description>
     </item>
     
   </channel>

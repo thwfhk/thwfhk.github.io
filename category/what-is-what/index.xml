@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>What-is-what | </title>
+    <link>thwfhk.github.io/category/what-is-what/</link>
+      <atom:link href="thwfhk.github.io/category/what-is-what/index.xml" rel="self" type="application/rss+xml" />
+    <description>What-is-what</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>What-is-what</title>
+      <link>thwfhk.github.io/category/what-is-what/</link>
+    </image>
+    
+    <item>
+      <title>什么是自然数</title>
+      <link>thwfhk.github.io/post/natural_numbers/</link>
+      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
+      <guid>thwfhk.github.io/post/natural_numbers/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;0,1,2,3,4,....我好像可以无穷无尽的数下去啊？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是&amp;quot;&lt;strong&gt;什么是什么(What is What)&lt;/strong&gt;&amp;quot;系列的第一篇文章，首先介绍一下这个系列：&lt;/p&gt;
+&lt;p&gt;我有时会发现自己在不同的地方学到的东西以某种微妙的方式联系在一起，这种体验非常有趣；另一方面，有些事物又是难以界定的，即使读再多次它的定义，仍会感到琢磨不透。因此，我希望开始这样一个系列，将我在&lt;em&gt;不同的地方看到的同一事物&lt;/em&gt;总结在一起，希望能够发现它们之间的某种联系，从而对事物本身有更清晰的认识。&lt;/p&gt;
+&lt;p&gt;第一个事物是“&lt;strong&gt;自然数(Natural Numbers)&lt;/strong&gt;”.&lt;/p&gt;
+&lt;h2 id=&#34;自然语言&#34;&gt;1. 自然语言&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自日常生活和中学数学。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数就是&lt;code&gt;0,1,2,3,4,...&lt;/code&gt;这样数下去得到的所有的数。&lt;/p&gt;
+&lt;p&gt;自然数就是所有的正整数，包含0.（PS: 我至今记得高中时我分不清&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;中有没有0，然后同桌一脸鄙夷的说“N是自然数的缩写吧，应该包含0”）&lt;/p&gt;
+&lt;h2 id=&#34;peano公理&#34;&gt;2. Peano公理&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Peano公理刻画了自然数集的性质，满足Peano公理的系统是自然数集（至少是和自然数集同构的）。&lt;/p&gt;
+&lt;p&gt;一种Peano公理的描述为：设三元组&lt;span class=&#34;math inline&#34;&gt;\((N,F,0)\)&lt;/span&gt;满足：&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; is closed under &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;, i.e. &lt;span class=&#34;math inline&#34;&gt;\(F(N)=\{F(n)\mid n\in N\} \subset N\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\notin \text{ran}\ F\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt; is injective.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Suppose a subset &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; of &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; satisfies &lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F(A)\subset A\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(A=N\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;就是自然数集。&lt;/p&gt;
+&lt;p&gt;事实上，&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;指定了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;上的一种“后继”运算，这种后继运算给了&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中每个元素一个独一无二的后继，并且每个后继都在&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;中，这和自然数是相符的。第5条可以算是“最关键”的一条，它实际上说明了自然数集&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足这个条件的&lt;strong&gt;最小&lt;/strong&gt;集合。&lt;/p&gt;
+&lt;h2 id=&#34;集合论set-theory&#34;&gt;3. 集合论(Set Theory)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Discrete Math课程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是&lt;strong&gt;最小&lt;/strong&gt;的&lt;strong&gt;归纳集(minimal inductive set)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;其中一个集合&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是归纳集(inductive set)，当且仅当：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\forall a\in A,\ a^+\in A\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;的后继运算。&lt;/p&gt;
+&lt;p&gt;可以发现，这种定义和Peano公理几乎是一样的，&lt;span class=&#34;math inline&#34;&gt;\(a^+\)&lt;/span&gt;就是&lt;span class=&#34;math inline&#34;&gt;\(F(a)\)&lt;/span&gt;。Peano公理中的第5条实际上就是保证了&lt;em&gt;&amp;quot;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;是满足&lt;span class=&#34;math inline&#34;&gt;\(0\in A\land F(A)\subset A\)&lt;/span&gt;的最小集合&amp;quot;。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;另外，在集合论中有一种对自然数的经典构造：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(0=\{\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(1=\{0\} = \{\{\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(2=\{0,1\}=\{\{\},\{\{\}\}\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(n+1 = n\cup \{n\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种构造的一个好处在于&lt;span class=&#34;math inline&#34;&gt;\(a\le b\)&lt;/span&gt;可以表达成&lt;span class=&#34;math inline&#34;&gt;\(a\subseteq b\)&lt;/span&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;不动点fixed-point&#34;&gt;4. 不动点(Fixed Point)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自&lt;em&gt;Types and Programming Languages&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;自然数集是函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的&lt;strong&gt;最小不动点(the least fixed point)&lt;/strong&gt;，其中集合到集合的函数&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;定义为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(F(X) = \{0\}\cup \{x^+\mid x\in X\}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的不动点是指满足&lt;span class=&#34;math inline&#34;&gt;\(X=F(X)\)&lt;/span&gt;的集合&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;这个定义在本质上和前面是一样的，只不过是从不动点的角度。&lt;/p&gt;
+&lt;p&gt;最小不动点和最大不动点构造常用来定义程序语言中的&lt;strong&gt;recursive datatypes&lt;/strong&gt;，这里实际上将“自然数集”看成了“自然数类型”这个递归数据类型。&lt;/p&gt;
+&lt;p&gt;更多信息可以参考&lt;em&gt;Types and Programming Languages&lt;/em&gt;的21章。&lt;/p&gt;
+&lt;h2 id=&#34;f-代数f-algebra&#34;&gt;5. F-代数(F-Algebra)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;来自Program Calculation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;记&lt;span class=&#34;math inline&#34;&gt;\(F=\underline 1\hat{+} Id\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(Nat = \mu F\)&lt;/span&gt;，即自然数集是函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;的初始代数的Carrier。&lt;span class=&#34;math inline&#34;&gt;\((Nat,in_F::F\ \mu F\to\mu F)\)&lt;/span&gt;是F-初始代数(&lt;strong&gt;the initial &lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;-algebra&lt;/strong&gt;)。&lt;/p&gt;
+&lt;p&gt;这种使用intial F-algebra来定义的数据类型又叫做&lt;strong&gt;Algebraic Datatypes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;这里使用&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;而不是&lt;span class=&#34;math inline&#34;&gt;\(\mathbb{N}\)&lt;/span&gt;，是为了看起来更像一个数据类型，而不是自然数集合。虽然在使用&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴的时候，他们是一样的。&lt;/p&gt;
+&lt;p&gt;The initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra 意味着在某种意义上，&lt;span class=&#34;math inline&#34;&gt;\(Nat\)&lt;/span&gt;是函子&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;的“最小不动点”，即满足&lt;span class=&#34;math inline&#34;&gt;\(Nat = 1+Nat\)&lt;/span&gt;的最小集合。&lt;/p&gt;
+&lt;p&gt;在Program Calculation中借用了范畴论的一些概念，这里不严格的稍作解释：我们取&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;范畴，可以认为&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中每个object都是一个类型，每个arrow都是函数（&lt;span class=&#34;math inline&#34;&gt;\(f:A\to B\)&lt;/span&gt;将类型&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;的元素映射到类型&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;的元素）。自函子(endo-functor)就是范畴到自身的映射，将objects和arrows映射到objects和arrows。我们考虑一个自函子&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;，它的F-algebra定义为一个pair &lt;span class=&#34;math inline&#34;&gt;\((A,f),\ f::F\ A \to A\)&lt;/span&gt; ，&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(Set\)&lt;/span&gt;中的一个object。Initial F-algebra 就是&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;，满足从&lt;span class=&#34;math inline&#34;&gt;\((\mu F, in_F)\)&lt;/span&gt;到任何其他F-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;都有一个homomorphism。利用initial F-algebra以及和它对偶的final F-algebra这两种构造，可以形式化的描述fold(catamorphism)和unfold(anamorphism)。&lt;/p&gt;
+&lt;p&gt;更严格的描述可以参考&lt;em&gt;Calculating Functional Programs&lt;/em&gt;或者其他有关Program Calculation的材料。&lt;/p&gt;
+&lt;h2 id=&#34;与自然数上递归定理的联系&#34;&gt;与自然数上递归定理的联系&lt;/h2&gt;
+&lt;p&gt;顺便提一下，使用F-algebra定义的自然数自带了到其他F-algebra的唯一同态，而这与&lt;strong&gt;自然数上的递归定理&lt;/strong&gt;产生了某种联系：&lt;/p&gt;
+&lt;p&gt;先回顾一下自然数上的递归定理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设集合&lt;span class=&#34;math inline&#34;&gt;\(A,\ a\in A,\ F:A\to A\)&lt;/span&gt;，则存在唯一的&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足 &lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;写成point-free就是&lt;span class=&#34;math inline&#34;&gt;\(h\circ succ = F\circ h\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(succ(n) = n^+\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而由于&lt;span class=&#34;math inline&#34;&gt;\((\mathbb{N},zero\triangledown succ)\)&lt;/span&gt;是一个initial &lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra，所以从它到任何其他&lt;span class=&#34;math inline&#34;&gt;\((\underline 1\hat{+} Id)\)&lt;/span&gt;-algebra &lt;span class=&#34;math inline&#34;&gt;\((A,f)\)&lt;/span&gt;存在唯一的同态&lt;span class=&#34;math inline&#34;&gt;\(h:\mathbb{N}\to A\)&lt;/span&gt;，满足&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;啊哈，实际上“&lt;span class=&#34;math inline&#34;&gt;\(h\circ (zero\triangledown succ) = f\circ (1+h)\)&lt;/span&gt;” 和 “&lt;span class=&#34;math inline&#34;&gt;\(h(0)=a\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\forall n\in \mathbb{N},\ h(n^+) = F(h(n))\)&lt;/span&gt;” 这两个描述的性质是一模一样的！&lt;/p&gt;
+&lt;p&gt;这么说，“自然数上的递归定理” 描述的就是 “从一个初始F-代数到其他F-代数的同态”！这个同态其实就是fold(catamorphism)！想要计算&lt;span class=&#34;math inline&#34;&gt;\(h(n)\)&lt;/span&gt;，实际上就是将n中的0换成&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(^+\)&lt;/span&gt;换成&lt;span class=&#34;math inline&#34;&gt;\(F\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;从这里推广，对于任意一个algebraic datatype，我们都可以得到一个类似的“递归定理”，实际上就是catamorphism。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实本来是读&lt;em&gt;Calculating Functional Programs&lt;/em&gt;想到的这个问题，回顾了一下Discrete Math后发现原来还有这么多联系，非常有趣。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
