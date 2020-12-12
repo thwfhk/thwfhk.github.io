@@ -1,188 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml-stylesheet type="text/xsl" href="https://thwfhk.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>thwfhk.github.io/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc>https://thwfhk.github.io/about/</loc>
+    <lastmod>2019-08-24T19:05:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>thwfhk.github.io/talk/example/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc>https://thwfhk.github.io/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>thwfhk.github.io/talk/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc>https://thwfhk.github.io/categories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>thwfhk.github.io/tag/category-theory/</loc>
-    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/</loc>
-    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tags/</loc>
-    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/yoneda_lemma/</loc>
-    <lastmod>2020-09-29T17:51:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/haskell/</loc>
-    <lastmod>2020-08-25T17:43:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/programming-language-theory/</loc>
-    <lastmod>2020-08-25T17:43:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/higher_order_xxx/</loc>
-    <lastmod>2020-08-25T17:43:42+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/monad_is_a_monoid/</loc>
-    <lastmod>2020-08-22T22:25:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/categories/</loc>
-    <lastmod>2020-05-16T09:49:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/secret-sharing/</loc>
-    <lastmod>2020-05-16T09:49:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/writing/</loc>
-    <lastmod>2020-05-16T09:49:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/do_u_like_me/</loc>
-    <lastmod>2020-05-16T09:49:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/category/%E7%A7%91%E6%99%AE%E5%90%91/</loc>
-    <lastmod>2020-05-16T09:49:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/set-theory/</loc>
-    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/category/what-is-what/</loc>
-    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/natural_numbers/</loc>
-    <lastmod>2020-05-14T12:26:00+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/computation-theory/</loc>
-    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/halting_problem_and_cantor_theorem/</loc>
-    <lastmod>2020-03-31T22:55:23+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/algorithm/</loc>
-    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/haskell_red_black_tree/</loc>
-    <lastmod>2020-02-11T15:31:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/february/</loc>
-    <lastmod>2019-09-23T23:53:20+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/post/first/</loc>
-    <lastmod>2019-08-24T19:07:26+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/hello/</loc>
-    <lastmod>2019-08-24T19:07:26+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/slides/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/slides/example/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/project/lambdam/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/tag/programming-language/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/authors/</loc>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/project/facial-filter/</loc>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/publication/example/</loc>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/publication_types/</loc>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/publication/</loc>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/project/subgraph-isomorphism/</loc>
-  </url>
-  
-  <url>
-    <loc>thwfhk.github.io/author/wenhao-tang/</loc>
+    <loc>https://thwfhk.github.io/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>
