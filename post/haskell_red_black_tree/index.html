@@ -1,749 +1,181 @@
-<!DOCTYPE html><html lang="en-us" >
-
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何用Haskell写一棵红黑树 - Candy?</title>
   
-  
-  
-  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
-  
-
-  
-
-  
-  
-
-  
-  
-  
-  
-  
-    
-    
-    
-  
-  
-
-  <meta name="author" content="Wenhao Tang">
-
-  
-  
-  
-    
-  
-  <meta name="description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。">
-
-  
-  <link rel="alternate" hreflang="en-us" href="thwfhk.github.io/post/haskell_red_black_tree/">
-
-  
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-
-  
-  
-  
-  <meta name="theme-color" content="#2962ff">
-  
-
-  
-  
-  
-  <script src="/thwfhk.github.io/js/mathjax-config.js"></script>
-  
-
-  
-  
-  
-  
-    
-    
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-
-    
-    
-    
-      
-    
-    
-      
-      
-        
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
-        
-      
-    
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
-    
-
-    
-
-    
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
 
-      
-      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
-      
-    
-      
-
-      
-      
-
-      
-    
-      
-
-      
-      
-
-      
-    
-
-  
-
-  
-  
-  
-    
-      
-      
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
-    
-  
-
-  
-  
-  
-  
-  <link rel="stylesheet" href="/thwfhk.github.io/css/wowchemy.min.995d579c7ee697f742958d80da070126.css">
-
-  
-
-
-
-
-  
-
-  
-
-
-  
-  
-
-  
-
-  <link rel="manifest" href="/thwfhk.github.io/index.webmanifest">
-  <link rel="icon" type="image/png" href="/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
-  <link rel="apple-touch-icon" type="image/png" href="/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
-
-  <link rel="canonical" href="thwfhk.github.io/post/haskell_red_black_tree/">
-
-  
-  
-  
-  
-  
-  
-  
-    
-    
-  
-  
-  <meta property="twitter:card" content="summary">
-  
-  <meta property="og:site_name" content="">
-  <meta property="og:url" content="thwfhk.github.io/post/haskell_red_black_tree/">
-  <meta property="og:title" content="如何用Haskell写一棵红黑树 | ">
-  <meta property="og:description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。"><meta property="og:image" content="/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
-  
-    
-      <meta property="article:published_time" content="2020-02-11T15:31:46&#43;08:00">
-    
-    <meta property="article:modified_time" content="2020-02-11T15:31:46&#43;08:00">
-  
-
-  
-
-
-    
-
-
-
-
-
-
-  
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "thwfhk.github.io/post/haskell_red_black_tree/"
-  },
-  "headline": "如何用Haskell写一棵红黑树",
-  
-  "datePublished": "2020-02-11T15:31:46+08:00",
-  "dateModified": "2020-02-11T15:31:46+08:00",
-  
-  "author": {
-    "@type": "Person",
-    "name": "Wenhao Tang"
-  },
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
-    }
-  },
-  "description": "\u003cp\u003eCandy?在上学期的数算课上学了红黑树，但是他一直没写过。\u003c/p\u003e"
-}
+  gtag('config', 'UA-158181191-1');
 </script>
 
-  
-
-  
-
-
-  
-
-
-  
 
 
 
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-  <title>如何用Haskell写一棵红黑树 | </title>
+<meta name="author" content="Candy?" /><meta name="description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。
+" /><meta name="keywords" content="Candy?, Blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.78.2 with theme even" />
+
+
+<link rel="canonical" href="https://thwfhk.github.io/post/haskell_red_black_tree/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.ea46e737.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="如何用Haskell写一棵红黑树" />
+<meta property="og:description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://thwfhk.github.io/post/haskell_red_black_tree/" />
+<meta property="article:published_time" content="2020-02-11T15:31:46+08:00" />
+<meta property="article:modified_time" content="2020-02-11T15:31:46+08:00" />
+<meta itemprop="name" content="如何用Haskell写一棵红黑树">
+<meta itemprop="description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。">
+<meta itemprop="datePublished" content="2020-02-11T15:31:46+08:00" />
+<meta itemprop="dateModified" content="2020-02-11T15:31:46+08:00" />
+<meta itemprop="wordCount" content="2532">
+
+
+
+<meta itemprop="keywords" content="Haskell,Algorithm," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何用Haskell写一棵红黑树"/>
+<meta name="twitter:description" content="Candy?在上学期的数算课上学了红黑树，但是他一直没写过。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
 
 </head>
-
-
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
-
-  
-  
-  
-  
-  
-  <script src="/thwfhk.github.io/js/wowchemy-init.js"></script>
-
-  <aside class="search-results" id="search">
-  <div class="container">
-    <section class="search-header">
-
-      <div class="row no-gutters justify-content-between mb-3">
-        <div class="col-6">
-          <h1>Search</h1>
-        </div>
-        <div class="col-6 col-search-close">
-          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
-        </div>
-      </div>
-
-      <div id="search-box">
-        
-        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
-        
-      </div>
-
-    </section>
-    <section class="section-search-results">
-
-      <div id="search-hits">
-        
-      </div>
-
-    </section>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Candy?</a>
   </div>
-</aside>
-
-
-  <div class="page-header">
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
-  <div class="container">
-
-    
-    <div class="d-none d-lg-inline-flex">
-      <a class="navbar-brand" href="/thwfhk.github.io/"></a>
-    </div>
-    
-
-    
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-    <span><i class="fas fa-bars"></i></span>
-    </button>
-    
-
-    
-    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
-      <a class="navbar-brand" href="/thwfhk.github.io/"></a>
-    </div>
-    
-
-    
-    
-    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
-
-      
-      <ul class="navbar-nav d-md-inline-flex">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-
-        
-        
-        
-        
-
-        
-          
-            
-            
-          
-          
-            
-            
-            
-              
-            
-            
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/thwfhk.github.io/#about"><span>Home</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-
-        
-        
-        
-        
-
-        
-          
-            
-            
-          
-          
-            
-            
-            
-              
-            
-            
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/thwfhk.github.io/#featured"><span>Publications</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-
-        
-        
-        
-        
-
-        
-          
-            
-            
-          
-          
-            
-            
-            
-              
-            
-            
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/thwfhk.github.io/#projects"><span>Projects</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-
-        
-        
-        
-        
-
-        
-          
-            
-            
-          
-          
-            
-            
-            
-              
-            
-            
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link " href="/thwfhk.github.io/#posts"><span>Posts</span></a>
-        </li>
-
-        
-        
-
-      
-
-        
-      </ul>
-    </div>
-
-    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
-      
-      
-      <li class="nav-item">
-        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
-      </li>
-      
-
-      
-      
-      <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
-          <i class="fas fa-moon" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu">
-          <a href="#" class="dropdown-item js-set-theme-light">
-            <span>Light</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-dark">
-            <span>Dark</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-auto">
-            <span>Automatic</span>
-          </a>
-        </div>
-      </li>
-      
-
-      
-
-    </ul>
-
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于我</li>
+      </a>
+  </ul>
 </nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Candy?</a>
+</div>
 
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about">关于我</a>
+      </li>
+  </ul>
+</nav>
+    </header>
 
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何用Haskell写一棵红黑树</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> Tue, 11 Feb 2020 </span>
+        
+          <span class="more-meta"> 约 2532 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    
   </div>
-
-  <div class="page-body">
-    <article class="article">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-  
-  
-<div class="article-container pt-3">
-  <h1>如何用Haskell写一棵红黑树</h1>
-
-  
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Feb 11, 2020
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    6 min read
-  </span>
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
 </div>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-</div>
-
-
-
-  <div class="article-container">
-
-    <div class="article-style">
+    <div class="post-content">
       <p>Candy?在上学期的数算课上学了红黑树，但是他一直没写过。</p>
 <p>最近他入门了一下Haskell，得知用Haskell可以很方便实现各种树结构，于是就去学了一下如何用Haskell写红黑树，发现只要不到60行！（包括空行和类型签名）</p>
 <p>下面是一个简单的小教程。</p>
 <p><del>PS: 其实下面的算法和数算学的那个一点关系都没有</del></p>
 <h2 id="定义类型">定义类型</h2>
 <p>和普通二叉树一样哒，只不过加上了一个颜色信息</p>
-<pre><code class="language-haskell">data Tree a = Nil | Node Color (Tree a) a (Tree a) deriving (Show, Eq)
-data Color = R | B deriving (Show, Eq)
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Tree</span> a <span class="fu">=</span> <span class="dt">Nil</span> <span class="fu">|</span> <span class="dt">Node</span> <span class="dt">Color</span> (<span class="dt">Tree</span> a) a (<span class="dt">Tree</span> a) <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Eq</span>)
+<span class="kw">data</span> <span class="dt">Color</span> <span class="fu">=</span> <span class="dt">R</span> <span class="fu">|</span> <span class="dt">B</span> <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Eq</span>)</code></pre></div>
 <h2 id="辅助函数">辅助函数</h2>
 <ul>
 <li>将树根染黑：</li>
 </ul>
-<pre><code class="language-haskell">makeBlack :: Tree a -&gt; Tree a
-makeBlack Nil = Nil
-makeBlack (Node _ l x r) = Node B l x r
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">makeBlack ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+makeBlack <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Nil</span>
+makeBlack (<span class="dt">Node</span> _ l x r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">B</span> l x r</code></pre></div>
 <ul>
 <li>将树根染红：</li>
 </ul>
-<pre><code class="language-haskell">makeRed :: Tree a -&gt; Tree a
-makeRed Nil = Nil
-makeRed (Node _ l x r) = Node R l x r
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">makeRed ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+makeRed <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Nil</span>
+makeRed (<span class="dt">Node</span> _ l x r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> l x r</code></pre></div>
 <h2 id="插入操作">插入操作</h2>
 <p>一般的红黑树插入不太方便用纯函数式来写，<em>Okasaki在1999年提出了一种新的插入方法</em>，将插入统一为：</p>
 <ul>
@@ -751,23 +183,24 @@ makeRed (Node _ l x r) = Node R l x r
 <li>balance操作会处理<strong>当前子树的children和grandchildren</strong>出现双红的情况，并且会<strong>将当前子树的根变红</strong>（balance操作并不会改变rank）</li>
 </ul>
 <p>插入操作的框架很简单，需要注意的是最后要让整棵树的根变黑：</p>
-<pre><code class="language-haskell">insert :: (Ord a) =&gt; a -&gt; Tree a -&gt; Tree a
-insert x = makeBlack . ins 
-  where ins Nil = Node R Nil x Nil
-        ins t@(Node c l y r) | x &lt; y     = balance $ Node c (ins l) y r
-                             | x &gt; y     = balance $ Node c l y (ins r)
-                             | otherwise = t
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">insert ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+insert x <span class="fu">=</span> makeBlack <span class="fu">.</span> ins 
+  <span class="kw">where</span> ins <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> <span class="dt">Nil</span> x <span class="dt">Nil</span>
+        ins t<span class="fu">@</span>(<span class="dt">Node</span> c l y r) <span class="fu">|</span> x <span class="fu">&lt;</span> y     <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> c (ins l) y r
+                             <span class="fu">|</span> x <span class="fu">&gt;</span> y     <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> c l y (ins r)
+                             <span class="fu">|</span> otherwise <span class="fu">=</span> t</code></pre></div>
 <p>balance操作要处理四种情况：</p>
-<p><img src="/images/haskell_rbt/rbt1.jpg" alt="rbt1"></p>
+<div class="figure">
+<img src="/images/haskell_rbt/rbt1.jpg" alt="rbt1" />
+<p class="caption">rbt1</p>
+</div>
 <p>可以方便的用pattern matching来实现：</p>
-<pre><code class="language-haskell">balance :: Tree a -&gt; Tree a
-balance (Node B (Node R (Node R a x b) y c) z d) = Node R (Node B a x b) y (Node B c z d)
-balance (Node B (Node R a x (Node R b y c)) z d) = Node R (Node B a x b) y (Node B c z d)
-balance (Node B a x (Node R (Node R b y c) z d)) = Node R (Node B a x b) y (Node B c z d)
-balance (Node B a x (Node R b y (Node R c z d))) = Node R (Node B a x b) y (Node B c z d)
-balance t@(Node c x l r) = t
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">balance ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+balance (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">R</span> a x b) y c) z d) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> a x (<span class="dt">Node</span> <span class="dt">R</span> b y c)) z d) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance (<span class="dt">Node</span> <span class="dt">B</span> a x (<span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">R</span> b y c) z d)) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance (<span class="dt">Node</span> <span class="dt">B</span> a x (<span class="dt">Node</span> <span class="dt">R</span> b y (<span class="dt">Node</span> <span class="dt">R</span> c z d))) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance t<span class="fu">@</span>(<span class="dt">Node</span> c x l r) <span class="fu">=</span> t</code></pre></div>
 <h2 id="删除操作">删除操作</h2>
 <p>插入操作只要处理“双红”，删除操作还要处理“黑色节点数相等”，比较麻烦。</p>
 <p>这里采用了<em>Stefan Kahrs在2001年提出的方法</em>，主要特点是：</p>
@@ -777,23 +210,21 @@ balance t@(Node c x l r) = t
 <ul>
 <li>从黑根子树中删除节点，该子树高度会-1</li>
 <li>从红根子树中删除节点，该子树高度不变</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>我们有balanceL和balanceR两个操作，分别处理“左子树比右子树短1”和“右子树比左子树短1”的情况，将整棵树的高度变成<strong>较短</strong>那个的状态。</p>
 <p>删除操作的框架如下：</p>
-<pre><code class="language-haskell">delete :: Ord a =&gt; a -&gt; Tree a -&gt; Tree a
-delete x = makeBlack . del
-  where
-    del Nil = Nil
-    del t@(Node _ l y r) | x &lt; y     = delL t
-                         | x &gt; y     = delR t
-                         | otherwise = app l r
-    delL (Node _ l@(Node B _ _ _) y r) = balanceL $ Node B (del l) y r
-    delL (Node _ l y r)                = Node R (del l) y r
-    delR (Node _ l y r@(Node B _ _ _)) = balanceR $ Node B l y (del r)
-    delR (Node _ l y r)                = Node R l y (del r)
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">delete ::</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+delete x <span class="fu">=</span> makeBlack <span class="fu">.</span> del
+  <span class="kw">where</span>
+    del <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Nil</span>
+    del t<span class="fu">@</span>(<span class="dt">Node</span> _ l y r) <span class="fu">|</span> x <span class="fu">&lt;</span> y     <span class="fu">=</span> delL t
+                         <span class="fu">|</span> x <span class="fu">&gt;</span> y     <span class="fu">=</span> delR t
+                         <span class="fu">|</span> otherwise <span class="fu">=</span> app l r
+    delL (<span class="dt">Node</span> _ l<span class="fu">@</span>(<span class="dt">Node</span> <span class="dt">B</span> _ _ _) y r) <span class="fu">=</span> balanceL <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> (del l) y r
+    delL (<span class="dt">Node</span> _ l y r)                <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (del l) y r
+    delR (<span class="dt">Node</span> _ l y r<span class="fu">@</span>(<span class="dt">Node</span> <span class="dt">B</span> _ _ _)) <span class="fu">=</span> balanceR <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> l y (del r)
+    delR (<span class="dt">Node</span> _ l y r)                <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> l y (del r)</code></pre></div>
 <p>以待插入节点将插入左子树为例：</p>
 <ul>
 <li>当前节点y的左子树为黑根时，会在删除后将y染黑并进行balanceL操作</li>
@@ -801,517 +232,233 @@ delete x = makeBlack . del
 </ul>
 <p><em>容易发现，这样操作是可以维持新的invariant的（枚举当前节点颜色情况证明即可）</em></p>
 <p>由于delete中在balanceL/R之前会染黑，balanceL/R只要处理根为黑的情况即可，有三种情况：</p>
-<p><img src="/images/haskell_rbt/rbt2.jpg" alt="rbt2"></p>
+<div class="figure">
+<img src="/images/haskell_rbt/rbt2.jpg" alt="rbt2" />
+<p class="caption">rbt2</p>
+</div>
 <p>同样用pattern matching来实现：</p>
-<pre><code class="language-haskell">balanceL :: Tree a -&gt; Tree a 
-balanceL (Node B (Node R a x b) y r) = Node R (Node B a x b) y r
-balanceL (Node B l y (Node B a z b)) = balance $ Node B l y (Node R a z b)
-balanceL (Node B l y (Node R (Node B a u b) z c)) = Node R (Node B l y a) u (balance $ Node B b z (makeRed c))
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">balanceL ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a 
+balanceL (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> a x b) y r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y r
+balanceL (<span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">B</span> a z b)) <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">R</span> a z b)
+balanceL (<span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a u b) z c)) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> l y a) u (balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> b z (makeRed c))
 
-balanceR :: Tree a -&gt; Tree a 
-balanceR (Node B l y (Node R a x b)) = Node R l y (Node B a x b)
-balanceR (Node B (Node B a z b) y r) = balance $ Node B (Node R a z b) y r
-balanceR (Node B (Node R c z (Node B a u b)) y r) = Node R (balance $ Node B (makeRed c) z a) u (Node B b y r)
-</code></pre>
+<span class="ot">balanceR ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a 
+balanceR (<span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">R</span> a x b)) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> l y (<span class="dt">Node</span> <span class="dt">B</span> a x b)
+balanceR (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">B</span> a z b) y r) <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> a z b) y r
+balanceR (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> c z (<span class="dt">Node</span> <span class="dt">B</span> a u b)) y r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> (makeRed c) z a) u (<span class="dt">Node</span> <span class="dt">B</span> b y r)</code></pre></div>
 <p>app会合并两个子树，有三种情况：</p>
-<p><img src="/images/haskell_rbt/rbt3.jpg" alt="rbt3"></p>
+<div class="figure">
+<img src="/images/haskell_rbt/rbt3.jpg" alt="rbt3" />
+<p class="caption">rbt3</p>
+</div>
 <p>同样用pattern matching来实现：</p>
-<pre><code class="language-haskell">app :: Tree a -&gt; Tree a -&gt; Tree a
-app Nil t = t
-app t Nil = t 
-app (Node R a x b) (Node R c y d) = 
-  case app b c of
-    Node R b' z c' -&gt; Node R (Node R a x b') z (Node R c' y d)
-    s -&gt; Node R a x (Node R s y d)
-app (Node B a x b) (Node B c y d) =
-  case app b c of
-    Node r b' z c' -&gt; Node R (Node B a x b') z (Node B c' y d)
-    s -&gt; balanceL $ Node B a x (Node B s y d)
-app (Node R a x b) t = Node R a x (app b t)
-app t (Node R a x b) = Node R (app t a) x b
-</code></pre>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">app ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+app <span class="dt">Nil</span> t <span class="fu">=</span> t
+app t <span class="dt">Nil</span> <span class="fu">=</span> t 
+app (<span class="dt">Node</span> <span class="dt">R</span> a x b) (<span class="dt">Node</span> <span class="dt">R</span> c y d) <span class="fu">=</span> 
+  <span class="kw">case</span> app b c <span class="kw">of</span>
+    <span class="dt">Node</span> <span class="dt">R</span> b&#39; z c&#39; <span class="ot">-&gt;</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">R</span> a x b&#39;) z (<span class="dt">Node</span> <span class="dt">R</span> c&#39; y d)
+    s <span class="ot">-&gt;</span> <span class="dt">Node</span> <span class="dt">R</span> a x (<span class="dt">Node</span> <span class="dt">R</span> s y d)
+app (<span class="dt">Node</span> <span class="dt">B</span> a x b) (<span class="dt">Node</span> <span class="dt">B</span> c y d) <span class="fu">=</span>
+  <span class="kw">case</span> app b c <span class="kw">of</span>
+    <span class="dt">Node</span> r b&#39; z c&#39; <span class="ot">-&gt;</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b&#39;) z (<span class="dt">Node</span> <span class="dt">B</span> c&#39; y d)
+    s <span class="ot">-&gt;</span> balanceL <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> a x (<span class="dt">Node</span> <span class="dt">B</span> s y d)
+app (<span class="dt">Node</span> <span class="dt">R</span> a x b) t <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> a x (app b t)
+app t (<span class="dt">Node</span> <span class="dt">R</span> a x b) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (app t a) x b</code></pre></div>
 <h2 id="完整代码">完整代码</h2>
 <p>只要60行！</p>
-<pre><code class="language-haskell">data Tree a = Nil | Node Color (Tree a) a (Tree a) deriving (Show, Eq)
-data Color = R | B deriving (Show, Eq)
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Tree</span> a <span class="fu">=</span> <span class="dt">Nil</span> <span class="fu">|</span> <span class="dt">Node</span> <span class="dt">Color</span> (<span class="dt">Tree</span> a) a (<span class="dt">Tree</span> a) <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Eq</span>)
+<span class="kw">data</span> <span class="dt">Color</span> <span class="fu">=</span> <span class="dt">R</span> <span class="fu">|</span> <span class="dt">B</span> <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Eq</span>)
 
-makeBlack :: Tree a -&gt; Tree a
-makeBlack Nil = Nil
-makeBlack (Node _ l x r) = Node B l x r
+<span class="ot">makeBlack ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+makeBlack <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Nil</span>
+makeBlack (<span class="dt">Node</span> _ l x r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">B</span> l x r
 
-makeRed :: Tree a -&gt; Tree a
-makeRed Nil = Nil
-makeRed (Node _ l x r) = Node R l x r
+<span class="ot">makeRed ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+makeRed <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Nil</span>
+makeRed (<span class="dt">Node</span> _ l x r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> l x r
 
-insert :: (Ord a) =&gt; a -&gt; Tree a -&gt; Tree a
-insert x = makeBlack . ins 
-  where ins Nil = Node R Nil x Nil
-        ins t@(Node c l y r) | x &lt; y     = balance $ Node c (ins l) y r
-                             | x &gt; y     = balance $ Node c l y (ins r)
-                             | otherwise = t
+<span class="ot">insert ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+insert x <span class="fu">=</span> makeBlack <span class="fu">.</span> ins 
+  <span class="kw">where</span> ins <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> <span class="dt">Nil</span> x <span class="dt">Nil</span>
+        ins t<span class="fu">@</span>(<span class="dt">Node</span> c l y r) <span class="fu">|</span> x <span class="fu">&lt;</span> y     <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> c (ins l) y r
+                             <span class="fu">|</span> x <span class="fu">&gt;</span> y     <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> c l y (ins r)
+                             <span class="fu">|</span> otherwise <span class="fu">=</span> t
 
-balance :: Tree a -&gt; Tree a
-balance (Node B (Node R (Node R a x b) y c) z d) = Node R (Node B a x b) y (Node B c z d)
-balance (Node B (Node R a x (Node R b y c)) z d) = Node R (Node B a x b) y (Node B c z d)
-balance (Node B a x (Node R (Node R b y c) z d)) = Node R (Node B a x b) y (Node B c z d)
-balance (Node B a x (Node R b y (Node R c z d))) = Node R (Node B a x b) y (Node B c z d)
-balance t@(Node c x l r) = t
+<span class="ot">balance ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+balance (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">R</span> a x b) y c) z d) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> a x (<span class="dt">Node</span> <span class="dt">R</span> b y c)) z d) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance (<span class="dt">Node</span> <span class="dt">B</span> a x (<span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">R</span> b y c) z d)) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance (<span class="dt">Node</span> <span class="dt">B</span> a x (<span class="dt">Node</span> <span class="dt">R</span> b y (<span class="dt">Node</span> <span class="dt">R</span> c z d))) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y (<span class="dt">Node</span> <span class="dt">B</span> c z d)
+balance t<span class="fu">@</span>(<span class="dt">Node</span> c x l r) <span class="fu">=</span> t
 
-delete :: Ord a =&gt; a -&gt; Tree a -&gt; Tree a
-delete x = makeBlack . del
-  where
-    del Nil = Nil
-    del t@(Node _ l y r) | x &lt; y     = delL t
-                         | x &gt; y     = delR t
-                         | otherwise = app l r
-    delL (Node _ l@(Node B _ _ _) y r) = balanceL $ Node B (del l) y r
-    delL (Node _ l y r)                = Node R (del l) y r
-    delR (Node _ l y r@(Node B _ _ _)) = balanceR $ Node B l y (del r)
-    delR (Node _ l y r)                = Node R l y (del r)
+<span class="ot">delete ::</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+delete x <span class="fu">=</span> makeBlack <span class="fu">.</span> del
+  <span class="kw">where</span>
+    del <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">Nil</span>
+    del t<span class="fu">@</span>(<span class="dt">Node</span> _ l y r) <span class="fu">|</span> x <span class="fu">&lt;</span> y     <span class="fu">=</span> delL t
+                         <span class="fu">|</span> x <span class="fu">&gt;</span> y     <span class="fu">=</span> delR t
+                         <span class="fu">|</span> otherwise <span class="fu">=</span> app l r
+    delL (<span class="dt">Node</span> _ l<span class="fu">@</span>(<span class="dt">Node</span> <span class="dt">B</span> _ _ _) y r) <span class="fu">=</span> balanceL <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> (del l) y r
+    delL (<span class="dt">Node</span> _ l y r)                <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (del l) y r
+    delR (<span class="dt">Node</span> _ l y r<span class="fu">@</span>(<span class="dt">Node</span> <span class="dt">B</span> _ _ _)) <span class="fu">=</span> balanceR <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> l y (del r)
+    delR (<span class="dt">Node</span> _ l y r)                <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> l y (del r)
 
-balanceL :: Tree a -&gt; Tree a 
-balanceL (Node B (Node R a x b) y r) = Node R (Node B a x b) y r
-balanceL (Node B l y (Node B a z b)) = balance $ Node B l y (Node R a z b)
-balanceL (Node B l y (Node R (Node B a u b) z c)) = Node R (Node B l y a) u (balance $ Node B b z (makeRed c))
+<span class="ot">balanceL ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a 
+balanceL (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> a x b) y r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b) y r
+balanceL (<span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">B</span> a z b)) <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">R</span> a z b)
+balanceL (<span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a u b) z c)) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> l y a) u (balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> b z (makeRed c))
 
-balanceR :: Tree a -&gt; Tree a 
-balanceR (Node B l y (Node R a x b)) = Node R l y (Node B a x b)
-balanceR (Node B (Node B a z b) y r) = balance $ Node B (Node R a z b) y r
-balanceR (Node B (Node R c z (Node B a u b)) y r) = Node R (balance $ Node B (makeRed c) z a) u (Node B b y r)
+<span class="ot">balanceR ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a 
+balanceR (<span class="dt">Node</span> <span class="dt">B</span> l y (<span class="dt">Node</span> <span class="dt">R</span> a x b)) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> l y (<span class="dt">Node</span> <span class="dt">B</span> a x b)
+balanceR (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">B</span> a z b) y r) <span class="fu">=</span> balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> a z b) y r
+balanceR (<span class="dt">Node</span> <span class="dt">B</span> (<span class="dt">Node</span> <span class="dt">R</span> c z (<span class="dt">Node</span> <span class="dt">B</span> a u b)) y r) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (balance <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> (makeRed c) z a) u (<span class="dt">Node</span> <span class="dt">B</span> b y r)
 
-app :: Tree a -&gt; Tree a -&gt; Tree a
-app Nil t = t
-app t Nil = t 
-app (Node R a x b) (Node R c y d) = 
-  case app b c of
-    Node R b' z c' -&gt; Node R (Node R a x b') z (Node R c' y d)
-    s -&gt; Node R a x (Node R s y d)
-app (Node B a x b) (Node B c y d) =
-  case app b c of
-    Node r b' z c' -&gt; Node R (Node B a x b') z (Node B c' y d)
-    s -&gt; balanceL $ Node B a x (Node B s y d)
-app (Node R a x b) t = Node R a x (app b t)
-app t (Node R a x b) = Node R (app t a) x b
-</code></pre>
+<span class="ot">app ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+app <span class="dt">Nil</span> t <span class="fu">=</span> t
+app t <span class="dt">Nil</span> <span class="fu">=</span> t 
+app (<span class="dt">Node</span> <span class="dt">R</span> a x b) (<span class="dt">Node</span> <span class="dt">R</span> c y d) <span class="fu">=</span> 
+  <span class="kw">case</span> app b c <span class="kw">of</span>
+    <span class="dt">Node</span> <span class="dt">R</span> b&#39; z c&#39; <span class="ot">-&gt;</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">R</span> a x b&#39;) z (<span class="dt">Node</span> <span class="dt">R</span> c&#39; y d)
+    s <span class="ot">-&gt;</span> <span class="dt">Node</span> <span class="dt">R</span> a x (<span class="dt">Node</span> <span class="dt">R</span> s y d)
+app (<span class="dt">Node</span> <span class="dt">B</span> a x b) (<span class="dt">Node</span> <span class="dt">B</span> c y d) <span class="fu">=</span>
+  <span class="kw">case</span> app b c <span class="kw">of</span>
+    <span class="dt">Node</span> r b&#39; z c&#39; <span class="ot">-&gt;</span> <span class="dt">Node</span> <span class="dt">R</span> (<span class="dt">Node</span> <span class="dt">B</span> a x b&#39;) z (<span class="dt">Node</span> <span class="dt">B</span> c&#39; y d)
+    s <span class="ot">-&gt;</span> balanceL <span class="fu">$</span> <span class="dt">Node</span> <span class="dt">B</span> a x (<span class="dt">Node</span> <span class="dt">B</span> s y d)
+app (<span class="dt">Node</span> <span class="dt">R</span> a x b) t <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> a x (app b t)
+app t (<span class="dt">Node</span> <span class="dt">R</span> a x b) <span class="fu">=</span> <span class="dt">Node</span> <span class="dt">R</span> (app t a) x b</code></pre></div>
 <h2 id="其他api">其他API</h2>
 <p>一些其他常规操作的API：序列和树之间转换、查找、求后继</p>
-<pre><code class="language-haskell">tree2List :: Tree a -&gt; [a]
-tree2List Nil = []
-tree2List (Node c l x r) = tree2List l ++ [x] ++ tree2List r
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">tree2List ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> [a]
+tree2List <span class="dt">Nil</span> <span class="fu">=</span> []
+tree2List (<span class="dt">Node</span> c l x r) <span class="fu">=</span> tree2List l <span class="fu">++</span> [x] <span class="fu">++</span> tree2List r
 
-list2Tree :: Ord a =&gt; [a] -&gt; Tree a
-list2Tree = foldl (flip insert) Nil 
+<span class="ot">list2Tree ::</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Tree</span> a
+list2Tree <span class="fu">=</span> foldl (flip insert) <span class="dt">Nil</span> 
 
-search :: (Ord a) =&gt; a -&gt; Tree a -&gt; Bool
-search _ Nil = False
-search x (Node _ l y r) 
-  | x == y    = True
-  | x &lt; y     = search x l
-  | otherwise = search x r
+<span class="ot">search ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+search _ <span class="dt">Nil</span> <span class="fu">=</span> <span class="dt">False</span>
+search x (<span class="dt">Node</span> _ l y r) 
+  <span class="fu">|</span> x <span class="fu">==</span> y    <span class="fu">=</span> <span class="dt">True</span>
+  <span class="fu">|</span> x <span class="fu">&lt;</span> y     <span class="fu">=</span> search x l
+  <span class="fu">|</span> otherwise <span class="fu">=</span> search x r
 
-successor :: Ord a =&gt; a -&gt; Tree a -&gt; a
-successor x Nil = x
-successor x (Node _ l y r) 
-  | x &lt;  y = let t = successor x l in if x == t then y else t
-  | x &gt;= y = successor x r
-</code></pre>
+<span class="ot">successor ::</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> a
+successor x <span class="dt">Nil</span> <span class="fu">=</span> x
+successor x (<span class="dt">Node</span> _ l y r) 
+  <span class="fu">|</span> x <span class="fu">&lt;</span>  y <span class="fu">=</span> <span class="kw">let</span> t <span class="fu">=</span> successor x l <span class="kw">in</span> <span class="kw">if</span> x <span class="fu">==</span> t <span class="kw">then</span> y <span class="kw">else</span> t
+  <span class="fu">|</span> x <span class="fu">&gt;=</span> y <span class="fu">=</span> successor x r</code></pre></div>
 <p>PS：因为没有维护size信息所以没法求第k小QwQ，不过加上size信息应该也不难写。</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://abhiroop.github.io/Haskell-Red-Black-Tree/" target="_blank" rel="noopener">一篇讲的很好的博客</a></li>
-<li><a href="https://www.cs.kent.ac.uk/people/staff/smk/redblack/Untyped.hs" target="_blank" rel="noopener">一份代码实现</a></li>
+<li><a href="https://abhiroop.github.io/Haskell-Red-Black-Tree/">一篇讲的很好的博客</a></li>
+<li><a href="https://www.cs.kent.ac.uk/people/staff/smk/redblack/Untyped.hs">一份代码实现</a></li>
 <li>Kahrs, Stefan. (2001). Red-black trees with types. Journal of Functional Programming. 11. 10.1017/S0956796801004026.</li>
-<li>另外，Matt Might提出了一种更加简洁的删除操作的实现，详情参阅<a href="http://matt.might.net/articles/red-black-delete/" target="_blank" rel="noopener">他的博客</a>。</li>
+<li>另外，Matt Might提出了一种更加简洁的删除操作的实现，详情参阅<a href="http://matt.might.net/articles/red-black-delete/">他的博客</a>。</li>
 </ul>
     </div>
 
     
-
-
-
-
-
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="thwfhk.github.io/tag/haskell/">Haskell</a>
-  
-  <a class="badge badge-light" href="thwfhk.github.io/tag/algorithm/">Algorithm</a>
-  
-</div>
-
-
-
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://twitter.com/intent/tweet?url=thwfhk.github.io/post/haskell_red_black_tree/&amp;text=%e5%a6%82%e4%bd%95%e7%94%a8Haskell%e5%86%99%e4%b8%80%e6%a3%b5%e7%ba%a2%e9%bb%91%e6%a0%91" target="_blank" rel="noopener" class="share-btn-twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://www.facebook.com/sharer.php?u=thwfhk.github.io/post/haskell_red_black_tree/&amp;t=%e5%a6%82%e4%bd%95%e7%94%a8Haskell%e5%86%99%e4%b8%80%e6%a3%b5%e7%ba%a2%e9%bb%91%e6%a0%91" target="_blank" rel="noopener" class="share-btn-facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="mailto:?subject=%e5%a6%82%e4%bd%95%e7%94%a8Haskell%e5%86%99%e4%b8%80%e6%a3%b5%e7%ba%a2%e9%bb%91%e6%a0%91&amp;body=thwfhk.github.io/post/haskell_red_black_tree/" target="_blank" rel="noopener" class="share-btn-email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=thwfhk.github.io/post/haskell_red_black_tree/&amp;title=%e5%a6%82%e4%bd%95%e7%94%a8Haskell%e5%86%99%e4%b8%80%e6%a3%b5%e7%ba%a2%e9%bb%91%e6%a0%91" target="_blank" rel="noopener" class="share-btn-linkedin">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="whatsapp://send?text=%e5%a6%82%e4%bd%95%e7%94%a8Haskell%e5%86%99%e4%b8%80%e6%a3%b5%e7%ba%a2%e9%bb%91%e6%a0%91%20thwfhk.github.io/post/haskell_red_black_tree/" target="_blank" rel="noopener" class="share-btn-whatsapp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://service.weibo.com/share/share.php?url=thwfhk.github.io/post/haskell_red_black_tree/&amp;title=%e5%a6%82%e4%bd%95%e7%94%a8Haskell%e5%86%99%e4%b8%80%e6%a3%b5%e7%ba%a2%e9%bb%91%e6%a0%91" target="_blank" rel="noopener" class="share-btn-weibo">
-          <i class="fab fa-weibo"></i>
-        </a>
-      </li>
-    
-  </ul>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-  
-  
-  
-    
-  
-  
-  
-  <div class="media author-card content-widget-hr">
-    
-      
-      <a href="thwfhk.github.io"><img class="avatar mr-3 avatar-circle" src="/thwfhk.github.io/author/wenhao-tang/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_270x270_fill_q75_lanczos_center.jpg" alt="Wenhao Tang"></a>
-    
-
-    <div class="media-body">
-      <h5 class="card-title"><a href="thwfhk.github.io">Wenhao Tang</a></h5>
-      <h6 class="card-subtitle">Undergraduate Student in CS</h6>
-      <p class="card-text">I am interested in programming language theory.</p>
-      <ul class="network-icon" aria-hidden="true">
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/thwfhk.github.io/#contact" >
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://github.com/thwfhk" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
-  
-</ul>
-
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <div class="article-widget content-widget-hr">
-    <h3>Related</h3>
-    <ul>
-      
-      <li><a href="thwfhk.github.io/post/higher_order_xxx/">区分一些Higher-order开头的词</a></li>
-      
-      <li><a href="thwfhk.github.io/post/monad_is_a_monoid/">Monad是自函子范畴上的幺半群</a></li>
-      
-      <li><a href="thwfhk.github.io/project/facial-filter/">Facial Filters</a></li>
-      
-      <li><a href="thwfhk.github.io/project/subgraph-isomorphism/">Subgraph Isomorphism</a></li>
-      
-    </ul>
-  </div>
-  
-
-
-
-
-
-  </div>
-</article>
-  </div>
-
-  <div class="page-footer">
-    
-    
-    <div class="container">
-      <footer class="site-footer">
-  
-
-  <p class="powered-by">
-    
-  </p>
-
-  
-  
-
-
-
-
-
-
-  <p class="powered-by">
-    
-    
-    
-    Published with
-    <a href="https://wowchemy.com" target="_blank" rel="noopener">Wowchemy</a>  —
-    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
-    open source</a> website builder that empowers creators.
-    
-  </p>
-</footer>
-
-    </div>
-    
-  </div>
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre><code class="tex hljs"></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-      
-
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
-      
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
-
-      
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
-        
-      
-
-    
-
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
-    
-
-    
-    
-    <script>const code_highlighting = true;</script>
-    
-
-    
-    
-    
-    
-    
-    
-    <script>
-      const search_config = {"indexURI":"/thwfhk.github.io/index.json","minLength":1,"threshold":0.3};
-      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
-      const content_type = {
-        'post': "Posts",
-        'project': "Projects",
-        'publication' : "Publications",
-        'talk' : "Talks",
-        'slides' : "Slides"
-        };
-    </script>
-    
-
-    
-    
-
-    
-    
-    <script id="search-hit-fuse-template" type="text/x-template">
-      <div class="search-hit" id="summary-{{key}}">
-      <div class="search-hit-content">
-        <div class="search-hit-name">
-          <a href="{{relpermalink}}">{{title}}</a>
-          <div class="article-metadata search-hit-type">{{type}}</div>
-          <p class="search-hit-description">{{snippet}}</p>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/haskell/">Haskell</a>
+          <a href="/tags/algorithm/">Algorithm</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/halting_problem_and_cantor_theorem/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">停机问题与康托定理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/february/">
+            <span class="next-text nav-default">为什么2月只有28天</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
-      </div>
-      </div>
+        
+
+
+  <div id="utter-container"></div>
+    <script src="https://utteranc.es/client.js"
+        repo= 'thwfhk/blog_comments_utteranc'
+        issue-term= "pathname"
+        theme= 'github-light'
+        crossorigin= "anonymous"
+        async>
     </script>
-    
 
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
-    
 
-    
-    
+  
 
-    
-    
-    
+  
 
-    
-    
+      </div>
+    </main>
 
-    
-    
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:thwfhk@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/thwfhk" class="iconfont icon-github" title="github"></a>
+  <a href="https://thwfhk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    
-    <script src="/thwfhk.github.io/js/wowchemy.min.4d670e4e47b7eaa49759e6822501455e.js"></script>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-    
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Candy?</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158181191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158181191-1');
+</script>
+
+
 
 
 

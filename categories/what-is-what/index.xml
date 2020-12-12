@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>What-is-what on Candy?</title>
@@ -6,11 +6,7 @@
     <description>Recent content in What-is-what on Candy?</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://thwfhk.github.io/categories/what-is-what/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 14 May 2020 12:26:00 +0800</lastBuildDate><atom:link href="https://thwfhk.github.io/categories/what-is-what/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>什么是自然数</title>
       <link>https://thwfhk.github.io/post/natural_numbers/</link>
