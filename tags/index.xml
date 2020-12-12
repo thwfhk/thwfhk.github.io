@@ -1,96 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Candy?</title>
-    <link>https://thwfhk.github.io/tags/</link>
-    <description>Recent content in Tags on Candy?</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 29 Sep 2020 17:51:30 +0800</lastBuildDate>
-    
-	<atom:link href="https://thwfhk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Category Theory</title>
-      <link>https://thwfhk.github.io/tags/category-theory/</link>
-      <pubDate>Tue, 29 Sep 2020 17:51:30 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/category-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Haskell</title>
-      <link>https://thwfhk.github.io/tags/haskell/</link>
-      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/haskell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming Language Theory</title>
-      <link>https://thwfhk.github.io/tags/programming-language-theory/</link>
-      <pubDate>Tue, 25 Aug 2020 17:43:42 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/programming-language-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>secret sharing</title>
-      <link>https://thwfhk.github.io/tags/secret-sharing/</link>
-      <pubDate>Sat, 16 May 2020 09:49:46 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/secret-sharing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Writing</title>
-      <link>https://thwfhk.github.io/tags/writing/</link>
-      <pubDate>Sat, 16 May 2020 09:49:46 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/writing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Set Theory</title>
-      <link>https://thwfhk.github.io/tags/set-theory/</link>
-      <pubDate>Thu, 14 May 2020 12:26:00 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/set-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Computation Theory</title>
-      <link>https://thwfhk.github.io/tags/computation-theory/</link>
-      <pubDate>Tue, 31 Mar 2020 22:55:23 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/computation-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Algorithm</title>
-      <link>https://thwfhk.github.io/tags/algorithm/</link>
-      <pubDate>Tue, 11 Feb 2020 15:31:46 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hello</title>
-      <link>https://thwfhk.github.io/tags/hello/</link>
-      <pubDate>Sat, 24 Aug 2019 19:07:26 +0800</pubDate>
-      
-      <guid>https://thwfhk.github.io/tags/hello/</guid>
-      <description></description>
-    </item>
+    <title>Tags | Academic</title>
+    <link>thwfhk.github.io/tags/</link>
+      <atom:link href="thwfhk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tags</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/thwfhk.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Tags</title>
+      <link>thwfhk.github.io/tags/</link>
+    </image>
     
   </channel>
 </rss>
