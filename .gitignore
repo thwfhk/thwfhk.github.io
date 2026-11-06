@@ -1,0 +1,13 @@
+*
+!/.gitignore
+!/.nojekyll
+!/404.html
+!/avatar.jpg
+!/favicon.ico
+!/index.html
+!/sitemap.xml
+!/style.css
+!/files/
+!/files/*.pdf
+!/fonts/
+!/fonts/*.woff2
