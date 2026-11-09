@@ -1,0 +1,131 @@
+@font-face {
+  font-family: Charter;
+  src: url('/fonts/charter_regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Charter;
+  src: url('/fonts/charter_italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: Charter;
+  src: url('/fonts/charter_bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Charter;
+  src: url('/fonts/charter_bold_italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('/fonts/FiraSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('/fonts/FiraSans-SemiBold.woff2') format('woff2');
+  font-weight: 600 700;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body {
+  max-width: 780px;
+  margin: 40px auto 2.75rem;
+  padding: 0 1rem;
+  background: #fff;
+  color: #222;
+  font: 1rem/1.45 Charter, Palatino, Georgia, serif;
+}
+a { color: #0050b5; text-decoration: none; }
+a:hover { color: #85302e; text-decoration: underline; }
+a:focus-visible { outline: 2px solid #0050b5; outline-offset: 3px; }
+.site-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  padding-bottom: .9rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+h1, h2, h3, .venue { font-family: 'Fira Sans', Arial, sans-serif; }
+h1 { margin: 0; font-size: 1.75rem; line-height: 1.2; }
+h1 a { color: #111; }
+nav { display: flex; flex-direction: column; align-items: flex-end; gap: .25rem; font-size: .94rem; }
+nav > * { white-space: nowrap; }
+.profile-links { display: flex; gap: .8rem; }
+.email-addresses { display: flex; flex-wrap: wrap; gap: .25rem .8rem; color: #666; }
+.email-addresses > span { white-space: nowrap; }
+h2 { margin: 1.4rem 0 .7rem; font-size: 1.25rem; line-height: 1.25; }
+h3 { margin: 1.2rem 0 .7rem; font-size: 1rem; }
+#extended-abstracts { font-size: inherit; }
+p { margin: 0 0 .7rem; }
+#intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; column-gap: 1.25rem; }
+.intro-text { grid-column: 1; grid-row: 1; }
+.intro-text p:last-child { margin-bottom: 0; }
+.avatar { grid-column: 2; grid-row: 1; display: block; margin: 0; border-radius: 10%; object-fit: cover; }
+ul { margin: 0; padding-left: 1.25rem; list-style: square; }
+li { padding-left: .1rem; }
+li > p { margin-bottom: .9rem; }
+.venue { color: #666; font-weight: 400; }
+.publications {
+  /* Match the square-list text indent as space opens in the left gutter. */
+  --label-column: max(calc(1.35rem - 12px), calc(60px - max(0px, (100vw - 780px) / 2)));
+  padding-left: 0;
+  list-style: none;
+}
+.publications > li {
+  display: grid;
+  grid-template-columns: var(--label-column) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: .9rem;
+  padding-left: 0;
+}
+.publications > li > p { margin: 0; }
+.publication-authors {
+  display: block;
+  width: max-content;
+  /* Use spare space on the right while retaining room at the screen edge. */
+  max-width: calc(100% + max(0px, (100vw - 780px) / 2 - 1rem));
+}
+.publication-venue {
+  font-size: .9rem;
+  text-align: right;
+  justify-self: end;
+  width: max-content;
+  /* Extend into the left gutter when there is room; wrap on narrow screens. */
+  max-width: calc(var(--label-column) + max(0px, (100vw - 780px) / 2));
+}
+code { font: .85rem Charter, Palatino, Georgia, serif; }
+a code { font-family: 'Fira Sans', Arial, sans-serif; }
+.award { color: #b50018; }
+footer { margin-top: 1.5rem; padding-top: .85rem; border-top: 1px solid #ddd; text-align: center; color: #555; }
+small { font-size: .85rem; }
+
+@media (max-width: 560px) {
+  body { margin: 1.5rem auto; }
+  .site-header { gap: .65rem; }
+  nav { width: 100%; align-items: flex-start; }
+  #intro { column-gap: 1rem; }
+  .avatar { width: 70px; height: 84px; }
+  .publication-venue { font-size: .85rem; }
+}
+@media (max-width: 360px) {
+  #intro { grid-template-columns: 1fr; row-gap: 1rem; }
+  .avatar, .intro-text { grid-column: auto; grid-row: auto; }
+}
